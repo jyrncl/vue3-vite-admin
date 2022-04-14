@@ -1,10 +1,10 @@
 <template>
   <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
-  <!-- <suspense> -->
     <!-- <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" /> -->
-    <!-- <router-view></router-view> -->
-  <!-- </suspense> -->
-  <router-view></router-view>
+    <div id="app">
+      <router-view></router-view>
+    </div>
+  <!-- <router-view></router-view> -->
 </template>
 
 <script setup lang="ts">
@@ -15,14 +15,13 @@
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-  img {
-    width: 100px;
-  }
+  width: 100vw;
+  height: 100vh;
+  // font-family: Avenir, Helvetica, Arial, sans-serif;
+  // -webkit-font-smoothing: antialiased;
+  // -moz-osx-font-smoothing: grayscale;
+  // text-align: center;
+  // color: #2c3e50;
+  // margin-top: 60px;
 }
 </style>
