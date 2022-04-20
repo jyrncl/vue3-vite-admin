@@ -1,8 +1,16 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import {router } from './router/index'
+import { createApp } from "vue";
+import App from "./App.vue";
+import { router } from "./router/index";
+import { getImageUrlByModules } from "@/utils/importImageHook/index";
 
-const app = createApp(App)
-app.use(router)
+declare module "@vue/runtime-core" {
+  interface ComponentCustomProperties {
+    $getImageUrlByModules: (moduleName: string, fileName: string) => string;
+  }
+}
 
-app.mount('#app')
+const app = createApp(App);
+app.config.globalProperties.$getImageUrlByModules = getImageUrlByModules;
+app.use(router);
+
+app.mount("#app");
