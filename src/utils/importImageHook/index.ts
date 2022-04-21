@@ -1,6 +1,7 @@
 const imageModules: Map<string, any> = new Map(); // 初始化数据
 const loginPageData = (import.meta as any).globEager('../../assets/images/loginPage/*'); // 分模块引入图片
 
+
 /**
  * @param modulesArray Array 传递由[moduleName: string(模块名称), data: any(模块数据)]
  */
@@ -13,7 +14,7 @@ const setThisModulesInfo = (
   });
 };
 
-// 将数据放在mao对象中
+// 将数据放在map对象中
 setThisModulesInfo([['loginPage', loginPageData]])
 
 
