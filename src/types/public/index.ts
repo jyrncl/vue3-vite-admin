@@ -1,0 +1,1 @@
+export type getImageUrlByModulesType = (moduleName: string, fileName: string) => string;

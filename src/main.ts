@@ -1,11 +1,12 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import { router } from "./router/index";
+import { getImageUrlByModulesType } from '@/types/index'
 import { getImageUrlByModules } from "@/utils/importImageHook/index";
 
 declare module "@vue/runtime-core" {
   interface ComponentCustomProperties {
-    $getImageUrlByModules: (moduleName: string, fileName: string) => string;
+    $getImageUrlByModules: getImageUrlByModulesType;
   }
 }
 
