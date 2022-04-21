@@ -20,20 +20,28 @@
         </div>
       </div>
       <div class="login-content">
-        <img :src="$getImageUrlByModules(ImageModules.loginPage, '1.png')" alt="">
+        <img
+          @click="toHello"
+          :src="$getImageUrlByModules(ImageModules.loginPage, '1.png')"
+          alt=""
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ImageModules } from '@/enum/index'
+import { ImageModules } from "@/enum/index";
+import { useRouter } from "vue-router";
 import { ref, reactive } from "vue";
 
 type tabItem = {
   label: string;
   id: string;
 };
+
+const router = useRouter();
+
 const tabList: Array<tabItem> = [
   {
     id: "login",
@@ -47,6 +55,10 @@ const tabList: Array<tabItem> = [
 const curTab = ref("login");
 const changeCurTab = (tab: string): void => {
   curTab.value = tab;
+};
+
+const toHello = () => {
+  router.push("/home");
 };
 </script>
 
@@ -68,6 +80,7 @@ const changeCurTab = (tab: string): void => {
     border-radius: 6px;
     background-color: rgba(255, 255, 255, 0.35);
     backdrop-filter: saturate(100%) blur(20px);
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
     .login-header {
       width: 100%;
       height: 60px;
@@ -84,6 +97,7 @@ const changeCurTab = (tab: string): void => {
         font-size: 16px;
         font-weight: 500;
         .login-tab {
+          font-size: 17px;
           cursor: pointer;
         }
       }
@@ -95,7 +109,7 @@ const changeCurTab = (tab: string): void => {
         margin: auto 0;
         z-index: -1;
         transition: all 0.5s;
-        .login-tab-bg{
+        .login-tab-bg {
           width: 286px;
           margin: 7px auto;
           height: 46px;
@@ -103,13 +117,21 @@ const changeCurTab = (tab: string): void => {
           backdrop-filter: saturate(100%) blur(20px);
           border: 1px solid #fff;
           border-radius: 6px;
+          box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
         }
       }
     }
-    .login-content{
+    .login-content {
       img {
-        margin-top: 40px;
+        margin-top: 80px;
         border-radius: 10px;
+        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+        transition: all 1s;
+        cursor: pointer;
+        &:hover{
+          transform: rotateZ(360deg) scale(0.5);
+          border-radius: 50%;
+        }
       }
     }
   }

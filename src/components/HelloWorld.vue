@@ -4,11 +4,7 @@ import { ref } from 'vue'
 defineProps<{ msg: string }>()
 
 const count = ref(0)
-const color = 'yellow'
-const func = (val: string): string => val
-console.log('dada')
-const data = await func('string')
-console.log(data, 'data')
+// console.log(data, 'data')
 </script>
 
 <template>
@@ -56,6 +52,5 @@ code {
   background-color: #eee;
   padding: 2px 4px;
   border-radius: 4px;
-  color: v-bind(color);
 }
 </style>
