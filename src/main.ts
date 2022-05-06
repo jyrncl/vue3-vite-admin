@@ -1,7 +1,7 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import { router } from "./router/index";
-import { getImageUrlByModulesType } from '@/types/index'
+import { getImageUrlByModulesType } from '@/types'
 import { getImageUrlByModules } from "@/utils/importImageHook/index";
 
 declare module "@vue/runtime-core" {

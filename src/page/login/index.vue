@@ -20,27 +20,21 @@
         </div>
       </div>
       <div class="login-content">
-        <img
-          @click="toHello"
-          :src="$getImageUrlByModules(ImageModules.loginPage, '1.png')"
-          alt=""
-        />
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ImageModules } from "@/enum/index";
 import { useRouter } from "vue-router";
 import { ref, reactive } from "vue";
+
+const router = useRouter();
 
 type tabItem = {
   label: string;
   id: string;
 };
-
-const router = useRouter();
 
 const tabList: Array<tabItem> = [
   {
