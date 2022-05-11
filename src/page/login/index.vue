@@ -20,6 +20,7 @@
         </div>
       </div>
       <div class="login-content">
+        <loginContent/>
       </div>
     </div>
   </div>
@@ -28,6 +29,7 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
 import { ref, reactive } from "vue";
+import loginContent from './loginContent/index.vue'
 
 const router = useRouter();
 
@@ -116,17 +118,7 @@ const toHello = () => {
       }
     }
     .login-content {
-      img {
-        margin-top: 80px;
-        border-radius: 10px;
-        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-        transition: all 1s;
-        cursor: pointer;
-        &:hover{
-          transform: rotateZ(360deg) scale(0.5);
-          border-radius: 50%;
-        }
-      }
+      padding: 20px;
     }
   }
 }
