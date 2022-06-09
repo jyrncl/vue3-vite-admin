@@ -6,5 +6,6 @@ const client = Axios.create({
 })
 
 export const request = async (config: AxiosRequestConfig) => {
-  return await client.request(config)
+  const result = await client.request(config)
+  return result.data
 }

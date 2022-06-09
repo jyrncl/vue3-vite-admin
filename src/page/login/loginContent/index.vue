@@ -59,10 +59,10 @@ const submitForm = (formEl: FormInstance | undefined) => {
   formEl.validate((valid) => {
     if (valid) {
       userLogin(loginFormProps.value).then(({data}) => {
-        if (data.data.login) {
+        if (data.loginInfo.isSuccessLogin) {
           router.push("/home");
         } else {
-          ElMessage.error('账号或密码错误')
+          ElMessage.error(data.loginInfo.msg)
         }
       })
     } else {
