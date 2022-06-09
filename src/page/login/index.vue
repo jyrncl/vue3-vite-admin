@@ -1,18 +1,18 @@
 <template>
   <div class="login">
-    <div class="login-wapper">
+    <div class="login-wrapper">
       <div class="login-header">
         <div
-          class="login-tab-wapper"
-          v-for="(item, index) in tabList"
-          :key="`${item.id}_${index}`"
-          @click="changeCurTab(item.id)"
+            class="login-tab-wrapper"
+            v-for="(item, index) in tabList"
+            :key="`${item.id}_${index}`"
+            @click="changeCurTab(item.id)"
         >
           <div class="login-tab">{{ item.label }}</div>
         </div>
         <div
-          class="login-tab-bg-wapper"
-          :style="{
+            class="login-tab-bg-wrapper"
+            :style="{
             transform: `translateX(${curTab === 'login' ? 0 : 300}px)`,
           }"
         >
@@ -20,25 +20,24 @@
         </div>
       </div>
       <div class="login-content">
-        <loginContent/>
+        <LoginContent
+            :style="{ transform: `rotate3d(0, -1, 0, ${curTab === 'login' ? 0 : -90}deg)`, opacity: `${curTab === 'login' ? 1 : 0.1}`}"/>
+        <RegisteredContent @changeTag="changeCurTab"
+                           :style="{ transform: `rotate3d(0, -1, 0, ${curTab === 'registered' ? 0 : 90}deg) scale(${curTab === 'registered' ? 1 : 0.5})`}"/>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useRouter } from "vue-router";
-import { ref, reactive } from "vue";
-import loginContent from './loginContent/index.vue'
+import LoginContent from './loginContent/index.vue'
+import RegisteredContent from './registeredContent/index.vue'
+import {ref} from "vue";
 
-const router = useRouter();
-
-type tabItem = {
+const tabList: Array<{
   label: string;
   id: string;
-};
-
-const tabList: Array<tabItem> = [
+}> = [
   {
     id: "login",
     label: "登录",
@@ -53,9 +52,6 @@ const changeCurTab = (tab: string): void => {
   curTab.value = tab;
 };
 
-const toHello = () => {
-  router.push("/home");
-};
 </script>
 
 <style lang="scss" scoped>
@@ -66,17 +62,19 @@ const toHello = () => {
   background-size: cover;
   background-repeat: no-repeat;
   text-align: center;
-  .login-wapper {
+
+  .login-wrapper {
     display: inline-block;
     width: 600px;
     height: 500px;
     margin: 200px auto 0;
-    // border: 1px solid rgba(255, 255, 255, 0.6);
     overflow: hidden;
     border-radius: 6px;
     background-color: rgba(255, 255, 255, 0.35);
     backdrop-filter: saturate(100%) blur(20px);
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    perspective: 500px;
+
     .login-header {
       width: 100%;
       height: 60px;
@@ -86,18 +84,21 @@ const toHello = () => {
       position: relative;
       background-color: rgba(255, 255, 255, 0.1);
       backdrop-filter: saturate(100%) blur(20px);
-      .login-tab-wapper {
+
+      .login-tab-wrapper {
         width: 300px;
         height: 100%;
         line-height: 60px;
         font-size: 16px;
         font-weight: 500;
+
         .login-tab {
           font-size: 17px;
           cursor: pointer;
         }
       }
-      .login-tab-bg-wapper {
+
+      .login-tab-bg-wrapper {
         width: 300px;
         height: 100%;
         position: absolute;
@@ -105,6 +106,7 @@ const toHello = () => {
         margin: auto 0;
         z-index: -1;
         transition: all 0.5s;
+
         .login-tab-bg {
           width: 286px;
           margin: 7px auto;
@@ -117,8 +119,12 @@ const toHello = () => {
         }
       }
     }
+
     .login-content {
-      padding: 20px;
+      transform-style: preserve-3d;
+      width: 100%;
+      position: relative;
+      box-sizing: border-box;
     }
   }
 }

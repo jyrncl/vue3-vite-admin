@@ -2,41 +2,32 @@
   <div class="loginContent">
     <div class="loginContent-headerImg">
       <img
-        :src="$getImageUrlByModules(ImageModules.loginPage, '1.png')"
-        alt=""
+          :src="$getImageUrlByModules(ImageModules.loginPage, '1.png')"
+          alt=""
       />
     </div>
     <div class="loginContent-form">
-      <el-form-item label-width="120px" label="账号" prop="age">
-        <el-input v-model.number="ruleForm.age" />
-      </el-form-item>
       <el-form
-        ref="ruleFormRef"
-        :model="ruleForm"
-        status-icon
-        :rules="rules"
-        label-width="120px"
-        class="demo-ruleForm"
+          ref="loginFormRef"
+          :model="loginFormProps"
+          status-icon
+          :rules="rules"
+          label-width="55px"
+          class="login-Form"
       >
-        <el-form-item label="当前密码" prop="pass">
+        <el-form-item label="账号" prop="username" class="login-input">
+          <el-input v-model.number="loginFormProps.username"/>
+        </el-form-item>
+        <el-form-item label="密码" prop="password" class="login-input">
           <el-input
-            v-model="ruleForm.pass"
-            type="password"
-            autocomplete="off"
+              v-model="loginFormProps.password"
+              type="password"
+              autocomplete="off"
           />
         </el-form-item>
-        <el-form-item label="确认密码" prop="checkPass">
-          <el-input
-            v-model="ruleForm.checkPass"
-            type="password"
-            autocomplete="off"
-          />
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="submitForm(ruleFormRef)"
-            >确认</el-button
-          >
-          <el-button @click="resetForm(ruleFormRef)">重置</el-button>
+        <el-form-item class="bottom-btn">
+          <div class="submit" @click="submitForm(loginFormRef)">确认</div>
+          <div class="reset" @click="resetForm(loginFormRef)">重置</div>
         </el-form-item>
       </el-form>
     </div>
@@ -44,69 +35,37 @@
 </template>
 
 <script setup lang="ts">
-import { ImageModules } from "@/enum";
-import { ref, reactive } from "vue";
-import type { FormInstance } from "element-plus";
+import { userLogin } from '@/api/user'
+import {ImageModules} from "@/enum";
+import {ref, reactive} from "vue";
+import {useRouter} from 'vue-router'
+import { ElMessage } from 'element-plus'
+import type {FormInstance} from "element-plus";
 
-const ruleFormRef = ref<FormInstance>();
-
-const checkAge = (rule: any, value: any, callback: any) => {
-  if (!value) {
-    return callback(new Error("Please input the age"));
-  }
-  setTimeout(() => {
-    if (!Number.isInteger(value)) {
-      callback(new Error("Please input digits"));
-    } else {
-      if (value < 18) {
-        callback(new Error("Age must be greater than 18"));
-      } else {
-        callback();
-      }
-    }
-  }, 1000);
-};
-
-const validatePass = (rule: any, value: any, callback: any) => {
-  if (value === "") {
-    callback(new Error("请输入密码"));
-  } else {
-    if (ruleForm.checkPass !== "") {
-      if (!ruleFormRef.value) return;
-      ruleFormRef.value.validateField("checkPass", () => null);
-    }
-    callback();
-  }
-};
-const validatePass2 = (rule: any, value: any, callback: any) => {
-  if (value === "") {
-    callback(new Error("请确认密码"));
-  } else if (value !== ruleForm.pass) {
-    callback(new Error("两次输入的密码不一致"));
-  } else {
-    callback();
-  }
-};
-
-const ruleForm = reactive({
-  pass: "",
-  checkPass: "",
-  age: "",
-});
+const router = useRouter()
+const loginFormRef = ref<FormInstance>();
+const loginFormProps = ref({
+  username: '',
+  password: ''
+})
 
 const rules = reactive({
-  pass: [{ validator: validatePass, trigger: "blur" }],
-  checkPass: [{ validator: validatePass2, trigger: "blur" }],
-  age: [{ validator: checkAge, trigger: "blur" }],
+  username: [{required: true, message: '请输入用户名', trigger: "blur"}],
+  password: [{required: true, message: '请输入密码', trigger: "blur"}],
 });
 
 const submitForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   formEl.validate((valid) => {
     if (valid) {
-      console.log("submit!");
+      userLogin(loginFormProps.value).then(({data}) => {
+        if (data.data.login) {
+          router.push("/home");
+        } else {
+          ElMessage.error('账号或密码错误')
+        }
+      })
     } else {
-      console.log("error submit!");
       return false;
     }
   });
@@ -120,23 +79,73 @@ const resetForm = (formEl: FormInstance | undefined) => {
 
 <style lang="scss" scoped>
 .loginContent {
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  transition: all 0.5s;
+  transform-origin: left;
+  position: absolute;
+
   .loginContent-headerImg {
+    margin-top: 18px;
+
     img {
-      width: 60px;
-      height: 60px;
+      width: 70px;
+      height: 70px;
       border-radius: 50%;
-      transition: all 0.2s;
+      transition: all 0.5s;
       cursor: pointer;
       border: 2px solid #fff;
       box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+
       &:hover {
-        transform: scale(1.2);
+        transform: scale(1.1) rotateZ(360deg) translateY(18px);
       }
     }
   }
-  .loginContent-form{
-    width: 80%;
-    margin-top: 15px;
+
+  .loginContent-form {
+    width: 60%;
+    margin: 28px auto 0;
+
+    .login-Form {
+      .login-input {
+        ::v-deep(.el-input) {
+          .el-input__wrapper {
+            background: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+
+            .el-input__inner {
+              outline: none;
+            }
+          }
+        }
+      }
+
+      .bottom-btn {
+        ::v-deep(.el-form-item__content) {
+          justify-content: center;
+
+          .submit, .reset {
+            padding: 3px 28px;
+            box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-top: 8px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.5);
+            transition: all 0.1s;
+
+            &:hover {
+              transform: scale(1.1);
+            }
+          }
+
+          .reset {
+            margin-left: 28px;
+          }
+        }
+      }
+    }
   }
 }
 </style>
