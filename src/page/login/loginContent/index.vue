@@ -35,11 +35,11 @@
 </template>
 
 <script setup lang="ts">
-import { userLogin } from '@/api/user'
+import {userLogin} from '@/api/user'
 import {ImageModules} from "@/enum";
 import {ref, reactive} from "vue";
 import {useRouter} from 'vue-router'
-import { ElMessage } from 'element-plus'
+import {ElMessage} from 'element-plus'
 import type {FormInstance} from "element-plus";
 
 const router = useRouter()

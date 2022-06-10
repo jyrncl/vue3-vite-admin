@@ -4,10 +4,18 @@ export const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     component: () => import("@/page/login/index.vue"),
+    meta: {
+      isNeedToken: false,
+      isKeepAlive: true,
+    },
   },
   {
     path: '/home',
     component: () => import("@/page/home/index.vue"),
+    meta: {
+      isNeedToken: false,
+      isKeepAlive: false,
+    },
   }
 ];
 
