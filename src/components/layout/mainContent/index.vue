@@ -1,5 +1,13 @@
 <template>
-  <div class="mainContent">mainContent</div>
+  <div class="mainContent">
+    <router-view v-slot="{ Component }">
+      <transition>
+        <keep-alive>
+          <component :is="Component" />
+        </keep-alive>
+      </transition>
+    </router-view>
+  </div>
 </template>
 
 <script setup lang="ts">
