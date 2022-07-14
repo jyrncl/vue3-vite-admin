@@ -124,7 +124,6 @@ const changeCurTab = (tab: string): void => {
       transform-style: preserve-3d;
       width: 100%;
       position: relative;
-      box-sizing: border-box;
     }
   }
 }

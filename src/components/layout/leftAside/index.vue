@@ -23,16 +23,19 @@ import { ImageModules } from "@/enum";
   height: 100%;
   .header-title {
     width: 100%;
-    height: 40px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 15px;
-    box-sizing: border-box;
+    justify-content: flex-start;
+    padding: 8px 20px;
     .logo {
       img {
         width: 30px;
+        border-radius: 50%;
       }
+    }
+    .title {
+      margin-left: 15px;
+      font-weight: bold;
     }
   }
 }

@@ -81,7 +81,6 @@ const resetForm = (formEl: FormInstance | undefined) => {
 .registeredContent {
   width: 100%;
   padding: 20px;
-  box-sizing: border-box;
   transition: all 0.5s;
   position: absolute;
   transform-origin: left;
