@@ -1,34 +1,36 @@
 <template>
   <el-menu
     default-active="2"
-    class="el-menu-vertical-demo"
+    :class="`${$prefix}-menu`"
     :collapse="isCollapse"
     @open="handleOpen"
     @close="handleClose"
   >
-    <el-sub-menu index="1-4"
-    >
-      <template #title
-        ><el-icon><icon-menu /></el-icon><span>item four</span></template
-      >
-      <el-menu-item index="1-4-1">item one</el-menu-item>
-      <el-menu-item index="1-4-2">item one</el-menu-item>
-      <el-menu-item index="1-4-3">item one</el-menu-item>
-    </el-sub-menu>
-    <el-menu-item index="2">
-      <el-icon><icon-menu /></el-icon>
-      <template #title>Navigator Two</template>
-    </el-menu-item>
-    <el-menu-item index="3">
-      <el-icon><setting /></el-icon>
-      <template #title>Navigator Four</template>
-    </el-menu-item>
+    <template v-for="item in menuTree" :key="item.id">
+      <template v-if="isHaveChildren(item)">
+        <el-sub-menu :index="item.path" v-for="item in menuTree" :key="item.id">
+          <template #title
+          ><el-icon><icon-menu /></el-icon><span>item four</span></template
+          >
+          <el-menu-item index="1-4-1">item one</el-menu-item>
+          <el-menu-item index="1-4-2">item one</el-menu-item>
+          <el-menu-item index="1-4-3">item one</el-menu-item>
+        </el-sub-menu>
+      </template>
+      <template v-else>
+        <el-menu-item :index="item.path">
+          <el-icon><setting /></el-icon>
+          <template #title>{{ item.name }}</template>
+        </el-menu-item>
+      </template>
+    </template>
   </el-menu>
 </template>
 
 <script setup lang="ts">
 import { Document, Menu as IconMenu, Location, Setting } from "@element-plus/icons-vue";
 import { ref, reactive } from "vue";
+import { isHaveChildren } from "@/utils/common";
 
 const isCollapse = ref(false);
 
@@ -69,5 +71,7 @@ const handleClose = (key: string, keyPath: string[]) => {
 </script>
 
 <style lang="scss" scoped>
-.#{$prefix} {}
+.#{$prefix}-menu {
+  color: $default-color;
+}
 </style>
