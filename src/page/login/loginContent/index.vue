@@ -16,11 +16,12 @@
           class="login-Form"
       >
         <el-form-item label="账号" prop="username" class="login-input">
-          <el-input v-model.number="loginFormProps.username"/>
+          <el-input v-model.number="loginFormProps.username" @keydown.enter.native="submitForm(loginFormRef)"/>
         </el-form-item>
         <el-form-item label="密码" prop="password" class="login-input">
           <el-input
               v-model="loginFormProps.password"
+              @keydown.enter.native="submitForm(loginFormRef)"
               type="password"
               autocomplete="off"
           />

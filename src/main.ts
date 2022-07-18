@@ -19,6 +19,7 @@ declare module "@vue/runtime-core" {
 const app = createApp(App);
 app.config.globalProperties.$getImageUrlByModules = getImageUrlByModules;
 app.config.globalProperties.$prefix = import.meta.env.VITE_SCSS_CLASS_PREFIX;
+console.log(import.meta.env.VITE_SCSS_CLASS_PREFIX)
 app.use(router);
 app.use(ElementPlus);
 app.use(globalComponents);

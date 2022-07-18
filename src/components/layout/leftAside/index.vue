@@ -38,5 +38,9 @@ import { ImageModules } from "@/enum";
       font-weight: bold;
     }
   }
+  .menu-list {
+    width: 100%;
+    height: calc(100% - 50px);
+  }
 }
 </style>

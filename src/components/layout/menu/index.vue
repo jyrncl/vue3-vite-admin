@@ -21,7 +21,6 @@ const menuTree = ref<Array<MenuRow>>([]);
 onMounted(() => {
   getMenuList().then(({ data }) => {
     menuTree.value = data.menuList;
-    console.log(menuTree.value);
   })
 })
 
@@ -29,6 +28,6 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .#{$prefix}-menu {
-  color: $default-color;
+  height: 100%;
 }
 </style>
