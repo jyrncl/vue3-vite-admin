@@ -3,10 +3,10 @@ import App from "./App.vue";
 import ElementPlus from "element-plus";
 import * as ElementPlusIconsVue from "@element-plus/icons-vue";
 import "element-plus/dist/index.css";
-import "@/style/default.scss"
+import "@/style/default.scss";
 import globalComponents from "@/global-components/index";
 import { router } from "@/router";
-import { createPinia } from 'pinia';
+import { createPinia } from "pinia";
 import type { getImageUrlByModulesType } from "@/types";
 import { getImageUrlByModules } from "@/utils/importImageHook";
 
