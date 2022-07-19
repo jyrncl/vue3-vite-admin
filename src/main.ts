@@ -6,6 +6,7 @@ import "element-plus/dist/index.css";
 import "@/style/default.scss"
 import globalComponents from "@/global-components/index";
 import { router } from "@/router";
+import { createPinia } from 'pinia';
 import type { getImageUrlByModulesType } from "@/types";
 import { getImageUrlByModules } from "@/utils/importImageHook";
 
@@ -19,8 +20,9 @@ declare module "@vue/runtime-core" {
 const app = createApp(App);
 app.config.globalProperties.$getImageUrlByModules = getImageUrlByModules;
 app.config.globalProperties.$prefix = import.meta.env.VITE_SCSS_CLASS_PREFIX;
-console.log(import.meta.env.VITE_SCSS_CLASS_PREFIX)
+
 app.use(router);
+app.use(createPinia());
 app.use(ElementPlus);
 app.use(globalComponents);
 

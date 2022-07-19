@@ -1,22 +1,20 @@
 <template>
-  <el-container class="home-wrapper">
-    <el-col :span="3">
+  <div class="home-wrapper">
+    <div class="home-left">
       <LeftAside/>
-    </el-col>
-    <el-col :span="21">
-      <el-container>
-        <el-header>
-          <TopHeader/>
-        </el-header>
-        <el-header>
-          <TopTabPage/>
-        </el-header>
-        <el-main>
-          <MainContent/>
-        </el-main>
-      </el-container>
-    </el-col>
-  </el-container>
+    </div>
+    <div class="home-content">
+      <div class="home-content-header">
+        <TopHeader/>
+      </div>
+      <div class="home-content-tab-page">
+        <TopTabPage/>
+      </div>
+      <div class="home-content-main">
+        <MainContent/>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -30,5 +28,23 @@ import MainContent from '@/components/layout/mainContent/index.vue'
 .home-wrapper {
   width: 100%;
   height: 100%;
+  display: flex;
+  align-items: flex-start;
+  .home-left {
+    height: 100%;
+  }
+  .home-content {
+    flex: auto;
+    height: 100%;
+    &-header {
+      padding: 10px 15px;
+      border: 1px solid $default-border-color;
+      border-top: none;
+      border-left: none;
+    }
+    &-tab-page {
+      padding: 10px 15px;
+    }
+  }
 }
 </style>

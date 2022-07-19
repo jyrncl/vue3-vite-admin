@@ -2,6 +2,7 @@
   <el-menu
     default-active="2"
     :class="`${$prefix}-menu`"
+    :collapse-transition="false"
     :collapse="isCollapse"
   >
     <menu-item-vue :menuList="menuTree" />
@@ -12,9 +13,9 @@
 import { getMenuList } from "@/api/user";
 import MenuItemVue from "./menu-item.vue"
 import type { MenuRow } from "@/types";
+import { useCommonStore } from "@/store";
+import { storeToRefs } from "pinia"
 import { ref, onMounted } from "vue";
-
-const isCollapse = ref(false);
 
 const menuTree = ref<Array<MenuRow>>([]);
 
@@ -24,10 +25,13 @@ onMounted(() => {
   })
 })
 
+const { isCollapse } = storeToRefs(useCommonStore());
+
 </script>
 
 <style lang="scss" scoped>
 .#{$prefix}-menu {
   height: 100%;
+  border: none;
 }
 </style>
