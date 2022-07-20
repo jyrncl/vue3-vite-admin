@@ -1,2 +1,3 @@
-export * from "./public/index";
-export * from "./layout/index";
+export * from "./public";
+export * from "./layout";
+export * from "./store"

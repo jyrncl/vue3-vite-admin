@@ -9,7 +9,7 @@
       </el-sub-menu>
     </template>
     <template v-else>
-      <el-menu-item :index="menu.path">
+      <el-menu-item :index="menu.path" @click="test($event.indexPath)">
         <el-icon><IconItem :icon="menu.icon" /></el-icon>
         <span>{{ menu.name }}</span>
       </el-menu-item>
@@ -24,6 +24,10 @@ import { isHaveChildren } from "@/utils/common";
 const props = withDefaults(defineProps<{ menuList: Array<MenuRow> }>(), {
   menuList: () => []
 });
+
+const test = (data: Array<string>) => {
+  console.log(data, "data")
+}
 
 </script>
 

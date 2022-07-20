@@ -7,7 +7,7 @@
     "strict": true,
     "jsx": "preserve",
     "sourceMap": true,
-    "types": ["element-plus/global"],
+    "types": ["element-plus/global", "unplugin-vue-define-options"],
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],

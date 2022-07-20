@@ -1,0 +1,28 @@
+@import "./variable.scss";
+
+/**
+左移，缩小消失
+ */
+.#{$prefix}-slide-in-left-enter-active,
+.#{$prefix}-slide-in-left-leave-active {
+  transition: all 0.4s;
+}
+
+.#{$prefix}-slide-in-left-enter-from,
+.#{$prefix}-slide-in-left-leave-to {
+  transform: translateX(-100%) scale(0);
+}
+
+/**
+3d 翻转
+ */
+.#{$prefix}-rotate3d-left-enter-active,
+.#{$prefix}-rotate3d-left-leave-active {
+  transition: all 0.5s;
+}
+
+.#{$prefix}-rotate3d-left-enter-from,
+.#{$prefix}-rotate3d-left-leave-to {
+  transform: rotate3d(0, -1, 0, -90deg);
+  opacity: 0;
+}

@@ -2,6 +2,7 @@
   <el-menu
     default-active="2"
     :class="`${$prefix}-menu`"
+    :router="true"
     :collapse-transition="false"
     :collapse="isCollapse"
   >

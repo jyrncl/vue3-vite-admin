@@ -1,9 +1,13 @@
 <template>
-  <component :is="`${$prefix}${propsData.icon}`"></component>
+  <component :color="color" :is="`${$prefix}${icon}`"></component>
 </template>
 
 <script setup lang="ts">
-const propsData = withDefaults(defineProps<{ icon: string }>(), {})
+interface props {
+  icon: string;
+  color?: string;
+}
+const { icon, color } = defineProps<props>();
 </script>
 
 <style lang="scss" scoped></style>

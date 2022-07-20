@@ -26,6 +26,7 @@ const commonStore = useCommonStore();
   height: 100%;
   border-right: 1px solid $default-border-color;
   overflow: hidden;
+  transition: all 0.3s;
   .header-title {
     width: 100%;
     display: flex;

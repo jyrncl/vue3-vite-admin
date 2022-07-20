@@ -22,6 +22,10 @@ import LeftAside from '@/components/layout/leftAside/index.vue'
 import TopHeader from '@/components/layout/topHeader/index.vue'
 import TopTabPage from '@/components/layout/topTabPage/index.vue'
 import MainContent from '@/components/layout/mainContent/index.vue'
+
+defineOptions({
+  name: "home-page"
+})
 </script>
 
 <style lang="scss" scoped>

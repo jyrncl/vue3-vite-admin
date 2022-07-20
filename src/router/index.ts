@@ -15,15 +15,20 @@ export const routes: Array<RouteRecordRaw> = [
     path: "/home",
     name: "home",
     component: Layout,
+    redirect: "/home/indexPage",
     meta: {
-      isNeedToken: false,
+      isNeedToken: true,
       isKeepAlive: false
     },
     children: [
       {
         path: "/home/indexPage",
         name: "indexPage",
-        component: () => import("@/views/indexPage/index.vue")
+        component: () => import("@/views/indexPage/index.vue"),
+        meta: {
+          isNeedToken: true,
+          isKeepAlive: false
+        },
       }
     ]
   }
