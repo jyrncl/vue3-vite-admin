@@ -9,7 +9,7 @@
       </el-sub-menu>
     </template>
     <template v-else>
-      <el-menu-item :index="menu.path" @click="test($event.indexPath)">
+      <el-menu-item :index="menu.path" @click="setPath($event.indexPath)">
         <el-icon><IconItem :icon="menu.icon" /></el-icon>
         <span>{{ menu.name }}</span>
       </el-menu-item>
@@ -20,13 +20,17 @@
 <script setup lang="ts">
 import type { MenuRow } from "@/types";
 import { isHaveChildren } from "@/utils/common";
+import { useCommonStore } from "@/store";
 
 const props = withDefaults(defineProps<{ menuList: Array<MenuRow> }>(), {
   menuList: () => []
 });
 
-const test = (data: Array<string>) => {
-  console.log(data, "data")
+const { setBreadcrumbList } = useCommonStore();
+
+const setPath = (pathList: Array<string>) => {
+  console.log(pathList, "pathList")
+  setBreadcrumbList(pathList)
 }
 
 </script>
