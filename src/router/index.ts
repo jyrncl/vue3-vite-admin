@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
+import { viewsRouterList } from "@/router/views";
 import Layout from "@/page/home/index.vue";
 
 export const routes: Array<RouteRecordRaw> = [
@@ -28,10 +29,11 @@ export const routes: Array<RouteRecordRaw> = [
         meta: {
           isNeedToken: true,
           isKeepAlive: false
-        },
+        }
       }
     ]
-  }
+  },
+  ...viewsRouterList
 ];
 
 export const router = createRouter({
