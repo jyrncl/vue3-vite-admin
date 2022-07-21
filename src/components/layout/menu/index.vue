@@ -1,6 +1,6 @@
 <template>
   <el-menu
-    :default-active="defaultPath"
+    :default-active="route.path"
     :class="`${$prefix}-menu`"
     :router="true"
     :collapse-transition="false"
@@ -16,7 +16,7 @@ import MenuItemVue from "./menu-item.vue";
 import type { MenuRow } from "@/types";
 import { useCommonStore } from "@/store";
 import { useRoute } from "vue-router";
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted } from "vue";
 
 const menuTree = ref<Array<MenuRow>>([]);
 const commonStore = useCommonStore();
@@ -28,14 +28,7 @@ onMounted(() => {
   });
 });
 
-const defaultPath = ref("");
 const route = useRoute();
-watch(
-  () => route.path,
-  (path: string) => {
-    defaultPath.value = path
-  }
-);
 </script>
 
 <style lang="scss" scoped>
