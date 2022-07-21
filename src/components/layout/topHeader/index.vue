@@ -5,7 +5,7 @@
     </div>
     <div class="breadcrumb">
       <el-breadcrumb separator="/">
-        <el-breadcrumb-item :to="{ path: '/' }">homepage</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: item.path }" v-for="item in commonStore.breadcrumbList" :key="item.id">{{ item.name }}</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
   </div>

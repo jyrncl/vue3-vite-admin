@@ -26,13 +26,25 @@ const props = withDefaults(defineProps<{ menuList: Array<MenuRow> }>(), {
   menuList: () => []
 });
 
-const { setBreadcrumbList } = useCommonStore();
+const { setBreadcrumbList, menuTree } = useCommonStore();
+
+const getThisData = (tree: Array<MenuRow>, path: string): MenuRow | undefined => {
+  for (const ele of tree) {
+    if (ele.path === path) {
+      return ele;
+    } else if (ele.children.length) {
+      return getThisData(ele.children, path);
+    }
+  }
+};
 
 const setPath = (pathList: Array<string>) => {
-  console.log(pathList, "pathList")
-  setBreadcrumbList(pathList)
-}
-
+  const result: Array<MenuRow | undefined> = [];
+  pathList.forEach(ele => {
+    result.push(getThisData(menuTree, ele));
+  });
+  setBreadcrumbList(result);
+};
 </script>
 
 <style lang="scss" scoped></style>
