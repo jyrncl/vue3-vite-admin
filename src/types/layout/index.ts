@@ -5,3 +5,9 @@ export interface MenuRow {
   icon?: string,
   children: Array<MenuRow>,
 }
+
+export interface TabPageRow {
+  id: string;
+  name: string;
+  path: string;
+}

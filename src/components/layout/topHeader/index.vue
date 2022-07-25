@@ -5,16 +5,21 @@
     </div>
     <div class="breadcrumb">
       <el-breadcrumb separator="/">
-        <el-breadcrumb-item :to="{ path: item.path }" v-for="item in commonStore.breadcrumbList" :key="item.id">{{ item.name }}</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: item.path }" v-for="item in breadcrumbList" :key="item.id">{{ item.name }}</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { computed } from "vue";
 import { useCommonStore } from "@/store";
 
 const commonStore = useCommonStore();
+
+const breadcrumbList = computed(() => {
+  return commonStore.breadcrumbList;
+})
 </script>
 
 <style lang="scss" scoped>

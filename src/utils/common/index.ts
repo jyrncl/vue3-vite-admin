@@ -10,17 +10,16 @@ export function isHaveChildren(data: { children: Array<any>; [prop: string]: any
  * 将数据存入local store中
  */
 export function setItemByLocalStore(key: string, value: any): void {
-  console.log(key, value);
   window.localStorage.setItem(key, JSON.stringify({ key, value }));
 }
 
 /**
- * 将数据从local store中取出
+ * 将数据从local store中取出 LocalStoreItem
  */
-export function getItemByLocalStore(key: string): LocalStoreItem | null {
-  const item = window.localStorage.getItem(key)
-  console.log(item);
-  return item ? JSON.parse(item) : item;
+export function getItemByLocalStore(key: string): any {
+  const item: string | null = window.localStorage.getItem(key)
+  const result: LocalStoreItem | null = item ? JSON.parse(item) : item;
+  return result ? result.value : null;
 }
 
 /**
