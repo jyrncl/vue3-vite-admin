@@ -9,7 +9,7 @@
       </el-sub-menu>
     </template>
     <template v-else>
-      <el-menu-item :index="menu.path" @click="setPath($event.indexPath)">
+      <el-menu-item :index="menu.path" @click="setPath($event.indexPath, menu)">
         <el-icon><IconItem :icon="menu.icon" /></el-icon>
         <span>{{ menu.name }}</span>
       </el-menu-item>
@@ -26,7 +26,7 @@ const props = withDefaults(defineProps<{ menuList: Array<MenuRow> }>(), {
   menuList: () => []
 });
 
-const { setBreadcrumbList, menuTree } = useCommonStore();
+const { setBreadcrumbList, menuTree, setTabPageList } = useCommonStore();
 
 const getThisData = (tree: Array<MenuRow>, path: string): MenuRow | undefined => {
   for (const ele of tree) {
@@ -38,11 +38,12 @@ const getThisData = (tree: Array<MenuRow>, path: string): MenuRow | undefined =>
   }
 };
 
-const setPath = (pathList: Array<string>) => {
+const setPath = (pathList: Array<string>, menuRow: MenuRow) => {
   const result: Array<MenuRow | undefined> = [];
   pathList.forEach(ele => {
     result.push(getThisData(menuTree, ele));
   });
+  setTabPageList(menuRow);
   setBreadcrumbList(result);
 };
 </script>

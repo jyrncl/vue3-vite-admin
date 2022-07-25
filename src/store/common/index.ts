@@ -25,7 +25,7 @@ export const useCommonStore = defineStore("common", {
     setTabPageList(tabPageRow: TabPageRow) {
       return new Promise((resolve) => {
         const index = this.tabPageList.findIndex((item) => item.id === tabPageRow.id)
-        if (index !== -1) {
+        if (index === -1) {
           this.tabPageList.push(tabPageRow)
           setItemByLocalStore("tabPageList", this.tabPageList);
         } else {
@@ -34,11 +34,17 @@ export const useCommonStore = defineStore("common", {
       })
     },
     closeTabPage(tabPageRow: TabPageRow) {
-      const index = this.tabPageList.findIndex((item) => item.id === tabPageRow.id)
-      if (index !== -1) {
-        this.tabPageList.splice(index, 1)
-        setItemByLocalStore("tabPageList", this.tabPageList);
-      }
+      return new Promise((resolve) => {
+        const index = this.tabPageList.findIndex((item) => item.id === tabPageRow.id)
+        if (index !== -1) {
+          this.tabPageList.splice(index, 1)
+          setItemByLocalStore("tabPageList", this.tabPageList);
+        } else {
+          if (this.tabPageList.length) {
+            resolve(this.tabPageList.at(-1))
+          }
+        }
+      })
     },
   }
 });
