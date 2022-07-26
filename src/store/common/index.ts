@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { setItemByLocalStore, getItemByLocalStore } from "@/utils/common";
-import { CommonStore, MenuRow, TabPageRow } from "@/types"
+import type { CommonStore, MenuRow, TabPageRow } from "@/types"
 
 export const useCommonStore = defineStore("common", {
   state: (): CommonStore => ({
@@ -22,7 +22,7 @@ export const useCommonStore = defineStore("common", {
       this.menuTree = menuTree;
       setItemByLocalStore("menuTree", menuTree);
     },
-    setTabPageList(tabPageRow: TabPageRow) {
+    setTabPageList(tabPageRow: TabPageRow): Promise<TabPageRow | undefined> {
       return new Promise((resolve) => {
         const index = this.tabPageList.findIndex((item) => item.id === tabPageRow.id)
         if (index === -1) {
@@ -33,16 +33,13 @@ export const useCommonStore = defineStore("common", {
         }
       })
     },
-    closeTabPage(tabPageRow: TabPageRow) {
+    closeTabPage(tabPageRow: TabPageRow): Promise<TabPageRow | undefined> {
       return new Promise((resolve) => {
         const index = this.tabPageList.findIndex((item) => item.id === tabPageRow.id)
         if (index !== -1) {
           this.tabPageList.splice(index, 1)
           setItemByLocalStore("tabPageList", this.tabPageList);
-        } else {
-          if (this.tabPageList.length) {
-            resolve(this.tabPageList.at(-1))
-          }
+          resolve(this.tabPageList.at(-1))
         }
       })
     },

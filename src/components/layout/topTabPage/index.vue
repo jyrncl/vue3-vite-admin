@@ -3,8 +3,8 @@
     <el-tag
       v-for="item in commonStore.tabPageList"
       :key="item.id"
-      class="mx-1"
-      closable
+      class="tab-item"
+      :closable="Number(item.id) !== 11"
       :disable-transitions="false"
       @click="handleClick(item)"
       @close="handleClose(item)"
@@ -19,13 +19,15 @@ import type { TabPageRow } from "@/types";
 import { useRouter } from "vue-router";
 import { useCommonStore } from "@/store";
 
-const commonStore = useCommonStore();
-
-const handleClose = (tabPageRow: TabPageRow) => {
-  commonStore.closeTabPage(tabPageRow);
-};
-
 const router = useRouter();
+
+const commonStore = useCommonStore();
+const handleClose = (tabPageRow: TabPageRow) => {
+  commonStore.closeTabPage(tabPageRow).then((tabPageRow) => {
+    router.push({ path: tabPageRow?.path || '' })
+  });
+
+};
 
 const handleClick = (tabPageRow: TabPageRow) => {
   router.push({ path: tabPageRow.path })
@@ -38,5 +40,9 @@ const handleClick = (tabPageRow: TabPageRow) => {
   height: 100%;
   display: flex;
   align-items: center;
+  .tab-item {
+    margin-right: 8px;
+    cursor: pointer;
+  }
 }
 </style>
