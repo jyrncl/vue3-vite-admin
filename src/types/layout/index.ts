@@ -1,5 +1,6 @@
 export interface MenuRow {
   id: string,
+  pid: string,
   name: string,
   path: string,
   icon?: string,

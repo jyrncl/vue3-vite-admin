@@ -7,6 +7,9 @@ export function isHaveChildren(data: { children: Array<any>; [prop: string]: any
   return Boolean(data.children && data.children.length);
 }
 
+/**
+ * 返回指定path的节点
+ */
 export function getThisData(tree: Array<MenuRow>, path: string): MenuRow | undefined {
   for (const ele of tree) {
     if (ele.path === path) {
@@ -17,6 +20,19 @@ export function getThisData(tree: Array<MenuRow>, path: string): MenuRow | undef
   }
 }
 
+export function getPath(rootId: string, curPath: string, menuRow: MenuRow, menuTree: Array<MenuRow>) {
+  const curItem = getThisData(menuTree, curPath);
+  const queue: Array<MenuRow> = menuTree;
+  while(queue.length) {
+    const node = queue.pop();
+    if (!node) return;
+    if (node.id) {}
+  }
+}
+
+/**
+ * 返回树中与之相关的节点组成的字符串数组
+ */
 export function getPathList(pathList: Array<string>, menuRow: MenuRow, menuTree: Array<MenuRow>): Promise<Array<MenuRow | undefined>> {
   return new Promise(resolve => {
     const result: Array<MenuRow | undefined> = [];
