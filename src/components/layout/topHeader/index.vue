@@ -5,21 +5,29 @@
     </div>
     <div class="breadcrumb">
       <el-breadcrumb separator="/">
-        <el-breadcrumb-item :to="{ path: item.path }" v-for="item in breadcrumbList" :key="item.id">{{ item.name }}</el-breadcrumb-item>
+        <el-breadcrumb-item @click="setBreadcrumbAndTabPage(item)" :to="{ path: item.path }" v-for="item in commonStore.breadcrumbList" :key="item.id">{{ item.name }}</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import type { MenuRow } from "@/types"
+import { getPathList } from "@/utils/common";
 import { useCommonStore } from "@/store";
 
 const commonStore = useCommonStore();
 
-const breadcrumbList = computed(() => {
-  return commonStore.breadcrumbList;
-})
+const setBreadcrumbAndTabPage = (item: MenuRow) => {
+  console.log(item, "item");
+  const pathList = commonStore.breadcrumbList.map((item) => item?.path || '')
+  getPathList(pathList, item, commonStore.menuTree).then((result) => {
+    if (!item.children.length) {
+      commonStore.setTabPageList(item);
+    }
+    commonStore.setBreadcrumbList(result);
+  })
+}
 </script>
 
 <style lang="scss" scoped>

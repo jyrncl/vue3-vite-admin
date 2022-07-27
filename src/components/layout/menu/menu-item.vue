@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 import type { MenuRow } from "@/types";
-import { isHaveChildren } from "@/utils/common";
+import { isHaveChildren, getPathList } from "@/utils/common";
 import { useCommonStore } from "@/store";
 
 const props = withDefaults(defineProps<{ menuList: Array<MenuRow> }>(), {
@@ -28,23 +28,11 @@ const props = withDefaults(defineProps<{ menuList: Array<MenuRow> }>(), {
 
 const { setBreadcrumbList, menuTree, setTabPageList } = useCommonStore();
 
-const getThisData = (tree: Array<MenuRow>, path: string): MenuRow | undefined => {
-  for (const ele of tree) {
-    if (ele.path === path) {
-      return ele;
-    } else if (ele.children.length) {
-      return getThisData(ele.children, path);
-    }
-  }
-};
-
 const setPath = (pathList: Array<string>, menuRow: MenuRow) => {
-  const result: Array<MenuRow | undefined> = [];
-  pathList.forEach(ele => {
-    result.push(getThisData(menuTree, ele));
-  });
-  setTabPageList(menuRow);
-  setBreadcrumbList(result);
+  getPathList(pathList, menuRow, menuTree).then((result) => {
+    setTabPageList(menuRow);
+    setBreadcrumbList(result);
+  })
 };
 </script>
 

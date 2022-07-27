@@ -4,6 +4,7 @@
       v-for="item in commonStore.tabPageList"
       :key="item.id"
       class="tab-item"
+      :effect="`${item.path === route.path ? 'dark' : 'light'}`"
       :closable="Number(item.id) !== 11"
       :disable-transitions="false"
       @click="handleClick(item)"
@@ -16,10 +17,11 @@
 
 <script setup lang="ts">
 import type { TabPageRow } from "@/types";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import { useCommonStore } from "@/store";
 
 const router = useRouter();
+const route = useRoute();
 
 const commonStore = useCommonStore();
 const handleClose = (tabPageRow: TabPageRow) => {
