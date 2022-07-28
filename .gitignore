@@ -115,3 +115,10 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+/.idea/codeStyles/codeStyleConfig.xml
+/.idea/git_toolbox_prj.xml
+/.idea/modules.xml
+/.idea/codeStyles/Project.xml
+/.idea/vcs.xml
+/.idea/vue3-vite-admin.iml
+/.idea/watcherTasks.xml
