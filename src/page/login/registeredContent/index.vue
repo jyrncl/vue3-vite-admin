@@ -1,36 +1,18 @@
 <template>
   <div class="registeredContent">
     <div class="registeredContent-headerImg">
-      <img
-          :src="$getImageUrlByModules(ImageModules.loginPage, '1.png')"
-          alt=""
-      />
+      <img :src="$getImageUrlByModules(ImageModules.loginPage, '1.png')" alt="" />
     </div>
     <div class="registeredContent-form">
-      <el-form
-          ref="registeredFormRef"
-          :model="registeredFormProps"
-          status-icon
-          :rules="rules"
-          label-width="80px"
-          class="login-Form"
-      >
+      <el-form ref="registeredFormRef" :model="registeredFormProps" status-icon :rules="rules" label-width="80px" class="login-Form">
         <el-form-item label="账号" prop="username" class="login-input">
-          <el-input v-model.number="registeredFormProps.username"/>
+          <el-input v-model.number="registeredFormProps.username" />
         </el-form-item>
         <el-form-item label="密码" prop="password" class="login-input">
-          <el-input
-              v-model="registeredFormProps.password"
-              type="password"
-              autocomplete="off"
-          />
+          <el-input v-model="registeredFormProps.password" type="password" autocomplete="off" />
         </el-form-item>
         <el-form-item label="确认密码" prop="checkPass" class="login-input">
-          <el-input
-              v-model="registeredFormProps.checkPass"
-              type="password"
-              autocomplete="off"
-          />
+          <el-input v-model="registeredFormProps.checkPass" type="password" autocomplete="off" />
         </el-form-item>
         <el-form-item class="bottom-btn">
           <div class="submit" @click="submitForm(registeredFormRef)">确认</div>
@@ -42,39 +24,38 @@
 </template>
 
 <script setup lang="ts">
-import {ImageModules} from "@/enum";
-import {useRegisteredValidate} from '@/hooks/useFormValidateRules';
-import type {FormInstance} from "element-plus";
-import {reactive} from 'vue';
+import { ImageModules } from "@/enum";
+import { useRegisteredValidate } from "@/hooks/useFormValidateRules";
+import type { FormInstance } from "element-plus";
+import { reactive } from "vue";
 
-const {registeredFormProps, registeredFormRef, validatePass, validateCheckPass} = useRegisteredValidate();
+const { registeredFormProps, registeredFormRef, validatePass, validateCheckPass } = useRegisteredValidate();
 
 const rules = reactive({
-  username: [{required: true, message: '请输入用户名', trigger: "blur"}],
-  password: [{required: true, validator: validatePass, trigger: 'blur'}],
-  checkPass: [{required: true, validator: validateCheckPass, trigger: 'blur'}],
-})
+  username: [{ required: true, message: "请输入用户名", trigger: "blur" }],
+  password: [{ required: true, validator: validatePass, trigger: "blur" }],
+  checkPass: [{ required: true, validator: validateCheckPass, trigger: "blur" }]
+});
 
 const emits = defineEmits<{
-  (e: 'changeTag', tab: string): void
-}>()
+  (e: "changeTag", tab: string): void;
+}>();
 
 const submitForm = (formEl: FormInstance | undefined) => {
-  if (!formEl) return
-  formEl.validate((valid) => {
+  if (!formEl) return;
+  formEl.validate(valid => {
     if (valid) {
-      emits('changeTag', 'login')
+      emits("changeTag", "login");
     } else {
-      return false
+      return false;
     }
-  })
-}
+  });
+};
 
 const resetForm = (formEl: FormInstance | undefined) => {
-  if (!formEl) return
-  formEl.resetFields()
-}
-
+  if (!formEl) return;
+  formEl.resetFields();
+};
 </script>
 
 <style lang="scss" scoped>
@@ -125,7 +106,8 @@ const resetForm = (formEl: FormInstance | undefined) => {
         ::v-deep(.el-form-item__content) {
           justify-content: center;
 
-          .submit, .reset {
+          .submit,
+          .reset {
             padding: 3px 28px;
             box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
             border-radius: 8px;
