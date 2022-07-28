@@ -1,13 +1,13 @@
 import { defineStore } from "pinia";
 import { setItemByLocalStore, getItemByLocalStore } from "@/utils/common";
-import type { CommonStore, MenuRow, TabPageRow } from "@/types"
+import type { CommonStore, MenuRow, TabPageRow } from "@/types";
 
 export const useCommonStore = defineStore("common", {
   state: (): CommonStore => ({
     isCollapse: getItemByLocalStore("isCollapse") || false,
     breadcrumbList: getItemByLocalStore("breadcrumbList") || [],
     menuTree: getItemByLocalStore("menuTree") || [],
-    tabPageList: getItemByLocalStore("tabPageList") || [],
+    tabPageList: getItemByLocalStore("tabPageList") || []
   }),
   actions: {
     changeCollapse() {
@@ -23,25 +23,25 @@ export const useCommonStore = defineStore("common", {
       setItemByLocalStore("menuTree", menuTree);
     },
     setTabPageList(tabPageRow: TabPageRow): Promise<TabPageRow | undefined> {
-      return new Promise((resolve) => {
-        const index = this.tabPageList.findIndex((item) => item.id === tabPageRow.id)
+      return new Promise(resolve => {
+        const index = this.tabPageList.findIndex(item => item.id === tabPageRow.id);
         if (index === -1) {
-          this.tabPageList.push(tabPageRow)
+          this.tabPageList.push(tabPageRow);
           setItemByLocalStore("tabPageList", this.tabPageList);
         } else {
           resolve(tabPageRow);
         }
-      })
+      });
     },
     closeTabPage(tabPageRow: TabPageRow): Promise<TabPageRow | undefined> {
-      return new Promise((resolve) => {
-        const index = this.tabPageList.findIndex((item) => item.id === tabPageRow.id)
+      return new Promise(resolve => {
+        const index = this.tabPageList.findIndex(item => item.id === tabPageRow.id);
         if (index !== -1) {
-          this.tabPageList.splice(index, 1)
+          this.tabPageList.splice(index, 1);
           setItemByLocalStore("tabPageList", this.tabPageList);
-          resolve(this.tabPageList.at(-1))
+          resolve(this.tabPageList.at(-1));
         }
-      })
-    },
+      });
+    }
   }
 });

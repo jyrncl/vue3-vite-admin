@@ -5,7 +5,7 @@
       :key="item.id"
       class="tab-item"
       :effect="`${item.path === route.path ? 'dark' : 'light'}`"
-      :closable="Number(item.id) !== 11"
+      :closable="item.path !== $indexPage"
       :disable-transitions="false"
       @click="handleClick(item)"
       @close="handleClose(item)"
@@ -17,34 +17,52 @@
 
 <script setup lang="ts">
 import type { TabPageRow } from "@/types";
-import { watch } from "vue";
+import { watch, onBeforeUnmount, ref, getCurrentInstance, ComponentInternalInstance } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useCommonStore } from "@/store";
-import { getPathList } from "@/utils/common";
+import { getPathList, getThisData } from "@/utils/common";
 
+const { proxy } = getCurrentInstance() as ComponentInternalInstance;
 const router = useRouter();
 const route = useRoute();
 
 const commonStore = useCommonStore();
 const handleClose = (tabPageRow: TabPageRow) => {
-  commonStore.closeTabPage(tabPageRow).then((tabPageRow) => {
-    router.push({ path: tabPageRow?.path || '' })
+  commonStore.closeTabPage(tabPageRow).then(tabPageRow => {
+    router.push({ path: tabPageRow?.path || "" });
   });
 };
 
-watch(() => route.matched, () => {
-  setBreadcrumbAndTabPage();
-});
+const isFirstRender = ref(true)
 
 const setBreadcrumbAndTabPage = () => {
-  const pathList = route.matched.map((item) => item.path)
-  getPathList(pathList, commonStore.menuTree).then((result) => {
+  const pathList = route.matched.map(item => item.path);
+  getPathList(pathList, commonStore.menuTree).then(result => {
+    if (isFirstRender) {
+      const { id, path, name } = getThisData(commonStore.menuTree, proxy?.$indexPage || "") as TabPageRow;
+      commonStore.setTabPageList({ id, path, name })
+      isFirstRender.value = false;
+    }
     commonStore.setBreadcrumbList(result);
-  })
-}
+  });
+};
+
+const unwatch = watch(
+  () => route.matched,
+  () => {
+    setBreadcrumbAndTabPage();
+  },
+  {
+    immediate: true
+  }
+);
+
+onBeforeUnmount(() => {
+  unwatch();
+});
 
 const handleClick = (tabPageRow: TabPageRow) => {
-  router.push({ path: tabPageRow.path })
+  router.push({ path: tabPageRow.path });
 };
 </script>
 

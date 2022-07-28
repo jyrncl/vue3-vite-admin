@@ -6,27 +6,16 @@
     :collapse-transition="false"
     :collapse="commonStore.isCollapse"
   >
-    <menu-item-vue :menuList="menuTree" />
+    <menu-item-vue :menuList="commonStore.menuTree" />
   </el-menu>
 </template>
 
 <script setup lang="ts">
-import { getMenuList } from "@/api/user";
 import MenuItemVue from "./menu-item.vue";
-import type { MenuRow } from "@/types";
 import { useCommonStore } from "@/store";
 import { useRoute } from "vue-router";
-import { ref, onMounted } from "vue";
 
-const menuTree = ref<Array<MenuRow>>([]);
 const commonStore = useCommonStore();
-
-onMounted(() => {
-  getMenuList().then(({ data }) => {
-    menuTree.value = data.menuList;
-    commonStore.setMenuTree(data.menuList);
-  });
-});
 
 const route = useRoute();
 </script>

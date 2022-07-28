@@ -14,12 +14,14 @@ declare module "@vue/runtime-core" {
   interface ComponentCustomProperties {
     $getImageUrlByModules: getImageUrlByModulesType;
     $prefix: string;
+    $indexPage: string;
   }
 }
 
 const app = createApp(App);
 app.config.globalProperties.$getImageUrlByModules = getImageUrlByModules;
 app.config.globalProperties.$prefix = import.meta.env.VITE_SCSS_CLASS_PREFIX;
+app.config.globalProperties.$indexPage = import.meta.env.VITE_INDEX_PAGE;
 
 app.use(router);
 app.use(createPinia());
