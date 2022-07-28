@@ -13,20 +13,13 @@
 
 <script setup lang="ts">
 import type { MenuRow } from "@/types"
-import { getPathList } from "@/utils/common";
 import { useCommonStore } from "@/store";
 
 const commonStore = useCommonStore();
 
 const setBreadcrumbAndTabPage = (item: MenuRow) => {
-  console.log(item, "item");
-  const pathList = commonStore.breadcrumbList.map((item) => item?.path || '')
-  getPathList(pathList, item, commonStore.menuTree).then((result) => {
-    if (!item.children.length) {
-      commonStore.setTabPageList(item);
-    }
-    commonStore.setBreadcrumbList(result);
-  })
+  if (item.children.length) return;
+  commonStore.setTabPageList(item);
 }
 </script>
 

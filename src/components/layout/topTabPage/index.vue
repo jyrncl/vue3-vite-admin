@@ -17,8 +17,10 @@
 
 <script setup lang="ts">
 import type { TabPageRow } from "@/types";
+import { watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useCommonStore } from "@/store";
+import { getPathList } from "@/utils/common";
 
 const router = useRouter();
 const route = useRoute();
@@ -28,8 +30,18 @@ const handleClose = (tabPageRow: TabPageRow) => {
   commonStore.closeTabPage(tabPageRow).then((tabPageRow) => {
     router.push({ path: tabPageRow?.path || '' })
   });
-
 };
+
+watch(() => route.matched, () => {
+  setBreadcrumbAndTabPage();
+});
+
+const setBreadcrumbAndTabPage = () => {
+  const pathList = route.matched.map((item) => item.path)
+  getPathList(pathList, commonStore.menuTree).then((result) => {
+    commonStore.setBreadcrumbList(result);
+  })
+}
 
 const handleClick = (tabPageRow: TabPageRow) => {
   router.push({ path: tabPageRow.path })
