@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import type { TabPageRow } from "@/types";
+import type { MenuRow, TabPageRow } from "@/types";
 import { watch, onBeforeUnmount, ref, getCurrentInstance, ComponentInternalInstance } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useCommonStore } from "@/store";
@@ -38,8 +38,10 @@ const isFirstRender = ref(true)
 const setBreadcrumbAndTabPage = () => {
   const pathList = route.matched.map(item => item.path);
   getPathList(pathList, commonStore.menuTree).then(result => {
-    if (isFirstRender) {
-      const { id, path, name } = getThisData(commonStore.menuTree, proxy?.$indexPage || "") as TabPageRow;
+    if (isFirstRender && !commonStore.tabPageList.length) {
+      const result: Array<MenuRow> = [];
+      getThisData(commonStore.menuTree, proxy?.$indexPage || "", result);
+      const { id, path, name } = result[0];
       commonStore.setTabPageList({ id, path, name })
       isFirstRender.value = false;
     }

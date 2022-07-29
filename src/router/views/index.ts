@@ -1,5 +1,6 @@
 import type { RouteRecordRaw } from "vue-router";
 import Layout from "@/page/home/index.vue";
+import Default from "@/page/default/index.vue";
 export const viewsRouterList: Array<RouteRecordRaw> = [
   {
     path: "/dashboard",
@@ -29,6 +30,39 @@ export const viewsRouterList: Array<RouteRecordRaw> = [
           isKeepAlive: false
         }
       }
+    ]
+  },
+  {
+    path: "/charts",
+    name: "charts",
+    component: Layout,
+    redirect: "/charts/echarts",
+    meta: {
+      isNeedToken: true,
+      isKeepAlive: false
+    },
+    children: [
+      {
+        path: "/charts/echarts",
+        name: "line",
+        redirect: "/charts/echarts/line",
+        component: Default,
+        meta: {
+          isNeedToken: true,
+          isKeepAlive: false
+        },
+        children: [
+          {
+            path: "/charts/echarts/line",
+            name: "line",
+            component: () => import("@/views/charts/echarts/line/index.vue"),
+            meta: {
+              isNeedToken: true,
+              isKeepAlive: false
+            },
+          }
+        ]
+      },
     ]
   }
 ];

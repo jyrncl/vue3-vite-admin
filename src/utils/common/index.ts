@@ -10,12 +10,13 @@ export function isHaveChildren(data: { children: Array<any>; [prop: string]: any
 /**
  * 返回指定path的节点
  */
-export function getThisData(tree: Array<MenuRow>, path: string): MenuRow | undefined {
-  for (const ele of tree) {
-    if (ele.path === path) {
-      return ele;
-    } else if (ele.children.length) {
-      return getThisData(ele.children, path);
+export function getThisData(tree: Array<MenuRow>, path: string, result: Array<MenuRow | undefined>): void {
+  for (const menuRow of tree) {
+    if (menuRow.path === path) {
+      result.push(menuRow);
+      return;
+    } else if (menuRow.children.length) {
+      getThisData(menuRow.children, path, result);
     }
   }
 }
@@ -26,8 +27,8 @@ export function getThisData(tree: Array<MenuRow>, path: string): MenuRow | undef
 export function getPathList(pathList: Array<string>, menuTree: Array<MenuRow>): Promise<Array<MenuRow | undefined>> {
   return new Promise(resolve => {
     const result: Array<MenuRow | undefined> = [];
-    pathList.forEach(ele => {
-      result.push(getThisData(menuTree, ele));
+    pathList.forEach(path => {
+      getThisData(menuTree, path, result);
     });
     resolve(result);
   });
