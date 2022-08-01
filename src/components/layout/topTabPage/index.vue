@@ -29,9 +29,7 @@ const route = useRoute();
 const commonStore = useCommonStore();
 const handleClose = (tabPageRow: TabPageRow) => {
   commonStore.closeTabPage(tabPageRow).then(({ curPath, nextPath }) => {
-    if (route.path === curPath) {
-      router.push({ path: nextPath });
-    }
+    route.path === curPath && router.push({ path: nextPath });
   });
 };
 
