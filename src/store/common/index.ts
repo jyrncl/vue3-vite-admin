@@ -33,13 +33,13 @@ export const useCommonStore = defineStore("common", {
         }
       });
     },
-    closeTabPage(tabPageRow: TabPageRow): Promise<TabPageRow | undefined> {
+    closeTabPage(tabPageRow: TabPageRow): Promise<{ curPath: string, nextPath: string }> {
       return new Promise(resolve => {
         const index = this.tabPageList.findIndex(item => item.id === tabPageRow.id);
         if (index !== -1) {
           this.tabPageList.splice(index, 1);
           setItemByLocalStore("tabPageList", this.tabPageList);
-          resolve(this.tabPageList.at(-1));
+          resolve({ curPath: tabPageRow.path, nextPath: this.tabPageList.at(-1)?.path || '' });
         }
       });
     }
