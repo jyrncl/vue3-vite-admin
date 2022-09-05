@@ -62,6 +62,14 @@ onBeforeMount(() => {
     &-tab-page {
       padding: 10px 15px;
     }
+    &-main {
+      width: 100%;
+      height: calc(100% - 87px);
+      box-sizing: border-box;
+      overflow-x: hidden;
+      overflow-y: auto;
+      background-color: #eee;
+    }
   }
 }
 </style>

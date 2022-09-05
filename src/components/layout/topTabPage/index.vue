@@ -45,7 +45,7 @@ const setBreadcrumbAndTabPage = () => {
       commonStore.setTabPageList({ id, path, name })
       isFirstRender.value = false;
     }
-    commonStore.setBreadcrumbList(result);
+    commonStore.setBreadcrumbList(result as Array<MenuRow>);
   });
 };
 

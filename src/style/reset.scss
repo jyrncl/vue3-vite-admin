@@ -3,3 +3,22 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+::-webkit-scrollbar {
+  /*滚动条整体*/
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  /*滑轨*/
+  background-color: #aaa;
+  border-radius: 30px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #555; /*滑块*/
+}
+
+::-webkit-scrollbar-button {
+  /*两端的按钮*/
+  display: none;
+}

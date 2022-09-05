@@ -31,7 +31,11 @@
           <el-icon><IconItem icon="Search" /></el-icon>
         </div>
       </div>
-      <div class="user-info"></div>
+      <div class="user-info">
+        <div class="icon">
+          <img :src="$getImageUrlByModules(ImageModules.loginPage, '1.png')" alt="" />
+        </div>
+      </div>
       <div class="setting">
         <div class="icon">
           <el-icon><IconItem icon="Setting" /></el-icon>
@@ -42,6 +46,7 @@
 </template>
 
 <script setup lang="ts">
+import { ImageModules } from "@/enum"
 import type { MenuRow } from "@/types";
 import { useCommonStore } from "@/store";
 
@@ -73,6 +78,24 @@ const setBreadcrumbAndTabPage = (item: MenuRow) => {
   .right-user {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    width: 150px;
+    .icon {
+      cursor: pointer;
+    }
+    .user-info {
+      .icon {
+        img {
+          width: 18px;
+          border-radius: 50%;
+          border: 1px solid #eee;
+          transition: all 0.3s;
+          &:hover {
+            transform: scale(1.8);
+          }
+        }
+      }
+    }
   }
 }
 </style>

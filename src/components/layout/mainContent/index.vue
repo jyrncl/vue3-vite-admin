@@ -14,5 +14,9 @@
 </script>
 
 <style lang="scss" scoped>
-
+.mainContent {
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+}
 </style>

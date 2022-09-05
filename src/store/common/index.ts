@@ -14,7 +14,7 @@ export const useCommonStore = defineStore("common", {
       this.isCollapse = !this.isCollapse;
       setItemByLocalStore("isCollapse", this.isCollapse);
     },
-    setBreadcrumbList(breadcrumbList: Array<MenuRow | undefined>) {
+    setBreadcrumbList(breadcrumbList: Array<MenuRow>) {
       this.breadcrumbList = breadcrumbList;
       setItemByLocalStore("breadcrumbList", breadcrumbList);
     },
