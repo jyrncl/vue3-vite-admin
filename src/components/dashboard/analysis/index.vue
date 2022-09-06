@@ -1,11 +1,16 @@
 <template>
-  <div class="analysis" v-for="item in 1000" :key="item">测试一下啊</div>
+  <analysis-item></analysis-item>
 </template>
 
 <script setup lang="ts">
+import AnalysisItem from "./item.vue"
+import { reactive } from "vue";
 defineOptions({
   name: "analysis"
 });
+const analysisItemList = reactive([{
+  name: "",
+}])
 </script>
 
 <style scoped lang="scss">
