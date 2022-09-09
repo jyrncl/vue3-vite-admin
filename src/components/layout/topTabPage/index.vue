@@ -16,33 +16,33 @@
 </template>
 
 <script setup lang="ts">
-import type { MenuRow, TabPageRow } from "@/types";
-import { watch, onBeforeUnmount, ref, getCurrentInstance, ComponentInternalInstance } from "vue";
-import { useRouter, useRoute } from "vue-router";
-import { useCommonStore } from "@/store";
-import { getPathList, getThisData } from "@/utils/common";
+import type {MenuRow, TabPageRow} from '@/types';
+import {watch, onBeforeUnmount, ref, getCurrentInstance, ComponentInternalInstance} from 'vue';
+import {useRouter, useRoute} from 'vue-router';
+import {useCommonStore} from '@/store';
+import {getPathList, getThisData} from '@/utils/common';
 
-const { proxy } = getCurrentInstance() as ComponentInternalInstance;
+const {proxy} = getCurrentInstance() as ComponentInternalInstance;
 const router = useRouter();
 const route = useRoute();
 
 const commonStore = useCommonStore();
 const handleClose = (tabPageRow: TabPageRow) => {
-  commonStore.closeTabPage(tabPageRow).then(({ curPath, nextPath }) => {
-    route.path === curPath && router.push({ path: nextPath });
+  commonStore.closeTabPage(tabPageRow).then(({curPath, nextPath}) => {
+    route.path === curPath && router.push({path: nextPath});
   });
 };
 
-const isFirstRender = ref(true)
+const isFirstRender = ref(true);
 
 const setBreadcrumbAndTabPage = () => {
-  const pathList = route.matched.map(item => item.path);
-  getPathList(pathList, commonStore.menuTree).then(result => {
-    if (isFirstRender && !commonStore.tabPageList.length) {
+  const pathList = route.matched.map((item) => item.path);
+  getPathList(pathList, commonStore.menuTree).then((result) => {
+    if (isFirstRender.value && !commonStore.tabPageList.length) {
       const result: Array<MenuRow> = [];
-      getThisData(commonStore.menuTree, proxy?.$indexPage || "", result);
-      const { id, path, name } = result[0];
-      commonStore.setTabPageList({ id, path, name })
+      getThisData(commonStore.menuTree, proxy?.$indexPage || '', result);
+      const {id, path, name} = result[0];
+      commonStore.setTabPageList({id, path, name});
       isFirstRender.value = false;
     }
     commonStore.setBreadcrumbList(result as Array<MenuRow>);
@@ -50,13 +50,13 @@ const setBreadcrumbAndTabPage = () => {
 };
 
 const unwatch = watch(
-  () => route.matched,
-  () => {
-    setBreadcrumbAndTabPage();
-  },
-  {
-    immediate: true
-  }
+    () => route.matched,
+    () => {
+      setBreadcrumbAndTabPage();
+    },
+    {
+      immediate: true,
+    },
 );
 
 onBeforeUnmount(() => {
@@ -64,7 +64,7 @@ onBeforeUnmount(() => {
 });
 
 const handleClick = (tabPageRow: TabPageRow) => {
-  router.push({ path: tabPageRow.path });
+  router.push({path: tabPageRow.path});
 };
 </script>
 

@@ -16,9 +16,9 @@
 
 <script setup lang="ts">
 defineOptions({
-  name: "keep-alive-page"
+  name: 'keep-alive-page',
 });
-const { component } = defineProps(["component"]);
+const {component} = defineProps(['component']);
 </script>
 
 <style lang="scss" scoped>

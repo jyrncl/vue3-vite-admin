@@ -6,7 +6,7 @@ const loginPageData = (import.meta as any).globEager('../../assets/images/loginP
  * @param modulesArray Array 传递由[moduleName: string(模块名称), data: any(模块数据)]
  */
 const setThisModulesInfo = (
-  modulesArray: Array<[string, any]>
+    modulesArray: Array<[string, any]>,
 ): void => {
   // 将传入的数据放入Map对象中
   modulesArray.forEach((ele): void => {
@@ -15,7 +15,7 @@ const setThisModulesInfo = (
 };
 
 // 将数据放在map对象中
-setThisModulesInfo([['loginPage', loginPageData]])
+setThisModulesInfo([['loginPage', loginPageData]]);
 
 
 /**
@@ -23,9 +23,9 @@ setThisModulesInfo([['loginPage', loginPageData]])
  * @param fileName string 文件名称
  * @return 返回图片路径
  */
- export const getImageUrlByModules = (
-  moduleName: string,
-  fileName: string
+export const getImageUrlByModules = (
+    moduleName: string,
+    fileName: string,
 ): string => {
   const path = `../../assets/images/${moduleName}/${fileName}`;
   return imageModules.get(moduleName)[path].default;

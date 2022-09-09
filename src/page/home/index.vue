@@ -18,23 +18,23 @@
 </template>
 
 <script setup lang="ts">
-import { getMenuList } from "@/api/user";
-import { useCommonStore } from "@/store";
-import { onBeforeMount, ref } from "vue";
-import LeftAside from "@/components/layout/leftAside/index.vue";
-import TopHeader from "@/components/layout/topHeader/index.vue";
-import TopTabPage from "@/components/layout/topTabPage/index.vue";
-import MainContent from "@/components/layout/mainContent/index.vue";
+import {getMenuList} from '@/api/user';
+import {useCommonStore} from '@/store';
+import {onBeforeMount, ref} from 'vue';
+import LeftAside from '@/components/layout/leftAside/index.vue';
+import TopHeader from '@/components/layout/topHeader/index.vue';
+import TopTabPage from '@/components/layout/topTabPage/index.vue';
+import MainContent from '@/components/layout/mainContent/index.vue';
 
 defineOptions({
-  name: "home-page"
+  name: 'home-page',
 });
 
 const loading = ref(true);
 const commonStore = useCommonStore();
 
 onBeforeMount(() => {
-  getMenuList().then(({ data }) => {
+  getMenuList().then(({data}) => {
     commonStore.setMenuTree(data.menuList);
     loading.value = false;
   });

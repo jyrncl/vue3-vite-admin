@@ -11,9 +11,9 @@
 </template>
 
 <script setup lang="ts">
-import MenuItemVue from "./menu-item.vue";
-import { useCommonStore } from "@/store";
-import { useRoute } from "vue-router";
+import MenuItemVue from './menu-item.vue';
+import {useCommonStore} from '@/store';
+import {useRoute} from 'vue-router';
 
 const commonStore = useCommonStore();
 

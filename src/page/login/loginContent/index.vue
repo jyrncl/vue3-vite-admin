@@ -21,33 +21,33 @@
 </template>
 
 <script setup lang="ts">
-import { userLogin } from "@/api/user";
-import { ImageModules } from "@/enum";
-import { ref, reactive, getCurrentInstance, ComponentInternalInstance } from "vue";
-import { useRouter } from "vue-router";
-import { ElMessage } from "element-plus";
-import type { FormInstance } from "element-plus";
+import {userLogin} from '@/api/user';
+import {ImageModules} from '@/enum';
+import {ref, reactive, getCurrentInstance, ComponentInternalInstance} from 'vue';
+import {useRouter} from 'vue-router';
+import {ElMessage} from 'element-plus';
+import type {FormInstance} from 'element-plus';
 
-const { proxy } = getCurrentInstance() as ComponentInternalInstance;
+const {proxy} = getCurrentInstance() as ComponentInternalInstance;
 const router = useRouter();
 const loginFormRef = ref<FormInstance>();
 const loginFormProps = ref({
-  username: "",
-  password: ""
+  username: '',
+  password: '',
 });
 
 const rules = reactive({
-  username: [{ required: true, message: "请输入用户名", trigger: "blur" }],
-  password: [{ required: true, message: "请输入密码", trigger: "blur" }]
+  username: [{required: true, message: '请输入用户名', trigger: 'blur'}],
+  password: [{required: true, message: '请输入密码', trigger: 'blur'}],
 });
 
 const submitForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
-  formEl.validate(valid => {
+  formEl.validate((valid) => {
     if (valid) {
-      userLogin(loginFormProps.value).then(({ data }) => {
+      userLogin(loginFormProps.value).then(({data}) => {
         if (data.loginInfo.isSuccessLogin) {
-          router.push(proxy?.$indexPage || "");
+          router.push(proxy?.$indexPage || '');
         } else {
           ElMessage.error(data.loginInfo.msg);
         }

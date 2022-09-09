@@ -1,5 +1,5 @@
-import type { RouteRecordRaw, Router, RouteLocationNormalizedLoaded } from "vue-router";
-import { useRouter, useRoute } from "vue-router";
+import type {RouteRecordRaw, Router, RouteLocationNormalizedLoaded} from 'vue-router';
+import {useRouter, useRoute} from 'vue-router';
 
 interface DynamicRouterType {}
 

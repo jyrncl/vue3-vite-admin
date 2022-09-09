@@ -3,14 +3,14 @@
 </template>
 
 <script setup lang="ts">
-import AnalysisItem from "./item.vue"
-import { reactive } from "vue";
+import AnalysisItem from './item.vue';
+import {reactive} from 'vue';
 defineOptions({
-  name: "analysis"
+  name: 'analysis',
 });
 const analysisItemList = reactive([{
-  name: "",
-}])
+  name: '',
+}]);
 </script>
 
 <style scoped lang="scss">

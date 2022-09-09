@@ -14,16 +14,15 @@
 </template>
 
 <script setup lang="ts">
-import KeepAlivePage from "@/page/keep-alive-page/index.vue";
-import { ref, onMounted } from "vue";
-import { useRoute } from "vue-router";
+import KeepAlivePage from '@/page/keep-alive-page/index.vue';
+import {ref, onMounted} from 'vue';
+import {useRoute} from 'vue-router';
 const route = useRoute();
-const loading = ref(true)
+const loading = ref(true);
 
 onMounted(() => {
   loading.value = false;
-})
-
+});
 
 
 </script>

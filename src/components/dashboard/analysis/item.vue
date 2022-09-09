@@ -7,14 +7,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import type { TabsPaneContext } from 'element-plus'
+import {ref} from 'vue';
+import type {TabsPaneContext} from 'element-plus';
 
-const activeName = ref('')
+const activeName = ref('');
 
 const handleClick = (tab: TabsPaneContext, event: Event) => {
-  console.log(tab, event)
-}
+  console.log(tab, event);
+};
 </script>
 
 <style scoped lang="scss">

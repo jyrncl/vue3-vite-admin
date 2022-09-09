@@ -46,9 +46,9 @@
 </template>
 
 <script setup lang="ts">
-import { ImageModules } from "@/enum"
-import type { MenuRow } from "@/types";
-import { useCommonStore } from "@/store";
+import {ImageModules} from '@/enum';
+import type {MenuRow} from '@/types';
+import {useCommonStore} from '@/store';
 
 const commonStore = useCommonStore();
 
