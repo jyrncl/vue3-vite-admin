@@ -1,5 +1,7 @@
 <template>
-  <div class="header-tag" :style="`backgroundColor: rgba($color: ${color}, $alpha: 0.5)`">{{ title }}</div>
+  <div class="header-tag" :style="`backgroundColor: rgba($color: ${color}, $alpha: 0.5)`">
+    {{ title }}
+  </div>
 </template>
 
 <script setup lang="ts">

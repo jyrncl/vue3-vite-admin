@@ -1,4 +1,4 @@
-import {MenuRow, TabPageRow} from '@/types';
+import { MenuRow, TabPageRow } from "@/types";
 export interface CommonStore {
   isCollapse: boolean;
   breadcrumbList: Array<MenuRow>;

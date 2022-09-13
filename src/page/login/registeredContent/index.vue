@@ -4,7 +4,14 @@
       <img :src="$getImageUrlByModules(ImageModules.loginPage, '1.png')" alt="" />
     </div>
     <div class="registeredContent-form">
-      <el-form ref="registeredFormRef" :model="registeredFormProps" status-icon :rules="rules" label-width="80px" class="login-Form">
+      <el-form
+        ref="registeredFormRef"
+        :model="registeredFormProps"
+        status-icon
+        :rules="rules"
+        label-width="80px"
+        class="login-Form"
+      >
         <el-form-item label="账号" prop="username" class="login-input">
           <el-input v-model.number="registeredFormProps.username" />
         </el-form-item>
@@ -24,28 +31,29 @@
 </template>
 
 <script setup lang="ts">
-import {ImageModules} from '@/enum';
-import {useRegisteredValidate} from '@/hooks/useFormValidateRules';
-import type {FormInstance} from 'element-plus';
-import {reactive} from 'vue';
+import { ImageModules } from "@/enum";
+import { useRegisteredValidate } from "@/hooks/useFormValidateRules";
+import type { FormInstance } from "element-plus";
+import { reactive } from "vue";
 
-const {registeredFormProps, registeredFormRef, validatePass, validateCheckPass} = useRegisteredValidate();
+const { registeredFormProps, registeredFormRef, validatePass, validateCheckPass } =
+  useRegisteredValidate();
 
 const rules = reactive({
-  username: [{required: true, message: '请输入用户名', trigger: 'blur'}],
-  password: [{required: true, validator: validatePass, trigger: 'blur'}],
-  checkPass: [{required: true, validator: validateCheckPass, trigger: 'blur'}],
+  username: [{ required: true, message: "请输入用户名", trigger: "blur" }],
+  password: [{ required: true, validator: validatePass, trigger: "blur" }],
+  checkPass: [{ required: true, validator: validateCheckPass, trigger: "blur" }]
 });
 
 const emits = defineEmits<{
-  (e: 'changeTag', tab: string): void;
+  (e: "changeTag", tab: string): void;
 }>();
 
 const submitForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
-  formEl.validate((valid) => {
+  formEl.validate(valid => {
     if (valid) {
-      emits('changeTag', 'login');
+      emits("changeTag", "login");
     } else {
       return false;
     }

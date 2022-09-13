@@ -1,4 +1,4 @@
 export enum ImageModules {
-    loginPage = 'loginPage',
-    homePagr = 'homePage',
+  loginPage = "loginPage",
+  homePagr = "homePage"
 }

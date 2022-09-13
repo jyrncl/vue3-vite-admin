@@ -13,9 +13,9 @@
 </template>
 
 <script setup lang="ts">
-import Menu from '@/components/layout/menu/index.vue';
-import {ImageModules} from '@/enum';
-import {useCommonStore} from '@/store';
+import Menu from "@/components/layout/menu/index.vue";
+import { ImageModules } from "@/enum";
+import { useCommonStore } from "@/store";
 
 const commonStore = useCommonStore();
 </script>

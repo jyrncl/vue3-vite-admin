@@ -16,11 +16,11 @@
 </template>
 
 <script setup lang="ts">
-import type { MenuRow, TabPageRow } from '@/types';
-import { watch, onBeforeUnmount, ref, getCurrentInstance, ComponentInternalInstance } from 'vue';
-import { useRouter, useRoute } from 'vue-router';
-import { useCommonStore } from '@/store';
-import { getPathList, getThisData } from '@/utils/common';
+import type { MenuRow, TabPageRow } from "@/types";
+import { watch, onBeforeUnmount, ref, getCurrentInstance, ComponentInternalInstance } from "vue";
+import { useRouter, useRoute } from "vue-router";
+import { useCommonStore } from "@/store";
+import { getPathList, getThisData } from "@/utils/common";
 
 const { proxy } = getCurrentInstance() as ComponentInternalInstance;
 const router = useRouter();
@@ -40,7 +40,7 @@ const setBreadcrumbAndTabPage = () => {
   getPathList(pathList, commonStore.menuTree).then(result => {
     if (isFirstRender.value && !commonStore.tabPageList.length) {
       const result: Array<MenuRow> = [];
-      getThisData(commonStore.menuTree, proxy?.$indexPage || '', result);
+      getThisData(commonStore.menuTree, proxy?.$indexPage || "", result);
       const { id, path, name } = result[0];
       commonStore.setTabPageList({ id, path, name });
       isFirstRender.value = false;

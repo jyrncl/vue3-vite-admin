@@ -1,5 +1,5 @@
-import type {LocalStoreItem} from '@/types';
-import {MenuRow} from '@/types';
+import type { LocalStoreItem } from "@/types";
+import { MenuRow } from "@/types";
 /**
  * 判断菜单树的某一个节点是否有子节点
  */
@@ -10,7 +10,11 @@ export function isHaveChildren(data: { children: Array<any>; [prop: string]: any
 /**
  * 返回指定path的节点
  */
-export function getThisData(tree: Array<MenuRow>, path: string, result: Array<MenuRow | undefined>): void {
+export function getThisData(
+  tree: Array<MenuRow>,
+  path: string,
+  result: Array<MenuRow | undefined>
+): void {
   for (const menuRow of tree) {
     if (menuRow.path === path) {
       result.push(menuRow);
@@ -24,10 +28,13 @@ export function getThisData(tree: Array<MenuRow>, path: string, result: Array<Me
 /**
  * 返回树中与之相关的节点组成的字符串数组
  */
-export function getPathList(pathList: Array<string>, menuTree: Array<MenuRow>): Promise<Array<MenuRow | undefined>> {
-  return new Promise((resolve) => {
+export function getPathList(
+  pathList: Array<string>,
+  menuTree: Array<MenuRow>
+): Promise<Array<MenuRow | undefined>> {
+  return new Promise(resolve => {
     const result: Array<MenuRow | undefined> = [];
-    pathList.forEach((path) => {
+    pathList.forEach(path => {
       getThisData(menuTree, path, result);
     });
     resolve(result);
@@ -38,7 +45,7 @@ export function getPathList(pathList: Array<string>, menuTree: Array<MenuRow>): 
  * 将数据存入local store中
  */
 export function setItemByLocalStore(key: string, value: any): void {
-  window.localStorage.setItem(key, JSON.stringify({key, value}));
+  window.localStorage.setItem(key, JSON.stringify({ key, value }));
 }
 
 /**

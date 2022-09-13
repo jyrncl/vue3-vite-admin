@@ -5,9 +5,9 @@
 </template>
 
 <script setup lang="ts">
-import Analysis from '@/components/dashboard/analysis/index.vue';
+import Analysis from "@/components/dashboard/analysis/index.vue";
 defineOptions({
-  name: 'analysis-wrapper',
+  name: "analysis-wrapper"
 });
 </script>
 

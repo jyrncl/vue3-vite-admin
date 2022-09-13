@@ -3,17 +3,17 @@
     <div class="login-wrapper">
       <div class="login-header">
         <div
-            class="login-tab-wrapper"
-            v-for="(item, index) in tabList"
-            :key="`${item.id}_${index}`"
-            @click="changeCurTab(item.id)"
+          class="login-tab-wrapper"
+          v-for="(item, index) in tabList"
+          :key="`${item.id}_${index}`"
+          @click="changeCurTab(item.id)"
         >
           <div class="login-tab">{{ item.label }}</div>
         </div>
         <div
-            class="login-tab-bg-wrapper"
-            :style="{
-            transform: `translateX(${curTab === 'login' ? 0 : 300}px)`,
+          class="login-tab-bg-wrapper"
+          :style="{
+            transform: `translateX(${curTab === 'login' ? 0 : 300}px)`
           }"
         >
           <div class="login-tab-bg"></div>
@@ -21,37 +21,46 @@
       </div>
       <div class="login-content">
         <LoginContent
-            :style="{ transform: `rotate3d(0, -1, 0, ${curTab === 'login' ? 0 : -90}deg)`, opacity: `${curTab === 'login' ? 1 : 0.1}`}"/>
-        <RegisteredContent @changeTag="changeCurTab"
-                           :style="{ transform: `rotate3d(0, -1, 0, ${curTab === 'registered' ? 0 : 90}deg) scale(${curTab === 'registered' ? 1 : 0.5})`}"/>
+          :style="{
+            transform: `rotate3d(0, -1, 0, ${curTab === 'login' ? 0 : -90}deg)`,
+            opacity: `${curTab === 'login' ? 1 : 0.1}`
+          }"
+        />
+        <RegisteredContent
+          @changeTag="changeCurTab"
+          :style="{
+            transform: `rotate3d(0, -1, 0, ${curTab === 'registered' ? 0 : 90}deg) scale(${
+              curTab === 'registered' ? 1 : 0.5
+            })`
+          }"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import LoginContent from './loginContent/index.vue';
-import RegisteredContent from './registeredContent/index.vue';
-import {ref} from 'vue';
+import LoginContent from "./loginContent/index.vue";
+import RegisteredContent from "./registeredContent/index.vue";
+import { ref } from "vue";
 
 const tabList: Array<{
   label: string;
   id: string;
 }> = [
   {
-    id: 'login',
-    label: '登录',
+    id: "login",
+    label: "登录"
   },
   {
-    id: 'registered',
-    label: '注册',
-  },
+    id: "registered",
+    label: "注册"
+  }
 ];
-const curTab = ref('login');
+const curTab = ref("login");
 const changeCurTab = (tab: string): void => {
   curTab.value = tab;
 };
-
 </script>
 
 <style lang="scss" scoped>

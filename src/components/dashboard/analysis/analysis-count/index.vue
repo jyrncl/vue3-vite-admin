@@ -14,7 +14,14 @@
 </template>
 
 <script setup lang="ts">
-const { label, value, all, color, size = 20, icon } = defineProps<{
+const {
+  label,
+  value,
+  all,
+  color,
+  size = 20,
+  icon
+} = defineProps<{
   label: string;
   color: string;
   size: number;

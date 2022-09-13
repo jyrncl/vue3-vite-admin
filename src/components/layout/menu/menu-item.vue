@@ -18,16 +18,15 @@
 </template>
 
 <script setup lang="ts">
-import type {MenuRow} from '@/types';
-import {isHaveChildren} from '@/utils/common';
-import {useCommonStore} from '@/store';
+import type { MenuRow } from "@/types";
+import { isHaveChildren } from "@/utils/common";
+import { useCommonStore } from "@/store";
 
 const props = withDefaults(defineProps<{ menuList: Array<MenuRow> }>(), {
-  menuList: () => [],
+  menuList: () => []
 });
 
-const {setTabPageList} = useCommonStore();
-
+const { setTabPageList } = useCommonStore();
 </script>
 
 <style lang="scss" scoped></style>

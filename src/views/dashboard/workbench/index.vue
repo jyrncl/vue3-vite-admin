@@ -4,10 +4,8 @@
 
 <script setup lang="ts">
 defineOptions({
-  name: 'workbench',
+  name: "workbench"
 });
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

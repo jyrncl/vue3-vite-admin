@@ -26,21 +26,20 @@ import { onMounted, ref } from "vue";
 import AnalysisItem from "./item.vue";
 import AnalysisCount from "./analysis-count/index.vue";
 import HeaderTag from "./analysis-count/header-tag.vue";
-import { AnalysisComponentsList } from "@/types"
+import { AnalysisComponentsList } from "@/types";
 import { getAnalysisComponentsList } from "@/api/analysis";
 
 defineOptions({
   name: "analysis",
-  components: { AnalysisCount, HeaderTag },
+  components: { AnalysisCount, HeaderTag }
 });
 
-const analysisComponentsList = ref<AnalysisComponentsList>([])
+const analysisComponentsList = ref<AnalysisComponentsList>([]);
 onMounted(() => {
   getAnalysisComponentsList().then(({ data }) => {
     analysisComponentsList.value = data.data;
-  })
-})
-
+  });
+});
 </script>
 
 <style scoped lang="scss">

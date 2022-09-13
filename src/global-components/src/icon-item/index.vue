@@ -7,7 +7,7 @@ interface props {
   icon: string;
   color?: string;
 }
-const {icon, color} = defineProps<props>();
+const { icon, color } = defineProps<props>();
 </script>
 
 <style lang="scss" scoped></style>
