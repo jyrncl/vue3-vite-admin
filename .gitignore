@@ -124,3 +124,4 @@ dist
 /.idea/watcherTasks.xml
 /.idea/codestream.xml
 /.idea/inspectionProfiles/Project_Default.xml
+/.idea/jsLinters/eslint.xml
