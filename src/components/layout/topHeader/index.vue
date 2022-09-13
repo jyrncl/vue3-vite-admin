@@ -6,7 +6,13 @@
       </div>
       <div class="breadcrumb">
         <el-breadcrumb separator="/">
-          <el-breadcrumb-item @click="setBreadcrumbAndTabPage(item)" :to="{ path: item.path }" v-for="item in commonStore.breadcrumbList" :key="item.id">{{ item.name }}</el-breadcrumb-item>
+          <el-breadcrumb-item
+            @click="setBreadcrumbAndTabPage(item)"
+            :to="{ path: item.path }"
+            v-for="item in commonStore.breadcrumbList"
+            :key="item.id"
+            >{{ item.name }}</el-breadcrumb-item
+          >
         </el-breadcrumb>
       </div>
     </div>
@@ -46,9 +52,9 @@
 </template>
 
 <script setup lang="ts">
-import {ImageModules} from '@/enum';
-import type {MenuRow} from '@/types';
-import {useCommonStore} from '@/store';
+import { ImageModules } from "@/enum";
+import type { MenuRow } from "@/types";
+import { useCommonStore } from "@/store";
 
 const commonStore = useCommonStore();
 

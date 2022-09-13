@@ -1,16 +1,16 @@
-import {request} from '@/utils/request';
+import { request } from "@/utils/request";
 
 export function userLogin(data: { username: string; password: string }) {
   return request({
-    url: '/jyrncl/login',
-    method: 'post',
-    data,
+    url: "/jyrncl/user/login",
+    method: "post",
+    data
   });
 }
 
 export function getMenuList() {
   return request({
-    url: '/jyrncl/getMenuList',
-    method: 'post',
+    url: "/jyrncl/user/getMenuList",
+    method: "post"
   });
 }
