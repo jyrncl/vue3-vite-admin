@@ -1,13 +1,14 @@
 <template>
-  <div class="header-tag" :style="`backgroundColor: rgba($color: ${color}, $alpha: 0.5)`">
+  <div class="header-tag">
     {{ title }}
   </div>
 </template>
 
 <script setup lang="ts">
-const { title, color = "#fff" } = defineProps<{
+const { title, color = "#fff", bgColor = "#fff" } = defineProps<{
   title: string;
   color: string;
+  bgColor: string;
 }>();
 </script>
 
@@ -16,5 +17,6 @@ const { title, color = "#fff" } = defineProps<{
   color: v-bind(color);
   padding: 1px 5px;
   border: 1px solid v-bind(color);
+  background-color: v-bind(bgColor);
 }
 </style>
