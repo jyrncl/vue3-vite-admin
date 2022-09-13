@@ -3,8 +3,8 @@ export type AnalysisComponentsList = Array<{
   span: number;
   col: Array<{
     title: string;
-    headerComponent: string;
-    headerProps: object;
+    headerComponent?: string;
+    headerProps?: object;
     contentComponent: string;
     contentProps: object;
   }>;

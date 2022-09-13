@@ -37,6 +37,12 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
 .analysis-item-wrapper {
   width: 100%;
   background-color: #fff;
+  transition: all 0.3s;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    transform: scale(1.01);
+  }
   .analysis-item-simple {
     width: 100%;
     height: 100%;

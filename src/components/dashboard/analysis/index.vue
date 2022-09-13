@@ -43,8 +43,10 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-.analysis {
-  width: 100%;
-  height: 100%;
+.el-row {
+  margin-bottom: 20px;
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 </style>
