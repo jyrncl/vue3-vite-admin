@@ -11,12 +11,14 @@
     "@element-plus/icons-vue": "^2.0.6",
     "@types/node": "^17.0.23",
     "axios": "^0.27.2",
+    "echarts": "^5.3.3",
     "element-plus": "^2.2.0",
     "eslint": "^8.0.1",
     "pinia": "^2.0.14",
     "sass": "^1.49.9",
     "sass-loader": "^12.6.0",
     "vue": "^3.2.25",
+    "vue-echarts": "^6.2.3",
     "vue-router": "^4.0.13"
   },
   "devDependencies": {

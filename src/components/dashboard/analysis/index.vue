@@ -1,7 +1,7 @@
 <template>
   <el-row v-for="row in analysisComponentsList" :gutter="20">
     <el-col :span="row.span" v-for="col in row.col">
-      <analysis-item :type="row.type" :title="col.title">
+      <analysis-item :title="col.title">
         <template v-slot:header>
           <component
             v-if="col.headerComponent"
@@ -25,13 +25,14 @@
 import { onMounted, ref } from "vue";
 import AnalysisItem from "./item.vue";
 import AnalysisCount from "./analysis-count/index.vue";
-import HeaderTag from "./analysis-count/header-tag.vue";
+import HeaderTag from "./analysis-count/header-tag.vue"
+import TrafficLineChart from "./analysis-charts/traffic-line.vue";
 import { AnalysisComponentsList } from "@/types";
 import { getAnalysisComponentsList } from "@/api/analysis";
 
 defineOptions({
   name: "analysis",
-  components: { AnalysisCount, HeaderTag }
+  components: { AnalysisCount, HeaderTag, TrafficLineChart }
 });
 
 const analysisComponentsList = ref<AnalysisComponentsList>([]);
