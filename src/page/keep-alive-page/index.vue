@@ -1,7 +1,4 @@
 <template>
-  <!--  <div class="keep-alive-page-wrapper">-->
-  <!--    <component :is="component"></component>-->
-  <!--  </div>-->
   <div class="keep-alive-page-wrapper">
     <suspense>
       <template #default>

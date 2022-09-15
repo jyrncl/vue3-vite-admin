@@ -1,7 +1,7 @@
 <template>
   <div class="mainContent">
     <router-view v-slot="{ Component }">
-      <transition>
+      <transition :name="`${$prefix}-${transitionName}`" mode="out-in">
         <keep-alive>
           <component :is="Component" />
         </keep-alive>
@@ -10,7 +10,11 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useCommonStore } from "@/store"
+
+const { transitionName } = useCommonStore();
+</script>
 
 <style lang="scss" scoped>
 .mainContent {

@@ -6,7 +6,7 @@
 import VChart from "vue-echarts";
 import { use } from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
-import { BarChart, LineChart, PieChart } from "echarts/charts";
+import { BarChart, LineChart, PieChart, RadarChart } from "echarts/charts";
 import {
   GridComponent,
   TooltipComponent,
@@ -18,6 +18,7 @@ use([
   CanvasRenderer,
   BarChart,
   LineChart,
+  RadarChart,
   GridComponent,
   TooltipComponent,
   PieChart,

@@ -1,33 +1,32 @@
-import { computed } from "vue";
+// import { computed } from "vue";
+import { useEChartsOption } from "@/types";
 
-export const useTrafficLineOptions = () => {
-  const option = computed(() => ({
-    title: {
-      text: "Traffic Sources",
-      left: "center"
-    },
+export const useTrafficLineOptions: useEChartsOption = (data, props) => {
+  return {
     tooltip: {
-      trigger: "item",
-      formatter: "{a} <br/>{b} : {c} ({d}%)"
+      trigger: "axis"
     },
-    legend: {
-      orient: "vertical",
-      left: "left",
-      data: ["Direct", "Email", "Ad Networks", "Video Ads", "Search Engines"]
+    xAxis: {
+      type: "category",
+      data: data.map(item => item[props.label])
+    },
+    yAxis: {
+      type: "value"
+    },
+    grid: {
+      left: "3%",
+      right: "1%",
+      bottom: "10%",
+      top: "3%"
     },
     series: [
       {
-        name: "Traffic Sources",
-        type: "pie",
-        radius: "55%",
-        center: ["50%", "60%"],
-        data: [
-          { value: 335, name: "Direct" },
-          { value: 310, name: "Email" },
-          { value: 234, name: "Ad Networks" },
-          { value: 135, name: "Video Ads" },
-          { value: 1548, name: "Search Engines" }
-        ],
+        type: "line",
+        smooth: true,
+        data: data.map(item => ({
+          name: item[props.label],
+          value: item[props.value]
+        })),
         emphasis: {
           itemStyle: {
             shadowBlur: 10,
@@ -37,6 +36,5 @@ export const useTrafficLineOptions = () => {
         }
       }
     ]
-  }));
-  return { option };
+  };
 };

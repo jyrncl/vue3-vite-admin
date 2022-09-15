@@ -67,14 +67,18 @@ onBeforeMount(() => {
     }
     &-tab-page {
       padding: 10px 15px;
+      border-bottom: 1px solid #e5e7eb;
+      //background: rgba(0,0,0,.2);
+      //-webkit-backdrop-filter: saturate(100%) blur(20px);
+      //backdrop-filter: saturate(100%) blur(20px);
+
     }
     &-main {
       width: 100%;
       height: calc(100% - 87px);
-      box-sizing: border-box;
       overflow-x: hidden;
       overflow-y: auto;
-      background-color: #eee;
+      background-color: #e5e7eb;
     }
   }
 }
