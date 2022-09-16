@@ -26,3 +26,55 @@
   transform: rotate3d(0, -1, 0, -90deg);
   opacity: 0;
 }
+
+/**
+左移消失
+ */
+.#{$prefix}-left-to-right-enter-active,
+.#{$prefix}-left-to-right-leave-active {
+  transition: all 0.3s;
+}
+
+.#{$prefix}-left-to-right-enter-from,
+.#{$prefix}-left-to-right-leave-to {
+  transform: translateX(-100%);
+}
+
+/**
+右移消失
+ */
+.#{$prefix}-right-to-left-enter-active,
+.#{$prefix}-right-to-left-leave-active {
+  transition: all 0.3s;
+}
+
+.#{$prefix}-right-to-left-enter-from,
+.#{$prefix}-right-to-left-leave-to {
+  transform: translateX(100%);
+}
+
+/**
+上移消失
+ */
+.#{$prefix}-top-to-bottom-enter-active,
+.#{$prefix}-top-to-bottom-leave-active {
+  transition: all 0.3s;
+}
+
+.#{$prefix}-top-to-bottom-enter-from,
+.#{$prefix}-top-to-bottom-leave-to {
+  transform: translateY(-100%);
+}
+
+/**
+下移消失
+ */
+.#{$prefix}-bottom-to-top-enter-active,
+.#{$prefix}-bottom-to-top-leave-active {
+  transition: all 0.3s;
+}
+
+.#{$prefix}-bottom-to-top-enter-from,
+.#{$prefix}-bottom-to-top-leave-to {
+  transform: translateY(100%);
+}
