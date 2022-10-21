@@ -31,9 +31,11 @@
 </template>
 
 <script setup lang="ts">
+import { registeredUser } from "@/api/user";
 import { ImageModules } from "@/enum";
 import { useRegisteredValidate } from "@/hooks/useFormValidateRules";
 import type { FormInstance } from "element-plus";
+import { ElMessage } from "element-plus";
 import { reactive } from "vue";
 
 const { registeredFormProps, registeredFormRef, validatePass, validateCheckPass } =
@@ -53,7 +55,14 @@ const submitForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   formEl.validate(valid => {
     if (valid) {
-      emits("changeTag", "login");
+      registeredUser(registeredFormProps.value).then(data => {
+        if (data.code === 200) {
+          ElMessage.success(data.data)
+          emits("changeTag", "login");
+        } else {
+          ElMessage.error(data.data);
+        }
+      });
     } else {
       return false;
     }

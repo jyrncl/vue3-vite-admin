@@ -61,10 +61,10 @@ const submitForm = (formEl: FormInstance | undefined) => {
   formEl.validate(valid => {
     if (valid) {
       userLogin(loginFormProps.value).then(({ data }) => {
-        if (data.loginInfo.isSuccessLogin) {
+        if (data.userInfo) {
           router.push(proxy?.$indexPage || "");
         } else {
-          ElMessage.error(data.loginInfo.msg);
+          ElMessage.error(data.msg);
         }
       });
     } else {

@@ -1,26 +1,24 @@
 <template>
-  <TransitionGroup name="list" tag="div" @enter="handleEnter">
-    <el-row v-for="row in analysisComponentsList" :gutter="20" :key="row.id">
-      <el-col :span="row.span" v-for="col in row.col">
-        <analysis-item :title="col.title" :loading="loading">
-          <template v-slot:header>
-            <component
-              v-if="col.headerComponent"
-              :is="col.headerComponent"
-              v-bind="{ ...col.headerProps }"
-            ></component>
-          </template>
-          <template v-slot:content>
-            <component
-              v-if="col.contentComponent"
-              :is="col.contentComponent"
-              v-bind="{ ...col.contentProps }"
-            ></component>
-          </template>
-        </analysis-item>
-      </el-col>
-    </el-row>
-  </TransitionGroup>
+  <el-row v-for="row in analysisComponentsList" :gutter="20" :key="row.id">
+    <el-col :span="row.span" v-for="col in row.col">
+      <analysis-item :title="col.title" :loading="loading">
+        <template v-slot:header>
+          <component
+            v-if="col.headerComponent"
+            :is="col.headerComponent"
+            v-bind="{ ...col.headerProps }"
+          ></component>
+        </template>
+        <template v-slot:content>
+          <component
+            v-if="col.contentComponent"
+            :is="col.contentComponent"
+            v-bind="{ ...col.contentProps }"
+          ></component>
+        </template>
+      </analysis-item>
+    </el-col>
+  </el-row>
 </template>
 
 <script setup lang="ts">
@@ -49,13 +47,10 @@ onMounted(() => {
     .finally(() => {
       setTimeout(() => {
         loading.value = false;
-      }, 1500);
+      }, 1000);
     });
 });
 
-const handleEnter = (...arg: Array<any>) => {
-  console.log(...arg, "arg")
-}
 </script>
 
 <style scoped lang="scss">

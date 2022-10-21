@@ -64,5 +64,26 @@ export const viewsRouterList: Array<RouteRecordRaw> = [
         ]
       }
     ]
+  },
+  {
+    path: "/file",
+    name: "/file",
+    component: Layout,
+    redirect: "/file/file-management",
+    meta: {
+      isNeedToken: true,
+      isKeepAlive: false
+    },
+    children: [
+      {
+        path: "/file/file-management",
+        name: "file-management",
+        component: import("@/views/file-management/index.vue"),
+        meta: {
+          isNeedToken: true,
+          isKeepAlive: false
+        }
+      }
+    ]
   }
 ];
