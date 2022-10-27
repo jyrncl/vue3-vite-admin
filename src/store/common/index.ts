@@ -1,9 +1,9 @@
 import { defineStore } from "pinia";
 import { setItemByLocalStore, getItemByLocalStore } from "@/utils/common";
-import type { CommonStore, MenuRow, TabPageRow } from "@/types";
+import type { CommonStoreState, MenuRow, TabPageRow } from "@/types";
 
 export const useCommonStore = defineStore("common", {
-  state: (): CommonStore => ({
+  state: (): CommonStoreState => ({
     transitionName: getItemByLocalStore("transitionName") || "slide-in-left",
     isCollapse: getItemByLocalStore("isCollapse") || false,
     breadcrumbList: getItemByLocalStore("breadcrumbList") || [],

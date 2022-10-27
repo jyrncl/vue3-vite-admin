@@ -1,10 +1,32 @@
-import Axios, { AxiosRequestConfig } from "axios";
+import Axios from "axios";
+import { ElMessage } from "element-plus";
+import { pinia, useUserStore } from "@/store";
+import type { AxiosInstance } from "axios";
 
-const client = Axios.create({
+const userStore = useUserStore(pinia);
+const instance: AxiosInstance = Axios.create({
   timeout: 30000
 });
 
-export const request = async (config: AxiosRequestConfig) => {
-  const result = await client.request(config);
-  return result.data;
-};
+instance.interceptors.request.use(
+  request => {
+    request.headers = {
+      token: userStore.token
+    };
+    return request;
+  },
+  error => {
+    ElMessage.error(error);
+  }
+);
+
+instance.interceptors.response.use(
+  response => {
+    return response.data;
+  },
+  error => {
+    ElMessage.error(error);
+  }
+);
+
+export default instance;

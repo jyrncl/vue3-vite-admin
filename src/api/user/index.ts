@@ -1,4 +1,4 @@
-import { request } from "@/utils/request";
+import request from "@/utils/request";
 import type { LoginUser, RegisteredUser } from "@/types";
 
 export function userLogin(data: LoginUser) {

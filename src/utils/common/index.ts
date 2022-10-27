@@ -1,5 +1,5 @@
-import type { LocalStoreItem } from "@/types";
-import { MenuRow } from "@/types";
+import type { LocalStoreItem, MenuRow } from "@/types";
+import config from "@/config";
 /**
  * 判断菜单树的某一个节点是否有子节点
  */
@@ -45,14 +45,14 @@ export function getPathList(
  * 将数据存入local store中
  */
 export function setItemByLocalStore(key: string, value: any): void {
-  window.localStorage.setItem(key, JSON.stringify({ key, value }));
+  window.localStorage.setItem(`${config.localStoreKey}-key`, JSON.stringify({ key, value }));
 }
 
 /**
  * 将数据从local store中取出 LocalStoreItem
  */
 export function getItemByLocalStore(key: string): any {
-  const item: string | null = window.localStorage.getItem(key);
+  const item: string | null = window.localStorage.getItem(`${config.localStoreKey}-${key}`);
   const result: LocalStoreItem | null = item ? JSON.parse(item) : item;
   return result ? result.value : null;
 }
