@@ -2,7 +2,7 @@
   <div class="topHeader">
     <div class="left-link">
       <div class="collapse" @click="commonStore.changeCollapse">
-        <el-icon><IconItem :icon="commonStore.isCollapse ? 'Expand' : 'Fold'" /></el-icon>
+        <IconItem :icon="commonStore.isCollapse ? 'Expand' : 'Fold'" />
       </div>
       <div class="breadcrumb">
         <el-breadcrumb separator="/">
@@ -19,22 +19,22 @@
     <div class="right-user">
       <div class="search">
         <div class="icon">
-          <el-icon><IconItem icon="Search" /></el-icon>
+          <IconItem icon="Search" />
         </div>
       </div>
       <div class="message">
         <div class="icon">
-          <el-icon><IconItem icon="ChatDotRound" /></el-icon>
+          <IconItem icon="ChatDotRound" />
         </div>
       </div>
       <div class="fullscreen">
         <div class="icon">
-          <el-icon><IconItem icon="FullScreen" /></el-icon>
+          <IconItem icon="FullScreen" />
         </div>
       </div>
       <div class="change-language">
         <div class="icon">
-          <el-icon><IconItem icon="Search" /></el-icon>
+          <IconItem icon="Search" />
         </div>
       </div>
       <div class="user-info">
@@ -44,7 +44,7 @@
       </div>
       <div class="setting">
         <div class="icon">
-          <el-icon><IconItem icon="Setting" /></el-icon>
+          <IconItem icon="Setting" />
         </div>
       </div>
     </div>

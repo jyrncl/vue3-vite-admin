@@ -45,7 +45,7 @@ export function getPathList(
  * 将数据存入local store中
  */
 export function setItemByLocalStore(key: string, value: any): void {
-  window.localStorage.setItem(`${config.localStoreKey}-key`, JSON.stringify({ key, value }));
+  window.localStorage.setItem(`${config.localStoreKey}-${key}`, JSON.stringify({ key, value }));
 }
 
 /**

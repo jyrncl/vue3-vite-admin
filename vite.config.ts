@@ -7,7 +7,7 @@ import * as path from "path";
 export default ({ mode }) => {
   const env = loadEnv(mode, process.cwd());
   return defineConfig({
-    plugins: [vue(), defineOptions()],
+    plugins: [vue({ reactivityTransform: true }), defineOptions()],
     server: {
       port: 3756,
       host: true,
@@ -28,7 +28,7 @@ export default ({ mode }) => {
       preprocessorOptions: {
         scss: {
           charset: false,
-          additionalData: "@import '@/style/variable.scss';"
+          additionalData: "@import '@/style/variable.scss';@import '@/style/mixin.scss';"
         }
       }
     },

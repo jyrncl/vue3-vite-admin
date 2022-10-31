@@ -1,16 +1,16 @@
 <template>
-  <template v-for="menu in props.menuList" :key="menu.id">
+  <template v-for="menu in menuList" :key="menu.id">
     <template v-if="isHaveChildren(menu)">
       <el-sub-menu :index="menu.path">
         <template #title
-          ><el-icon><IconItem :icon="menu.icon" /></el-icon> <span>{{ menu.name }}</span></template
+          ><IconItem :icon="menu.icon" /> <span>{{ menu.name }}</span></template
         >
         <menu-item :menuList="menu.children"></menu-item>
       </el-sub-menu>
     </template>
     <template v-else>
       <el-menu-item :index="menu.path" @click="setTabPageList(menu)">
-        <el-icon><IconItem :icon="menu.icon" /></el-icon>
+        <IconItem :icon="menu.icon" />
         <span>{{ menu.name }}</span>
       </el-menu-item>
     </template>
@@ -22,7 +22,7 @@ import type { MenuRow } from "@/types";
 import { isHaveChildren } from "@/utils/common";
 import { useCommonStore } from "@/store";
 
-const props = withDefaults(defineProps<{ menuList: Array<MenuRow> }>(), {
+withDefaults(defineProps<{ menuList: Array<MenuRow> }>(), {
   menuList: () => []
 });
 

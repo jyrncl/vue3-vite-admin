@@ -2,9 +2,7 @@
   <div class="analysis-count">
     <div class="analysis-count-value">
       <div class="value">{{ value }}</div>
-      <el-icon :size="size" :color="color">
-        <icon-item :icon="icon"></icon-item>
-      </el-icon>
+      <icon-item :size="size" :color="color" :icon="icon" />
     </div>
     <div class="analysis-count-all">
       <div class="all-label">{{ label }}</div>
