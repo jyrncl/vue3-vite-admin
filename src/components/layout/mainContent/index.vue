@@ -1,28 +1,29 @@
 <template>
-  <div class="mainContent">
-    <router-view v-slot="{ Component }">
-      <template v-if="route.meta['keepAlive']">
-        <keep-alive>
-          <transition :name="`${$prefix}-${commonStore.transitionName}`">
-            <component :is="Component"/>
-          </transition>
-        </keep-alive>
-      </template>
-      <template v-else>
+  <div class="mainContent" :data-type="route.meta['keepAlive']">
+    <template v-if="route.meta['keepAlive']">
+      <router-view v-slot="{ Component }">
         <transition :name="`${$prefix}-${commonStore.transitionName}`">
-          <component :is="Component"/>
+          <keep-alive>
+            <component :is="Component" />
+          </keep-alive>
         </transition>
-      </template>
-    </router-view>
+      </router-view>
+    </template>
+    <template v-else>
+      <router-view v-slot="{ Component }">
+        <transition :name="`${$prefix}-${commonStore.transitionName}`">
+          <component :is="Component" />
+        </transition>
+      </router-view>
+    </template>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useRoute } from "vue-router"
-import { useCommonStore } from "@/store"
+import { useRoute } from "vue-router";
+import { useCommonStore } from "@/store";
 const commonStore = useCommonStore();
 const route = useRoute();
-
 </script>
 
 <style lang="scss" scoped>

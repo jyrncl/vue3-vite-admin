@@ -5,9 +5,7 @@
     element-loading-background="rgba(0, 0, 0, 1)"
     element-loading-text="Loading..."
   >
-    <router-view v-slot="{ Component }">
-      <keep-alive-wrapper :component="Component" />
-    </router-view>
+    <router-view />
   </div>
 </template>
 
