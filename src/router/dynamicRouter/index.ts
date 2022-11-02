@@ -7,7 +7,11 @@ const defaultRouteWrapper: RouteRecordRaw = {
   name: "home",
   path: "/",
   component: Layout,
-  children: []
+  children: [],
+  meta: {
+    authorization: true,
+    keepAlive: true
+  }
 };
 export default class DynamicRouter {
   dynamicViewsModules: Record<string, () => Promise<Record<string, any>>>;
