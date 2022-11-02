@@ -1,5 +1,5 @@
 <template>
-  <transition-wrapper :isTransition="isTransition">
+  <transition :name="`${$prefix}-${transitionName}`" mode="out-in">
     <template v-if="route.meta['keepAlive']">
       <keep-alive>
         <component :is="component"></component>
@@ -8,25 +8,25 @@
     <template v-else>
       <component :is="component"></component>
     </template>
-  </transition-wrapper>
+  </transition>
 </template>
 
 <script setup lang="ts">
 import { useRoute } from "vue-router";
+import { storeToRefs } from "pinia";
+import { useCommonStore } from "@/store";
 
 defineOptions({
   name: "keep-alive-wrapper"
 });
 withDefaults(
   defineProps<{
-    isTransition: boolean;
     component: any;
   }>(),
-  {
-    isTransition: true
-  }
+  {}
 );
 const route = useRoute();
+const { transitionName } = storeToRefs(useCommonStore());
 </script>
 
 <style lang="scss" scoped></style>

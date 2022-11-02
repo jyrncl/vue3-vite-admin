@@ -1,7 +1,7 @@
 <template>
   <div class="mainContent">
     <router-view v-slot="{ Component }">
-      <keep-alive-wrapper :is-transition="true" :component="Component" />
+      <keep-alive-wrapper :component="Component" />
     </router-view>
   </div>
 </template>

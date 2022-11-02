@@ -2,7 +2,7 @@ import { userLogin } from "@/api/user";
 import type { LoginUser } from "@/types";
 import { defineStore } from "pinia";
 import { setItemByLocalStore, getItemByLocalStore } from "@/utils/common";
-import DynamicRouter from "@/router/dynamicRouter";
+import { dynamicRouter } from "@/router";
 import { ElMessage } from "element-plus";
 import { getMenuList } from "@/api/user";
 import type { UserStoreState, MenuRow } from "@/types";
@@ -26,7 +26,7 @@ export const useUserStore = defineStore("user", {
     },
     async getMenuList(): Promise<Array<MenuRow>> {
       const { data: menuData } = await getMenuList();
-      new DynamicRouter().initRouter(menuData.menuList);
+      dynamicRouter.initRouter(menuData.menuList);
       return menuData.menuList;
     },
     setToken(token: string) {

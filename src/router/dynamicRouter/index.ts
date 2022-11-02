@@ -1,6 +1,7 @@
 import type { RouteRecordRaw, RouteComponent, Router } from "vue-router";
 import type { MenuRow } from "@/types";
 import { isHaveChildren } from "@/utils/common";
+import { pinia, useCommonStore, useUserStore } from "@/store";
 import Layout from "@/page/home/index.vue";
 import NotFoundPage from "@/page/other/404.vue";
 const defaultRouteWrapper: RouteRecordRaw = {
@@ -48,6 +49,13 @@ export default class DynamicRouter {
       },
       children: hasChild ? menu.children.map(item => this.formatRouterItem(item)) : []
     };
+  }
+
+  async refreshRouter() {
+    if (useUserStore(pinia).token && useCommonStore(pinia).isRefresh) {
+      const menuList = await useUserStore(pinia).getMenuList();
+      this.initRouter(menuList || []);
+    }
   }
 
   formatRouterList(menuList: Array<MenuRow>) {
