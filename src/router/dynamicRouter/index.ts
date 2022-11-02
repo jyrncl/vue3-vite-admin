@@ -2,12 +2,14 @@ import type { RouteRecordRaw, RouteComponent, Router } from "vue-router";
 import type { MenuRow } from "@/types";
 import { isHaveChildren } from "@/utils/common";
 import { pinia, useCommonStore, useUserStore } from "@/store";
+import config from "@/config";
 import Layout from "@/page/home/index.vue";
 import NotFoundPage from "@/page/other/404.vue";
 const defaultRouteWrapper: RouteRecordRaw = {
   name: "home",
   path: "/",
   component: Layout,
+  redirect: config.indexPage,
   children: [],
   meta: {
     authorization: true,
