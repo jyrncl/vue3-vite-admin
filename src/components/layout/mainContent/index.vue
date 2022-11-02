@@ -1,19 +1,13 @@
 <template>
   <div class="mainContent">
     <router-view v-slot="{ Component }">
-      <transition :name="`${$prefix}-${transitionName}`" mode="out-in">
-        <keep-alive>
-          <component :is="Component" />
-        </keep-alive>
-      </transition>
+      <keep-alive-wrapper :is-transition="true" :component="Component" />
     </router-view>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useCommonStore } from "@/store"
 
-const { transitionName } = useCommonStore();
 </script>
 
 <style lang="scss" scoped>

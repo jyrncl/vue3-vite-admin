@@ -1,5 +1,7 @@
 <template>
-  <router-view></router-view>
+  <router-view v-slot="{ Component }">
+    <keep-alive-wrapper :is-transition="true" :component="Component" />
+  </router-view>
 </template>
 
 <script setup lang="ts"></script>

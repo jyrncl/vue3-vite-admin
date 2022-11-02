@@ -18,6 +18,7 @@
 </template>
 
 <script setup lang="ts">
+import { onUnmounted } from "vue";
 import LeftAside from "@/components/layout/leftAside/index.vue";
 import TopHeader from "@/components/layout/topHeader/index.vue";
 import TopTabPage from "@/components/layout/topTabPage/index.vue";
@@ -26,6 +27,10 @@ import MainContent from "@/components/layout/mainContent/index.vue";
 defineOptions({
   name: "home-page"
 });
+
+onUnmounted(() => {
+  console.log("onUnmounted")
+})
 </script>
 
 <style lang="scss" scoped>

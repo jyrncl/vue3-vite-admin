@@ -17,6 +17,14 @@ export function registeredUser(data: RegisteredUser) {
   });
 }
 
+export function getUserDetail(data: { id: number | string }) {
+  return request({
+    url: "/api/user/getUserDetail",
+    method: "post",
+    data
+  });
+}
+
 export function getMenuList() {
   return request({
     url: "/jyrncl/user/getMenuList",

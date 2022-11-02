@@ -3,7 +3,6 @@ import { ElMessage } from "element-plus";
 import { pinia, useUserStore } from "@/store";
 import type { AxiosInstance } from "axios";
 
-const userStore = useUserStore(pinia);
 const instance: AxiosInstance = Axios.create({
   timeout: 30000
 });
@@ -11,7 +10,7 @@ const instance: AxiosInstance = Axios.create({
 instance.interceptors.request.use(
   request => {
     request.headers = {
-      token: userStore.token
+      Authorization: `Bearer ${useUserStore(pinia).token}`
     };
     return request;
   },

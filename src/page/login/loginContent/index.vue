@@ -36,15 +36,11 @@
 </template>
 
 <script setup lang="ts">
-import { userLogin } from "@/api/user";
 import { ImageModules } from "@/enum";
 import { ref, reactive, getCurrentInstance, ComponentInternalInstance } from "vue";
 import { useRouter } from "vue-router";
-import { ElMessage } from "element-plus";
-import { getMenuList } from "@/api/user";
 import type { FormInstance } from "element-plus";
-import DynamicRouter from "@/router/dynamicRouter";
-import { useCommonStore } from "@/store";
+import { useCommonStore, useUserStore } from "@/store";
 
 defineOptions({
   name: "login-content"
@@ -63,29 +59,18 @@ const rules = reactive({
   password: [{ required: true, message: "请输入密码", trigger: "blur" }]
 });
 
-const commonStore = useCommonStore();
-
-const loadingMenuList = () => {
-  return getMenuList().then(({ data }) => {
-    commonStore.setMenuTree(data.menuList);
-    const dynamicRouter = new DynamicRouter();
-    dynamicRouter.initRouter(data.menuList)
-  });
-}
+const { setMenuTree, setIsRefresh } = useCommonStore();
+const { userLogin } = useUserStore();
 
 const submitForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   formEl.validate(valid => {
     if (valid) {
-      userLogin(loginFormProps.value).then(({ data }) => {
-        if (data.userInfo) {
-          loadingMenuList().then(() => {
-            router.push(proxy?.$indexPage || "");
-          })
-        } else {
-          ElMessage.error(data.msg);
-        }
-      });
+      userLogin(loginFormProps.value).then((menuList) => {
+        setMenuTree(menuList);
+        setIsRefresh(false);
+        router.push(proxy?.$indexPage || "");
+      })
     } else {
       return false;
     }

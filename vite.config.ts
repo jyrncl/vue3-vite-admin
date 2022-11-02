@@ -7,7 +7,7 @@ import * as path from "path";
 export default ({ mode }) => {
   const env = loadEnv(mode, process.cwd());
   return defineConfig({
-    plugins: [vue({ reactivityTransform: true }), defineOptions()],
+    plugins: [vue(), defineOptions()],
     server: {
       port: 3756,
       host: true,

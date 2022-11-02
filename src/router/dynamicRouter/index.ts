@@ -1,6 +1,5 @@
-import type { RouteRecordRaw, RouteComponent } from "vue-router";
+import type { RouteRecordRaw, RouteComponent, Router } from "vue-router";
 import type { MenuRow } from "@/types";
-import { router } from "@/router";
 import { isHaveChildren } from "@/utils/common";
 import Layout from "@/page/home/index.vue";
 import NotFoundPage from "@/page/other/404.vue";
@@ -12,12 +11,14 @@ const defaultRouteWrapper: RouteRecordRaw = {
 };
 export default class DynamicRouter {
   dynamicViewsModules: Record<string, () => Promise<Record<string, any>>>;
-  constructor() {
+  Router: Router;
+  constructor(Router: Router) {
+    this.Router = Router;
     this.dynamicViewsModules = import.meta.glob("@/views/**/*.{vue,tsx}");
   }
 
   initRouter(menuList: Array<MenuRow>) {
-    router.addRoute(defaultRouteWrapper);
+    this.Router.addRoute(defaultRouteWrapper);
     this.formatRouterList(menuList);
   }
 
@@ -37,13 +38,17 @@ export default class DynamicRouter {
       component: hasChild
         ? () => import("@/page/default/index.vue")
         : this.dynamicImportComponents(`/src/views${menu.path}/index.vue`),
+      meta: {
+        authorization: true,
+        keepAlive: true
+      },
       children: hasChild ? menu.children.map(item => this.formatRouterItem(item)) : []
     };
   }
 
   formatRouterList(menuList: Array<MenuRow>) {
     menuList.forEach(menu => {
-      router.addRoute("home", this.formatRouterItem(menu));
+      this.Router.addRoute("home", this.formatRouterItem(menu));
     });
   }
 }

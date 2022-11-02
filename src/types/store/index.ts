@@ -5,6 +5,8 @@ export interface CommonStoreState {
   breadcrumbList: Array<MenuRow>;
   menuTree: Array<MenuRow>;
   tabPageList: Array<TabPageRow>;
+  isRefresh: boolean;
+  curRoutePath: string;
 }
 
 export interface UserStoreState {

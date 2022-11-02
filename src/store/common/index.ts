@@ -8,12 +8,21 @@ export const useCommonStore = defineStore("common", {
     isCollapse: getItemByLocalStore("isCollapse") || false,
     breadcrumbList: getItemByLocalStore("breadcrumbList") || [],
     menuTree: getItemByLocalStore("menuTree") || [],
-    tabPageList: getItemByLocalStore("tabPageList") || []
+    tabPageList: getItemByLocalStore("tabPageList") || [],
+    curRoutePath: getItemByLocalStore("curRoutePath") || "/",
+    isRefresh: true
   }),
   actions: {
     setTransitionName(transitionName: string) {
       this.transitionName = transitionName;
       setItemByLocalStore("transitionName", this.transitionName);
+    },
+    setIsRefresh(flag: boolean) {
+      this.isRefresh = flag;
+    },
+    setCurRoutePath(path: string) {
+      this.curRoutePath = path;
+      setItemByLocalStore("curRoutePath", this.curRoutePath);
     },
     changeCollapse() {
       this.isCollapse = !this.isCollapse;
