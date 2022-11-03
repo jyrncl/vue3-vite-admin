@@ -3,7 +3,7 @@ import { pinia, useUserStore } from "@/store";
 import { ElMessage } from "element-plus";
 
 Router.beforeEach((to, from, next) => {
-  console.log(useUserStore(pinia).token, to);
+  // console.log(useUserStore(pinia).token, to);
   if (to.meta.authorization) {
     if (useUserStore(pinia).token) {
       next();
