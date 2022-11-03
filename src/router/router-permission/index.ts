@@ -3,10 +3,14 @@ import { pinia, useUserStore } from "@/store";
 import { ElMessage } from "element-plus";
 
 Router.beforeEach((to, from, next) => {
-  // console.log(useUserStore(pinia).token, to);
   if (to.meta.authorization) {
     if (useUserStore(pinia).token) {
-      next();
+      if (to.path === "/login") {
+        next(false);
+        ElMessage.error("请点击退出登录进入登录页面");
+      } else {
+        next();
+      }
     } else {
       if (to.path === "/login") {
         next();

@@ -63,3 +63,7 @@ export function getItemByLocalStore(key: string): any {
 export function clearLocalStore(): void {
   window.localStorage.clear();
 }
+
+/**
+ * 判断是否login
+ */

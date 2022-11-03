@@ -18,6 +18,8 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from "vue";
+import { getUserDetail } from "@/api/user"
 import LeftAside from "@/components/layout/leftAside/index.vue";
 import TopHeader from "@/components/layout/topHeader/index.vue";
 import TopTabPage from "@/components/layout/topTabPage/index.vue";
@@ -26,6 +28,12 @@ import MainContent from "@/components/layout/mainContent/index.vue";
 defineOptions({
   name: "home-page"
 });
+
+onMounted(() => {
+  getUserDetail({ id: "8" }).then((data) => {
+    console.log(data, "detail")
+  })
+})
 </script>
 
 <style lang="scss" scoped>

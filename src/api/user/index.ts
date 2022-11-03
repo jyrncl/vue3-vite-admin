@@ -25,6 +25,13 @@ export function getUserDetail(data: { id: number | string }) {
   });
 }
 
+export function userExit() {
+  return request({
+    url: "/api/user/userExit",
+    method: "post"
+  });
+}
+
 export function getMenuList() {
   return request({
     url: "/jyrncl/user/getMenuList",

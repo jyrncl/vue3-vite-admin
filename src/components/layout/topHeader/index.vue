@@ -38,8 +38,9 @@
         </div>
       </div>
       <div class="user-info">
-        <div class="icon">
+        <div class="header-image" ref="buttonRef">
           <img :src="$getImageUrlByModules(ImageModules.loginPage, '1.png')" alt="" />
+          <span class="username">测试</span>
         </div>
       </div>
       <div class="setting">
@@ -49,11 +50,23 @@
       </div>
     </div>
   </div>
+  <el-popover
+    ref="popoverRef"
+    :virtual-ref="buttonRef"
+    trigger="hover"
+    placement="bottom-end"
+    popper-class="user-info-list-popper"
+    virtual-triggering
+  >
+    <div class="list-info">用户信息</div>
+    <div class="user-exit">退出登录</div>
+  </el-popover>
 </template>
 
 <script setup lang="ts">
 import { ImageModules } from "@/enum";
 import type { MenuRow } from "@/types";
+import { ref } from "vue";
 import { useCommonStore } from "@/store";
 
 const commonStore = useCommonStore();
@@ -62,15 +75,15 @@ const setBreadcrumbAndTabPage = (item: MenuRow) => {
   if (item.children.length) return;
   commonStore.setTabPageList(item);
 };
+
+const buttonRef = ref();
 </script>
 
 <style lang="scss" scoped>
 .topHeader {
   width: 100%;
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  @include space-between;
   .left-link {
     display: flex;
     align-items: center;
@@ -82,26 +95,39 @@ const setBreadcrumbAndTabPage = (item: MenuRow) => {
     }
   }
   .right-user {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 150px;
+    width: 180px;
+    @include space-between;
     .icon {
+      width: 1rem;
+      height: 1rem;
       cursor: pointer;
+      &:hover {
+        color: $default-theme-color;
+      }
     }
     .user-info {
-      .icon {
+      padding: 0 4px;
+      .header-image {
+        @include flex-center;
+        vertical-align: middle;
+        cursor: pointer;
         img {
-          width: 18px;
+          width: 1.2rem;
           border-radius: 50%;
           border: 1px solid #eee;
-          transition: all 0.3s;
-          &:hover {
-            transform: scale(1.8);
-          }
+          margin-right: 8px;
+        }
+        .username {
+          font-size: 12px;
         }
       }
     }
+  }
+}
+.user-info-list-popper {
+  color: red;
+  .list-info .user-exit {
+    border: 1px solid $default-border-color;
   }
 }
 </style>
