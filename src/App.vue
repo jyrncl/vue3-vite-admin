@@ -1,22 +1,10 @@
 <template>
-  <div
-    id="app"
-    v-loading="loading"
-    element-loading-background="rgba(0, 0, 0, 1)"
-    element-loading-text="Loading..."
-  >
+  <div id="app">
     <router-view />
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref, onMounted } from "vue";
-
-const loading = ref(true);
-onMounted(() => {
-  loading.value = false;
-});
-</script>
+<script setup lang="ts"></script>
 
 <style lang="scss">
 #app {

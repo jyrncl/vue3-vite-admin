@@ -1,0 +1,13 @@
+.user-info-list-popper {
+  padding: 0 !important;
+  .list-info, .user-exit {
+    text-align: center;
+    @include flex-center;
+    column-gap: 15px;
+    padding: 5px 0;
+    cursor: pointer;
+    &:hover {
+      background: rgba(85, 85, 85, 0.1);
+    }
+  }
+}

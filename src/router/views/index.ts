@@ -2,12 +2,16 @@ import type { RouteRecordRaw } from "vue-router";
 
 export const viewsRouterList: Array<RouteRecordRaw> = [
   {
+    path: "/",
+    redirect: "/login"
+  },
+  {
     path: "/login",
     name: "login",
     component: () => import("@/page/login/index.vue"),
     meta: {
-      authorization: true,
-      keepAlive: true
+      authorization: false,
+      keepAlive: false
     }
   },
   {

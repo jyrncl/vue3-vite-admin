@@ -38,7 +38,7 @@
         </div>
       </div>
       <div class="user-info">
-        <div class="header-image" ref="buttonRef">
+        <div class="header-image" ref="userInfoRef">
           <img :src="$getImageUrlByModules(ImageModules.loginPage, '1.png')" alt="" />
           <span class="username">测试</span>
         </div>
@@ -52,14 +52,20 @@
   </div>
   <el-popover
     ref="popoverRef"
-    :virtual-ref="buttonRef"
+    :virtual-ref="userInfoRef"
     trigger="hover"
     placement="bottom-end"
     popper-class="user-info-list-popper"
     virtual-triggering
   >
-    <div class="list-info">用户信息</div>
-    <div class="user-exit">退出登录</div>
+    <div class="list-info">
+      <icon-item icon="UserFilled" />
+      <span class="label">用户信息</span>
+    </div>
+    <div class="user-exit" @click="handleExit">
+      <icon-item icon="SwitchButton" />
+      <span class="label">退出登录</span>
+    </div>
   </el-popover>
 </template>
 
@@ -67,16 +73,25 @@
 import { ImageModules } from "@/enum";
 import type { MenuRow } from "@/types";
 import { ref } from "vue";
-import { useCommonStore } from "@/store";
+import { useRouter } from "vue-router"
+import { useCommonStore, useUserStore } from "@/store";
 
 const commonStore = useCommonStore();
+const userStore = useUserStore();
+const router = useRouter();
 
 const setBreadcrumbAndTabPage = (item: MenuRow) => {
   if (item.children.length) return;
   commonStore.setTabPageList(item);
 };
 
-const buttonRef = ref();
+const userInfoRef = ref();
+const handleExit = () => {
+  userStore.userExit().then(() => {
+    userStore.$reset();
+    router.push({ name: "login" })
+  })
+}
 </script>
 
 <style lang="scss" scoped>
@@ -122,12 +137,6 @@ const buttonRef = ref();
         }
       }
     }
-  }
-}
-.user-info-list-popper {
-  color: red;
-  .list-info .user-exit {
-    border: 1px solid $default-border-color;
   }
 }
 </style>

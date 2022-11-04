@@ -7,7 +7,7 @@ import Layout from "@/page/home/index.vue";
 import NotFoundPage from "@/page/other/404.vue";
 const defaultRouteWrapper: RouteRecordRaw = {
   name: "home",
-  path: "/",
+  path: "/home",
   component: Layout,
   redirect: config.indexPage,
   children: [],

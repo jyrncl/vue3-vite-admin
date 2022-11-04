@@ -1,7 +1,7 @@
-import { userLogin } from "@/api/user";
+import { userLogin, userExit } from "@/api/user";
 import type { LoginUser } from "@/types";
 import { defineStore } from "pinia";
-import { setItemByLocalStore, getItemByLocalStore } from "@/utils/common";
+import { setItemByLocalStore, getItemByLocalStore, clearLocalStore } from "@/utils/common";
 import { dynamicRouter } from "@/router";
 import { ElMessage } from "element-plus";
 import { getMenuList } from "@/api/user";
@@ -23,6 +23,10 @@ export const useUserStore = defineStore("user", {
           ElMessage.error(result.msg);
         }
       });
+    },
+    async userExit() {
+      await userExit();
+      await clearLocalStore();
     },
     async getMenuList(): Promise<Array<MenuRow>> {
       const { data: menuData } = await getMenuList();

@@ -61,6 +61,7 @@ const curTab = ref("login");
 const changeCurTab = (tab: string): void => {
   curTab.value = tab;
 };
+
 </script>
 
 <style lang="scss" scoped>
@@ -71,12 +72,12 @@ const changeCurTab = (tab: string): void => {
   background-size: cover;
   background-repeat: no-repeat;
   text-align: center;
+  @include flex-center;
 
   .login-wrapper {
     display: inline-block;
     width: 600px;
-    height: 500px;
-    margin: 200px auto 0;
+    height: 450px;
     overflow: hidden;
     border-radius: 6px;
     background-color: rgba(255, 255, 255, 0.35);
