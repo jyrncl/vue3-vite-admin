@@ -1,7 +1,7 @@
 import request from "@/utils/request";
-import { AnalysisComponentsList } from "@/types";
+import { AnalysisComponentsList, ResponseResultType } from "@/types";
 
-export function getAnalysisComponentsList(): Promise<{ data: { data: AnalysisComponentsList } }> {
+export function getAnalysisComponentsList(): ResponseResultType<AnalysisComponentsList> {
   return request({
     method: "post",
     url: "/jyrncl/analysis/getAnalysisComponentsList"

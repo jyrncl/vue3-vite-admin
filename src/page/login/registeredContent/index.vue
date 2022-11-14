@@ -1,7 +1,51 @@
+<script setup lang="ts">
+import { registeredUser } from "@/api/user";
+import { useRegisteredValidate } from "@/hooks/useFormValidateRules";
+import type { FormInstance } from "element-plus";
+import { ElMessage } from "element-plus";
+import { reactive } from "vue";
+
+const { registeredFormProps, registeredFormRef, validatePass, validateCheckPass } =
+  useRegisteredValidate();
+
+const rules = reactive({
+  username: [{ required: true, message: "请输入用户名", trigger: "blur" }],
+  password: [{ required: true, validator: validatePass, trigger: "blur" }],
+  checkPass: [{ required: true, validator: validateCheckPass, trigger: "blur" }]
+});
+
+const emits = defineEmits<{
+  (e: "changeTag", tab: string): void;
+}>();
+
+const submitForm = (formEl: FormInstance | undefined) => {
+  if (!formEl) return;
+  formEl.validate(valid => {
+    if (valid) {
+      registeredUser(registeredFormProps.value).then(({ data }) => {
+        if (data.code === 200) {
+          ElMessage.success(data.data)
+          emits("changeTag", "login");
+        } else {
+          ElMessage.error(data.data);
+        }
+      });
+    } else {
+      return false;
+    }
+  });
+};
+
+const resetForm = (formEl: FormInstance | undefined) => {
+  if (!formEl) return;
+  formEl.resetFields();
+};
+</script>
+
 <template>
   <div class="registeredContent">
     <div class="registeredContent-headerImg">
-      <img :src="$getImageUrlByModules(ImageModules.loginPage, '1.png')" alt="" />
+      <img :src="$getImageUrl('/loginPage/1.png')" alt="" />
     </div>
     <div class="registeredContent-form">
       <el-form
@@ -29,51 +73,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { registeredUser } from "@/api/user";
-import { ImageModules } from "@/enum";
-import { useRegisteredValidate } from "@/hooks/useFormValidateRules";
-import type { FormInstance } from "element-plus";
-import { ElMessage } from "element-plus";
-import { reactive } from "vue";
-
-const { registeredFormProps, registeredFormRef, validatePass, validateCheckPass } =
-  useRegisteredValidate();
-
-const rules = reactive({
-  username: [{ required: true, message: "请输入用户名", trigger: "blur" }],
-  password: [{ required: true, validator: validatePass, trigger: "blur" }],
-  checkPass: [{ required: true, validator: validateCheckPass, trigger: "blur" }]
-});
-
-const emits = defineEmits<{
-  (e: "changeTag", tab: string): void;
-}>();
-
-const submitForm = (formEl: FormInstance | undefined) => {
-  if (!formEl) return;
-  formEl.validate(valid => {
-    if (valid) {
-      registeredUser(registeredFormProps.value).then(data => {
-        if (data.code === 200) {
-          ElMessage.success(data.data)
-          emits("changeTag", "login");
-        } else {
-          ElMessage.error(data.data);
-        }
-      });
-    } else {
-      return false;
-    }
-  });
-};
-
-const resetForm = (formEl: FormInstance | undefined) => {
-  if (!formEl) return;
-  formEl.resetFields();
-};
-</script>
 
 <style lang="scss" scoped>
 .registeredContent {

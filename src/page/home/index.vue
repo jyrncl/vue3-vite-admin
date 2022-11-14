@@ -1,3 +1,22 @@
+<script setup lang="ts">
+import { onMounted } from "vue";
+import { getUserInfo } from "@/api/user"
+import LeftAside from "@/components/layout/leftAside/index.vue";
+import TopHeader from "@/components/layout/topHeader/index.vue";
+import TopTabPage from "@/components/layout/topTabPage/index.vue";
+import MainContent from "@/components/layout/mainContent/index.vue";
+
+defineOptions({
+  name: "home-page"
+});
+
+onMounted(() => {
+  getUserInfo().then(({ data }) => {
+    console.log(data.data, "detail")
+  })
+})
+</script>
+
 <template>
   <div class="home-wrapper">
     <div class="home-left">
@@ -16,25 +35,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { onMounted } from "vue";
-import { getUserDetail } from "@/api/user"
-import LeftAside from "@/components/layout/leftAside/index.vue";
-import TopHeader from "@/components/layout/topHeader/index.vue";
-import TopTabPage from "@/components/layout/topTabPage/index.vue";
-import MainContent from "@/components/layout/mainContent/index.vue";
-
-defineOptions({
-  name: "home-page"
-});
-
-onMounted(() => {
-  getUserDetail({ id: "8" }).then((data) => {
-    console.log(data, "detail")
-  })
-})
-</script>
 
 <style lang="scss" scoped>
 .home-wrapper {
@@ -63,7 +63,7 @@ onMounted(() => {
     }
     &-main {
       width: 100%;
-      height: calc(100% - 87px);
+      height: calc(100% - 85px);
       overflow-x: hidden;
       overflow-y: auto;
       background-color: #e5e7eb;

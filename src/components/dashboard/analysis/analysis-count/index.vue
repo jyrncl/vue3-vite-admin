@@ -1,16 +1,3 @@
-<template>
-  <div class="analysis-count">
-    <div class="analysis-count-value">
-      <div class="value">{{ value }}</div>
-      <icon-item :size="size" :color="color" :icon="icon" />
-    </div>
-    <div class="analysis-count-all">
-      <div class="all-label">{{ label }}</div>
-      <div class="all-value">{{ all }}</div>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
 const {
   label,
@@ -28,6 +15,19 @@ const {
   all: string | number;
 }>();
 </script>
+
+<template>
+  <div class="analysis-count">
+    <div class="analysis-count-value">
+      <div class="value">{{ value }}</div>
+      <icon-item :size="size" :color="color" :icon="icon" />
+    </div>
+    <div class="analysis-count-all">
+      <div class="all-label">{{ label }}</div>
+      <div class="all-value">{{ all }}</div>
+    </div>
+  </div>
+</template>
 
 <style scoped lang="scss">
 .analysis-count {

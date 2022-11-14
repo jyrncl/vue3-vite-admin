@@ -1,3 +1,27 @@
+<script setup lang="ts">
+import type { MenuRow } from "@/types";
+import { ref } from "vue";
+import { useRouter } from "vue-router"
+import { useCommonStore, useUserStore } from "@/store";
+
+const commonStore = useCommonStore();
+const userStore = useUserStore();
+const router = useRouter();
+
+const setBreadcrumbAndTabPage = (item: MenuRow) => {
+  if (item.children.length) return;
+  commonStore.setTabPageList(item);
+};
+
+const userInfoRef = ref();
+const handleExit = () => {
+  userStore.userExit().then(() => {
+    userStore.$reset();
+    router.push({ name: "login" })
+  })
+}
+</script>
+
 <template>
   <div class="topHeader">
     <div class="left-link">
@@ -11,7 +35,7 @@
             :to="{ path: item.path }"
             v-for="item in commonStore.breadcrumbList"
             :key="item.id"
-            >{{ item.name }}</el-breadcrumb-item
+          >{{ item.name }}</el-breadcrumb-item
           >
         </el-breadcrumb>
       </div>
@@ -39,7 +63,7 @@
       </div>
       <div class="user-info">
         <div class="header-image" ref="userInfoRef">
-          <img :src="$getImageUrlByModules(ImageModules.loginPage, '1.png')" alt="" />
+          <img :src="$getImageUrl('/loginPage/1.png')" alt="" />
           <span class="username">测试</span>
         </div>
       </div>
@@ -68,31 +92,6 @@
     </div>
   </el-popover>
 </template>
-
-<script setup lang="ts">
-import { ImageModules } from "@/enum";
-import type { MenuRow } from "@/types";
-import { ref } from "vue";
-import { useRouter } from "vue-router"
-import { useCommonStore, useUserStore } from "@/store";
-
-const commonStore = useCommonStore();
-const userStore = useUserStore();
-const router = useRouter();
-
-const setBreadcrumbAndTabPage = (item: MenuRow) => {
-  if (item.children.length) return;
-  commonStore.setTabPageList(item);
-};
-
-const userInfoRef = ref();
-const handleExit = () => {
-  userStore.userExit().then(() => {
-    userStore.$reset();
-    router.push({ name: "login" })
-  })
-}
-</script>
 
 <style lang="scss" scoped>
 .topHeader {

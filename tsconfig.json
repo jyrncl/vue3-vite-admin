@@ -9,6 +9,7 @@
     "sourceMap": true,
     "types": ["element-plus/global", "unplugin-vue-define-options", "vite/client"],
     "resolveJsonModule": true,
+    "skipLibCheck": true,
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
     "paths": {

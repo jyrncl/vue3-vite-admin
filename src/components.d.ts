@@ -1,6 +1,6 @@
 import IconItem from "@/global-components/src/icon-item/index.vue";
 import KeepAliveWrapper from "@/global-components/src/keep-alive-wrapper/keep-alive-wrapper.vue";
-import { getImageUrlByModulesType } from "@/types";
+import { GetImageUrlType } from "@/types";
 declare module "@vue/runtime-core" {
   export interface GlobalComponents {
     IconItem: typeof IconItem;
@@ -10,7 +10,7 @@ declare module "@vue/runtime-core" {
 
 declare module "@vue/runtime-core" {
   interface ComponentCustomProperties {
-    $getImageUrlByModules: getImageUrlByModulesType;
+    $getImageUrl: GetImageUrlType;
     $prefix: string;
     $indexPage: string;
   }

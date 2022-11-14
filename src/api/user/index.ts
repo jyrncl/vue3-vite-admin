@@ -1,7 +1,7 @@
 import request from "@/utils/request";
-import type { LoginUser, RegisteredUser } from "@/types";
+import type { LoginUser, RegisteredUser, ResponseResultType, MenuRow } from "@/types";
 
-export function userLogin(data: LoginUser) {
+export function userLogin(data: LoginUser): ResponseResultType {
   return request({
     url: "/api/user/login",
     method: "post",
@@ -9,7 +9,7 @@ export function userLogin(data: LoginUser) {
   });
 }
 
-export function registeredUser(data: RegisteredUser) {
+export function registeredUser(data: RegisteredUser): ResponseResultType {
   return request({
     url: "/api/user/createUser",
     method: "post",
@@ -17,22 +17,21 @@ export function registeredUser(data: RegisteredUser) {
   });
 }
 
-export function getUserDetail(data: { id: number | string }) {
+export function getUserInfo(): ResponseResultType {
   return request({
-    url: "/api/user/getUserDetail",
-    method: "post",
-    data
+    url: "/api/user/getUserInfo",
+    method: "post"
   });
 }
 
-export function userExit() {
+export function userExit(): ResponseResultType {
   return request({
     url: "/api/user/userExit",
     method: "post"
   });
 }
 
-export function getMenuList() {
+export function getMenuList(): ResponseResultType<{ menuList: Array<MenuRow> }> {
   return request({
     url: "/jyrncl/user/getMenuList",
     method: "post"

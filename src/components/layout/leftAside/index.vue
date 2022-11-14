@@ -1,8 +1,15 @@
+<script setup lang="ts">
+import Menu from "@/components/layout/menu/index.vue";
+import { useCommonStore } from "@/store";
+
+const commonStore = useCommonStore();
+</script>
+
 <template>
   <div class="leftAside" :style="{ width: commonStore.isCollapse ? '65px' : '200px' }">
     <div class="header-title">
       <div class="logo">
-        <img :src="$getImageUrlByModules(ImageModules.loginPage, '1.png')" alt="" />
+        <img :src="$getImageUrl('/loginPage/1.png')" alt="" />
       </div>
       <div class="title" v-show="!commonStore.isCollapse">jyrncl</div>
     </div>
@@ -11,14 +18,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import Menu from "@/components/layout/menu/index.vue";
-import { ImageModules } from "@/enum";
-import { useCommonStore } from "@/store";
-
-const commonStore = useCommonStore();
-</script>
 
 <style lang="scss" scoped>
 .leftAside {

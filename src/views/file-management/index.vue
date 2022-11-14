@@ -1,3 +1,15 @@
+<script setup lang="ts">
+import FileBreadcrumb from "@/components/file-management/fileBreadcrumb/index.vue";
+import FileSelect from "@/components/file-management/fileSelect/index.vue"
+import type { FileRouterItem } from "@/types"
+import { useFileLayout } from "@/hooks/file-management"
+import { ref } from "vue";
+
+const { fileLayout, changeFileLayout } = useFileLayout();
+const fileRouterList = ref<Array<FileRouterItem>>([]);
+
+</script>
+
 <template>
   <div class="file-management-wrapper">
     <div class="file-management-scroll">
@@ -30,18 +42,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import FileBreadcrumb from "@/components/file-management/fileBreadcrumb/index.vue";
-import FileSelect from "@/components/file-management/fileSelect/index.vue"
-import type { FileRouterItem } from "@/types"
-import { useFileLayout } from "@/hooks/file-management"
-import { ref } from "vue";
-
-const { fileLayout, changeFileLayout } = useFileLayout();
-const fileRouterList = ref<Array<FileRouterItem>>([]);
-
-</script>
 
 <style scoped lang="scss">
 .file-management-wrapper {

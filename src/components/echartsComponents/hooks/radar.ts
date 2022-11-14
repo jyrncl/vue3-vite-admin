@@ -1,5 +1,3 @@
-// import { useEChartsOption } from "@/types";
-
 export const useConversionRateOptions = () => {
   return {
     tooltip: {

@@ -1,3 +1,26 @@
+<script setup lang="ts">
+const { title, loading = true } = defineProps<{
+  title: string;
+  loading: boolean;
+}>();
+
+const ItemStyleEnum = ["margin", "width"] as const;
+type ItemStyle = {
+  "margin-left": string;
+  "margin-right": string;
+  width: string
+}
+const itemStyle = {
+  "margin-left": "margin-right: 16px",
+  "margin-right": "margin-left: 16px",
+  width: "width: 30%"
+};
+const getItemStyle = (index: number, tag: "left" | "right"): string => {
+  const key: keyof ItemStyle = index % 2 === 1 ? ItemStyleEnum[1] : `${ItemStyleEnum[0]}-${tag}`
+  return itemStyle[key];
+};
+</script>
+
 <template>
   <div class="analysis-item-wrapper">
     <div class="analysis-item-simple">
@@ -26,29 +49,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-const { title, loading = true } = defineProps<{
-  title: string;
-  loading: boolean;
-}>();
-
-const ItemStyleEnum = ["margin", "width"] as const;
-type ItemStyle = {
-  "margin-left": string;
-  "margin-right": string;
-  width: string
-}
-const itemStyle = {
-  "margin-left": "margin-right: 16px",
-  "margin-right": "margin-left: 16px",
-  width: "width: 30%"
-};
-const getItemStyle = (index: number, tag: "left" | "right"): string => {
-  const key: keyof ItemStyle = index % 2 === 1 ? ItemStyleEnum[1] : `${ItemStyleEnum[0]}-${tag}`
-  return itemStyle[key];
-};
-</script>
 
 <style scoped lang="scss">
 .analysis-item-wrapper {

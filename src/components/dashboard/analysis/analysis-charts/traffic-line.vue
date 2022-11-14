@@ -1,23 +1,21 @@
-<template>
-  <EChartsComponents :option="echartOption" class="e-charts-wrapper" />
-</template>
-
 <script setup lang="ts">
-import { getTrafficLineList } from "@/api/echarts"
+import { getTrafficLineList } from "@/api/echarts";
 import { onMounted, ref } from "vue";
-import EChartsComponents from "@/components/echartsComponents/index.vue"
-import { useTrafficLineOptions } from "@/components/echartsComponents/hooks/line"
+import EChartsComponents from "@/components/echartsComponents/index.vue";
+import { useTrafficLineOptions } from "@/components/echartsComponents/hooks/line";
+import { dealResponseNull } from "@/utils/common";
 
-const echartOption = ref({});
+const eChartOption = ref({});
 onMounted(() => {
-  getTrafficLineList().then((data) => {
-    if (data.data instanceof Array) {
-      echartOption.value = useTrafficLineOptions(data.data, { label: "time", value: "value" });
-    }
-  })
-})
-
+  getTrafficLineList().then(({ data }) => {
+    eChartOption.value = useTrafficLineOptions(dealResponseNull(data.data, []), { label: "time", value: "value" });
+  });
+});
 </script>
+
+<template>
+  <EChartsComponents :option="eChartOption" class="e-charts-wrapper" />
+</template>
 
 <style scoped lang="scss">
 .e-charts-wrapper {

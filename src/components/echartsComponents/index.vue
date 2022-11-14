@@ -1,7 +1,3 @@
-<template>
-  <v-chart class="chart" :autoresize="true" :option="option" />
-</template>
-
 <script setup lang="ts">
 import VChart from "vue-echarts";
 import { use } from "echarts/core";
@@ -34,6 +30,10 @@ const { option } = defineProps<{
 }>()
 
 </script>
+
+<template>
+  <v-chart class="chart" :autoresize="true" :option="option" />
+</template>
 
 <style scoped lang="scss">
 .chart {

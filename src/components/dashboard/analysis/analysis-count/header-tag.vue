@@ -1,9 +1,3 @@
-<template>
-  <div class="header-tag">
-    {{ title }}
-  </div>
-</template>
-
 <script setup lang="ts">
 const { title, color = "#fff", bgColor = "#fff" } = defineProps<{
   title: string;
@@ -11,6 +5,12 @@ const { title, color = "#fff", bgColor = "#fff" } = defineProps<{
   bgColor: string;
 }>();
 </script>
+
+<template>
+  <div class="header-tag">
+    {{ title }}
+  </div>
+</template>
 
 <style scoped lang="scss">
 .header-tag {

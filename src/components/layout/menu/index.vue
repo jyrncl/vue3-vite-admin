@@ -1,3 +1,13 @@
+<script setup lang="ts">
+import MenuItemVue from "./menu-item.vue";
+import { useCommonStore } from "@/store";
+import { useRoute } from "vue-router";
+
+const commonStore = useCommonStore();
+
+const route = useRoute();
+</script>
+
 <template>
   <el-menu
     :default-active="route.path"
@@ -9,16 +19,6 @@
     <menu-item-vue :menuList="commonStore.menuTree" />
   </el-menu>
 </template>
-
-<script setup lang="ts">
-import MenuItemVue from "./menu-item.vue";
-import { useCommonStore } from "@/store";
-import { useRoute } from "vue-router";
-
-const commonStore = useCommonStore();
-
-const route = useRoute();
-</script>
 
 <style lang="scss" scoped>
 .#{$prefix}-menu {

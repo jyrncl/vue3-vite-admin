@@ -1,20 +1,3 @@
-<template>
-  <div class="topTabPage">
-    <el-tag
-      v-for="item in commonStore.tabPageList"
-      :key="item.id"
-      class="tab-item"
-      :effect="`${item.path === route.path ? 'dark' : 'light'}`"
-      :closable="item.path !== $indexPage"
-      :disable-transitions="false"
-      @click="handleClick(item)"
-      @close="handleClose(item)"
-    >
-      {{ item.name }}
-    </el-tag>
-  </div>
-</template>
-
 <script setup lang="ts">
 import type { MenuRow, TabPageRow } from "@/types";
 import { watch, onBeforeUnmount, ref, getCurrentInstance, ComponentInternalInstance } from "vue";
@@ -67,6 +50,23 @@ const handleClick = (tabPageRow: TabPageRow) => {
   router.push({ path: tabPageRow.path });
 };
 </script>
+
+<template>
+  <div class="topTabPage">
+    <el-tag
+      v-for="item in commonStore.tabPageList"
+      :key="item.id"
+      class="tab-item"
+      :effect="`${item.path === route.path ? 'dark' : 'light'}`"
+      :closable="item.path !== $indexPage"
+      :disable-transitions="false"
+      @click="handleClick(item)"
+      @close="handleClose(item)"
+    >
+      {{ item.name }}
+    </el-tag>
+  </div>
+</template>
 
 <style lang="scss" scoped>
 .topTabPage {

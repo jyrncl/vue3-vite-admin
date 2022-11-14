@@ -1,3 +1,9 @@
+<script setup lang="ts">
+import { useCommonStore } from "@/store";
+const commonStore = useCommonStore();
+
+</script>
+
 <template>
   <div class="mainContent">
     <transition :name="`${$prefix}-${commonStore.transitionName}`" mode="out-in">
@@ -5,12 +11,6 @@
     </transition>
   </div>
 </template>
-
-<script setup lang="ts">
-import { useCommonStore } from "@/store";
-const commonStore = useCommonStore();
-
-</script>
 
 <style lang="scss" scoped>
 .mainContent {

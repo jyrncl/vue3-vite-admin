@@ -67,3 +67,10 @@ export function clearLocalStore(): void {
 /**
  * 判断是否login
  */
+
+/**
+ * 接口返回null处理
+ */
+export function dealResponseNull<T = any>(data: T | null, defaultValue: T): T {
+  return data ? data : defaultValue;
+}

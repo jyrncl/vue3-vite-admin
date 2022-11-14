@@ -1,4 +1,4 @@
-import { defineConfig, loadEnv } from "vite";
+import { defineConfig, loadEnv, splitVendorChunkPlugin } from "vite";
 import vue from "@vitejs/plugin-vue";
 import defineOptions from "unplugin-vue-define-options/vite";
 import * as path from "path";
@@ -7,7 +7,7 @@ import * as path from "path";
 export default ({ mode }) => {
   const env = loadEnv(mode, process.cwd());
   return defineConfig({
-    plugins: [vue(), defineOptions()],
+    plugins: [vue(), defineOptions(), splitVendorChunkPlugin()],
     server: {
       port: 3756,
       host: true,
@@ -36,6 +36,10 @@ export default ({ mode }) => {
       alias: {
         "@": path.join(__dirname, "./src")
       }
+    },
+    build: {
+      chunkSizeWarningLimit: 2500,
+      reportCompressedSize: true
     }
   });
 };

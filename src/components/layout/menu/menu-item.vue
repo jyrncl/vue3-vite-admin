@@ -1,9 +1,21 @@
+<script setup lang="ts">
+import type { MenuRow } from "@/types";
+import { isHaveChildren } from "@/utils/common";
+import { useCommonStore } from "@/store";
+
+const props = withDefaults(defineProps<{ menuList: Array<MenuRow> }>(), {
+  menuList: () => []
+});
+
+const { setTabPageList } = useCommonStore();
+</script>
+
 <template>
-  <template v-for="menu in menuList" :key="menu.id">
+  <template v-for="menu in props.menuList" :key="menu.id">
     <template v-if="isHaveChildren(menu)">
       <el-sub-menu :index="menu.path">
         <template #title
-          ><IconItem :icon="menu.icon" /> <span>{{ menu.name }}</span></template
+        ><IconItem :icon="menu.icon" /> <span>{{ menu.name }}</span></template
         >
         <menu-item :menuList="menu.children"></menu-item>
       </el-sub-menu>
@@ -16,17 +28,5 @@
     </template>
   </template>
 </template>
-
-<script setup lang="ts">
-import type { MenuRow } from "@/types";
-import { isHaveChildren } from "@/utils/common";
-import { useCommonStore } from "@/store";
-
-withDefaults(defineProps<{ menuList: Array<MenuRow> }>(), {
-  menuList: () => []
-});
-
-const { setTabPageList } = useCommonStore();
-</script>
 
 <style lang="scss" scoped></style>

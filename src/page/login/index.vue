@@ -1,3 +1,28 @@
+<script setup lang="ts">
+import LoginContent from "./loginContent/index.vue";
+import RegisteredContent from "./registeredContent/index.vue";
+import { ref } from "vue";
+
+const tabList: Array<{
+  label: string;
+  id: string;
+}> = [
+  {
+    id: "login",
+    label: "登录"
+  },
+  {
+    id: "registered",
+    label: "注册"
+  }
+];
+const curTab = ref("login");
+const changeCurTab = (tab: string): void => {
+  curTab.value = tab;
+};
+
+</script>
+
 <template>
   <div class="login">
     <div class="login-wrapper">
@@ -38,31 +63,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import LoginContent from "./loginContent/index.vue";
-import RegisteredContent from "./registeredContent/index.vue";
-import { ref } from "vue";
-
-const tabList: Array<{
-  label: string;
-  id: string;
-}> = [
-  {
-    id: "login",
-    label: "登录"
-  },
-  {
-    id: "registered",
-    label: "注册"
-  }
-];
-const curTab = ref("login");
-const changeCurTab = (tab: string): void => {
-  curTab.value = tab;
-};
-
-</script>
 
 <style lang="scss" scoped>
 .login {

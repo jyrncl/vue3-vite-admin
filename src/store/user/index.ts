@@ -1,11 +1,10 @@
-import { userLogin, userExit } from "@/api/user";
-import type { LoginUser } from "@/types";
+import type { LoginUser, UserStoreState, MenuRow } from "@/types";
 import { defineStore } from "pinia";
-import { setItemByLocalStore, getItemByLocalStore, clearLocalStore } from "@/utils/common";
 import { dynamicRouter } from "@/router";
 import { ElMessage } from "element-plus";
-import { getMenuList } from "@/api/user";
-import type { UserStoreState, MenuRow } from "@/types";
+import { dealResponseNull } from "@/utils/common";
+import { userLogin, userExit, getMenuList } from "@/api/user";
+import { setItemByLocalStore, getItemByLocalStore, clearLocalStore } from "@/utils/common";
 
 export const useUserStore = defineStore("user", {
   state: (): UserStoreState => ({
@@ -14,7 +13,9 @@ export const useUserStore = defineStore("user", {
   actions: {
     userLogin(data: LoginUser): Promise<Array<MenuRow>> {
       return new Promise(async resolve => {
-        const { data: result } = await userLogin(data);
+        const {
+          data: { data: result }
+        } = await userLogin(data);
         if (result.userInfo) {
           this.setToken(result.userInfo.authorization);
           const menuList = await this.getMenuList();
@@ -29,9 +30,12 @@ export const useUserStore = defineStore("user", {
       await clearLocalStore();
     },
     async getMenuList(): Promise<Array<MenuRow>> {
-      const { data: menuData } = await getMenuList();
-      dynamicRouter.initRouter(menuData.menuList);
-      return menuData.menuList;
+      const {
+        data: { data: menuData }
+      } = await getMenuList();
+      const menuList = dealResponseNull(menuData, { menuList: [] }).menuList;
+      dynamicRouter.initRouter(menuList);
+      return menuList;
     },
     setToken(token: string) {
       this.token = token;

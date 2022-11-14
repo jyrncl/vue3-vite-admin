@@ -1,42 +1,4 @@
-<template>
-  <div class="loginContent">
-    <div class="loginContent-headerImg">
-      <img :src="$getImageUrlByModules(ImageModules.loginPage, '1.png')" alt="" />
-    </div>
-    <div class="loginContent-form">
-      <el-form
-        ref="loginFormRef"
-        :model="loginFormProps"
-        status-icon
-        :rules="rules"
-        label-width="55px"
-        class="login-Form"
-      >
-        <el-form-item label="账号" prop="username" class="login-input">
-          <el-input
-            v-model.number="loginFormProps.username"
-            @keydown.enter.native="submitForm(loginFormRef)"
-          />
-        </el-form-item>
-        <el-form-item label="密码" prop="password" class="login-input">
-          <el-input
-            v-model="loginFormProps.password"
-            @keydown.enter.native="submitForm(loginFormRef)"
-            type="password"
-            autocomplete="off"
-          />
-        </el-form-item>
-        <el-form-item class="bottom-btn">
-          <div class="submit" @click="submitForm(loginFormRef)">确认</div>
-          <div class="reset" @click="resetForm(loginFormRef)">重置</div>
-        </el-form-item>
-      </el-form>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
-import { ImageModules } from "@/enum";
 import { ref, reactive, getCurrentInstance, ComponentInternalInstance } from "vue";
 import { useRouter } from "vue-router";
 import type { FormInstance } from "element-plus";
@@ -83,6 +45,43 @@ const resetForm = (formEl: FormInstance | undefined) => {
 };
 
 </script>
+
+<template>
+  <div class="loginContent">
+    <div class="loginContent-headerImg">
+      <img :src="$getImageUrl('/loginPage/1.png')" alt="" />
+    </div>
+    <div class="loginContent-form">
+      <el-form
+        ref="loginFormRef"
+        :model="loginFormProps"
+        status-icon
+        :rules="rules"
+        label-width="55px"
+        class="login-Form"
+      >
+        <el-form-item label="账号" prop="username" class="login-input">
+          <el-input
+            v-model.number="loginFormProps.username"
+            @keydown.enter.native="submitForm(loginFormRef)"
+          />
+        </el-form-item>
+        <el-form-item label="密码" prop="password" class="login-input">
+          <el-input
+            v-model="loginFormProps.password"
+            @keydown.enter.native="submitForm(loginFormRef)"
+            type="password"
+            autocomplete="off"
+          />
+        </el-form-item>
+        <el-form-item class="bottom-btn">
+          <div class="submit" @click="submitForm(loginFormRef)">确认</div>
+          <div class="reset" @click="resetForm(loginFormRef)">重置</div>
+        </el-form-item>
+      </el-form>
+    </div>
+  </div>
+</template>
 
 <style lang="scss" scoped>
 .loginContent {

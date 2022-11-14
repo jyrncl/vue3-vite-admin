@@ -8,10 +8,10 @@ import config from "@/config";
 import { pinia } from "@/store";
 import { Router, dynamicRouter } from "@/router";
 import "@/router/router-permission/index";
-import { getImageUrlByModules } from "@/utils/importImageHook";
+import { getImageUrl } from "@/utils/importImageHook";
 
 const app = createApp(App);
-app.config.globalProperties.$getImageUrlByModules = getImageUrlByModules;
+app.config.globalProperties.$getImageUrl = getImageUrl;
 app.config.globalProperties.$prefix = config.prefix;
 app.config.globalProperties.$indexPage = config.indexPage;
 

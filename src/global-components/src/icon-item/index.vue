@@ -1,16 +1,16 @@
-<template>
-  <el-icon :color="color" :size="size">
-    <component :is="`${$prefix}${icon}`"></component>
-  </el-icon>
-</template>
-
 <script setup lang="ts">
-withDefaults(defineProps<{
+const props = withDefaults(defineProps<{
   icon: string;
   color?: string;
   size?: string | number;
 }>(), {})
 
 </script>
+
+<template>
+  <el-icon :color="props.color" :size="props.size">
+    <component :is="`${$prefix}${props.icon}`"></component>
+  </el-icon>
+</template>
 
 <style lang="scss" scoped></style>

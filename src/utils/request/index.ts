@@ -21,7 +21,7 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   response => {
-    return response.data;
+    return response;
   },
   error => {
     ElMessage.error(error);

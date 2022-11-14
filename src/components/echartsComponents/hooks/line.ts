@@ -1,7 +1,7 @@
 // import { computed } from "vue";
-import { useEChartsOption } from "@/types";
+import { UseEChartsOption } from "@/types";
 
-export const useTrafficLineOptions: useEChartsOption = (data, props) => {
+export const useTrafficLineOptions: UseEChartsOption = (data, props) => {
   return {
     tooltip: {
       trigger: "axis"
