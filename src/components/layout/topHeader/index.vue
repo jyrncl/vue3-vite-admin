@@ -23,7 +23,7 @@ const handleExit = () => {
 </script>
 
 <template>
-  <div class="topHeader">
+  <div class="top-header">
     <div class="left-link">
       <div class="collapse" @click="commonStore.changeCollapse">
         <IconItem :icon="commonStore.isCollapse ? 'Expand' : 'Fold'" />
@@ -94,7 +94,7 @@ const handleExit = () => {
 </template>
 
 <style lang="scss" scoped>
-.topHeader {
+.top-header {
   width: 100%;
   height: 100%;
   @include space-between;

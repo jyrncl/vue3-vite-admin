@@ -32,8 +32,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <el-row v-for="row in analysisComponentsList" :gutter="20" :key="row.id">
-    <el-col :span="row.span" v-for="col in row.col">
+  <div class="analysis-row" v-for="row in analysisComponentsList" :key="row.id">
+    <div :class="['analysis-col', { 'analysis-col-single': row.col.length === 1 }]" v-for="(col, index) in row.col" :key="index">
       <analysis-item :title="col.title" :loading="loading">
         <template v-slot:header>
           <component
@@ -50,16 +50,24 @@ onMounted(() => {
           ></component>
         </template>
       </analysis-item>
-    </el-col>
-  </el-row>
+    </div>
+  </div>
 </template>
 
 <style scoped lang="scss">
-.el-row {
+.analysis-row {
   margin-bottom: 20px;
+  display: flex;
+  column-gap: 20px;
   &:last-child {
     margin-bottom: 0;
     padding-bottom: 10px;
+  }
+  .analysis-col {
+    flex: 1;
+  }
+  .analysis-col-single {
+    width: 100%;
   }
 }
 .list-enter-active,

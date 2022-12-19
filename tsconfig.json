@@ -10,6 +10,7 @@
     "types": ["element-plus/global", "unplugin-vue-define-options", "vite/client"],
     "resolveJsonModule": true,
     "skipLibCheck": true,
+    "noEmit": true,
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
     "paths": {

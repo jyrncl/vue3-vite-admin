@@ -1,13 +1,31 @@
 <script setup lang="ts">
 import FileBreadcrumb from "@/components/file-management/fileBreadcrumb/index.vue";
-import FileSelect from "@/components/file-management/fileSelect/index.vue"
-import type { FileRouterItem } from "@/types"
-import { useFileLayout } from "@/hooks/file-management"
-import { ref } from "vue";
+import FileSelect from "@/components/file-management/fileSelect/index.vue";
+import FileGridBox from "@/components/file-management/fileGridBox/index.vue";
+import type { FileRouterItem, FileItem } from "@/types";
+import { useFileLayout } from "@/hooks/file-management";
+import { reactive } from "vue";
 
 const { fileLayout, changeFileLayout } = useFileLayout();
-const fileRouterList = ref<Array<FileRouterItem>>([]);
-
+const list = [
+  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+  1, 1, 1, 1, 1, 1
+];
+const fileList = reactive<Array<FileItem>>(list.map((item, index) => {
+  return {
+    id: index + 1,
+    parent_id: "-1",
+    file_name: "文件夹一",
+    file_size: "未知",
+    file_path: "",
+    file_type: "folder",
+    original_name: "",
+    create_time: "2020/11/15 21:29",
+    update_time: "2020/11/15 21:29"
+  }
+}))
+const fileRouterList = reactive<Array<FileRouterItem>>([]);
+document.oncontextmenu = () => false
 </script>
 
 <template>
@@ -38,7 +56,9 @@ const fileRouterList = ref<Array<FileRouterItem>>([]);
           </div>
         </div>
       </div>
-      <div class="file-management-content"></div>
+      <div class="file-management-content">
+        <FileGridBox :file-list="fileList" />
+      </div>
     </div>
   </div>
 </template>
@@ -113,6 +133,9 @@ const fileRouterList = ref<Array<FileRouterItem>>([]);
     }
     .file-management-content {
       width: 100%;
+      height: calc(100% - 90px);
+      overflow-x: hidden;
+      overflow-y: auto;
     }
   }
 }

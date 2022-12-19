@@ -41,13 +41,13 @@ onMounted(() => {
   width: 100%;
   height: 100%;
   display: flex;
-  align-items: flex-start;
   .home-left {
     height: 100%;
   }
   .home-content {
     flex: auto;
     height: 100%;
+    overflow: hidden;
     &-header {
       padding: 10px 15px;
       border: 1px solid $default-border-color;
@@ -57,9 +57,6 @@ onMounted(() => {
     &-tab-page {
       padding: 10px 15px;
       border-bottom: 1px solid #e5e7eb;
-      //background: rgba(0,0,0,.2);
-      //-webkit-backdrop-filter: saturate(100%) blur(20px);
-      //backdrop-filter: saturate(100%) blur(20px);
     }
     &-main {
       width: 100%;

@@ -6,7 +6,7 @@ const commonStore = useCommonStore();
 </script>
 
 <template>
-  <div class="leftAside" :style="{ width: commonStore.isCollapse ? '65px' : '200px' }">
+  <div class="left-aside" :style="{ width: commonStore.isCollapse ? '65px' : '200px' }">
     <div class="header-title">
       <div class="logo">
         <img :src="$getImageUrl('/loginPage/1.png')" alt="" />
@@ -20,8 +20,7 @@ const commonStore = useCommonStore();
 </template>
 
 <style lang="scss" scoped>
-.leftAside {
-  width: 100%;
+.left-aside {
   height: 100%;
   border-right: 1px solid $default-border-color;
   overflow: hidden;
