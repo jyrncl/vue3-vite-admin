@@ -25,5 +25,6 @@ export type FileItem = {
 // 默认右键菜单
 export type ContextMenu = {
   name: string;
+  icon: string;
   callback: <T>(...arg: Array<T>) => void;
 };

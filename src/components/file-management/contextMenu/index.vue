@@ -2,13 +2,38 @@
 import type { ContextMenu } from "@/types"
 import { reactive } from "vue"
 
+
+// const props = withDefaults(defineProps<{
+//   visible: boolean;
+// }>(), {
+//   visible: false,
+// })
 const addFolder = () => {
   console.log("新建文件夹")
 }
 
 const defaultMenuList = reactive<Array<ContextMenu>>([{
   name: "新建文件夹",
+  icon: "FolderAdd",
   callback: addFolder
+}, {
+  name: "上传文件",
+  icon: "DocumentAdd",
+  callback: () => {
+    console.log("上传文件")
+  }
+}, {
+  name: "上传文件夹",
+  icon: "UploadFilled",
+  callback: () => {
+    console.log("上传文件夹")
+  }
+}, {
+  name: "刷新页面",
+  icon: "Refresh",
+  callback: () => {
+    console.log("刷新页面")
+  }
 }])
 defineOptions({
   name: "file-context-menu-wrapper"
@@ -16,8 +41,35 @@ defineOptions({
 </script>
 
 <template>
-  <div class="file-context-menu-wrapper"></div>
+  <div class="file-context-menu-wrapper">
+    <div class="file-context-menu-item" v-for="item in defaultMenuList" :key="item.icon" @click="item.callback">
+      <icon-item :icon="item.icon" size="18px" color="#409EFF" />
+      <span>{{ item.name }}</span>
+    </div>
+  </div>
 </template>
 
 <style scoped lang="scss">
+.file-context-menu-wrapper {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 150px;
+  border-radius: 8px;
+  padding: 10px;
+  background: #fff;
+  box-shadow: 0 0 1px 1px rgb(28 28 32 / 5%), 0 8px 24px rgb(28 28 32 / 12%);
+  z-index: 99999;
+  .file-context-menu-item {
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+    cursor: pointer;
+    padding: 8px;
+    border-bottom: 1px #eee solid;
+    &:last-child {
+      border: none;
+    }
+  }
+}
 </style>

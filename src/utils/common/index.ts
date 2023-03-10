@@ -74,3 +74,4 @@ export function clearLocalStore(): void {
 export function dealResponseNull<T = any>(data: T | null, defaultValue: T): T {
   return data ? data : defaultValue;
 }
+
