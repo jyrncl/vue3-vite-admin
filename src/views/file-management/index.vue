@@ -2,15 +2,13 @@
 import FileBreadcrumb from "@/components/file-management/fileBreadcrumb/index.vue";
 import FileSelect from "@/components/file-management/fileSelect/index.vue";
 import FileGridBox from "@/components/file-management/fileGridBox/index.vue";
-import FileContextMenu from "@/components/file-management/contextMenu/index.vue";
 import type { FileRouterItem, FileItem } from "@/types";
-import { useFileLayout, useToggleContextMenu } from "@/hooks/file-management";
+import { useFileLayout } from "@/hooks/file-management";
 import { reactive } from "vue";
 
 const { fileLayout, changeFileLayout } = useFileLayout();
-const [ contextMenuVisible, oncontextmenu ]= useToggleContextMenu((e: Event) => {
-  console.log(e, "eeee")
-}, () => {});
+
+
 const list = [
   1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
   1, 1, 1, 1, 1, 1
@@ -32,7 +30,7 @@ const fileRouterList = reactive<Array<FileRouterItem>>([]);
 </script>
 
 <template>
-  <div class="file-management-wrapper" @contextmenu="oncontextmenu">
+  <div class="file-management-wrapper">
     <div class="file-management-scroll">
       <div class="file-management-header">
         <FileBreadcrumb :file-router-list="fileRouterList" />
@@ -63,7 +61,6 @@ const fileRouterList = reactive<Array<FileRouterItem>>([]);
         <FileGridBox :file-list="fileList" />
       </div>
     </div>
-    <FileContextMenu v-show="contextMenuVisible" />
   </div>
 </template>
 
@@ -74,7 +71,6 @@ const fileRouterList = reactive<Array<FileRouterItem>>([]);
   background: #fff;
   border-radius: 5px;
   padding: 20px;
-  position: relative;
   .file-management-scroll {
     width: 100%;
     height: 100%;

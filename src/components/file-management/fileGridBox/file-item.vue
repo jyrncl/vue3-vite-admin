@@ -13,10 +13,18 @@ const props = withDefaults(
 );
 
 const checked = ref(false);
+
+const emit = defineEmits<{
+  (e: "changeContextMenuType", type: string): void
+}>()
+
+const handleOncontextmenu = () => {
+  emit("changeContextMenuType", "folder");
+}
 </script>
 
 <template>
-  <div class="file-item-wrapper">
+  <div class="file-item-wrapper" @contextmenu="handleOncontextmenu">
     <div class="file-item-item-main">
       <div class="file-image">
         <img :src="$getImageUrl('/file-management/folder.png')" alt="" />

@@ -3,11 +3,13 @@ import type { ContextMenu } from "@/types"
 import { reactive } from "vue"
 
 
-// const props = withDefaults(defineProps<{
-//   visible: boolean;
-// }>(), {
-//   visible: false,
-// })
+const props = withDefaults(defineProps<{
+  position: {x: number, y: number};
+  contextMenuType: string;
+}>(), {
+  position: () => ({ x: 0, y: 0 }),
+  contextMenuType: "content"
+})
 const addFolder = () => {
   console.log("新建文件夹")
 }
@@ -35,14 +37,40 @@ const defaultMenuList = reactive<Array<ContextMenu>>([{
     console.log("刷新页面")
   }
 }])
+
+const folderMenuList = reactive<Array<ContextMenu>>([{
+  name: "重命名",
+  icon: "EditPen",
+  callback: () => {
+    console.log("重命名")
+  }
+}, {
+  name: "详细信息",
+  icon: "MoreFilled",
+  callback: () => {
+    console.log("查看详细信息")
+  }
+}, {
+  name: "删除文件夹",
+  icon: "DeleteFilled",
+  callback: () => {
+    console.log("删除文件夹")
+  }
+}])
+
+const finallyMenuList = {
+  content: defaultMenuList,
+  folder: folderMenuList,
+}
+
 defineOptions({
   name: "file-context-menu-wrapper"
 });
 </script>
 
 <template>
-  <div class="file-context-menu-wrapper">
-    <div class="file-context-menu-item" v-for="item in defaultMenuList" :key="item.icon" @click="item.callback">
+  <div class="file-context-menu-wrapper" :style="{ top: `${position.y}px`, left: `${position.x}px` }">
+    <div class="file-context-menu-item" v-for="item in finallyMenuList[contextMenuType]" :key="item.icon" @click="item.callback">
       <icon-item :icon="item.icon" size="18px" color="#409EFF" />
       <span>{{ item.name }}</span>
     </div>
@@ -67,8 +95,13 @@ defineOptions({
     cursor: pointer;
     padding: 8px;
     border-bottom: 1px #eee solid;
+    border-radius: 8px;
+    overflow: hidden;
     &:last-child {
       border: none;
+    }
+    &:hover {
+      background: rgba(121, 187, 255, 0.2);
     }
   }
 }
