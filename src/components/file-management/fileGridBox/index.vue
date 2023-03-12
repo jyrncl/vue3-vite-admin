@@ -17,12 +17,10 @@ const props = withDefaults(defineProps<{
 
 const contextMenuType = ref("content")
 
-const [ contextMenuVisible, oncontextmenu, position ]= useToggleContextMenu("file-management-content",(e: Event) => {
-  console.log(position, "eeee", e )
+const [ contextMenuVisible, oncontextmenu, position ]= useToggleContextMenu("file-management-content", "file-context-menu-wrapper", () => {
 }, () => {});
 
 const handleOncontextmenu = (type: string) => {
-  console.log(type)
   contextMenuType.value = type;
   oncontextmenu();
 }

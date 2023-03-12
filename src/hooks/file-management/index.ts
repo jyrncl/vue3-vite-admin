@@ -13,43 +13,41 @@ export const useFileLayout = () => {
 /* 隐藏或者显示右键菜单
 
  */
-export function useToggleContextMenu(wrapperDom: string, visibleCb: (e: Event) => void, noneCb: () => void): [visible: Ref<boolean>, oncontextmenu: () => void, position: {x: number, y: number}] {
+export function useToggleContextMenu(wrapperDom: string, contextMenuDom: string, visibleCb: () => void, noneCb: () => void): [visible: Ref<boolean>, oncontextmenu: () => void, position: Ref<{x: number, y: number}>] {
   const visible = ref(false)
-  const position = { x: 0, y: 0 };
+  const position = ref({ x: 0, y: 0 });
   let boundary: DOMRect = <DOMRect>{};
   onMounted(() => {
     boundary = document.getElementsByClassName(wrapperDom)[0].getBoundingClientRect();
   })
-  const setVisible = (e: Event) => {
+  const setVisible = () => {
     visible.value = true;
-    visibleCb(e);
+    visibleCb();
   }
 
   const oncontextmenu = () => {
-    console.log(111);
     document.oncontextmenu = (e) => {
-      setVisible(e);
+      setVisible();
       setPosition(e.x, e.y);
       return false;
     }
   }
 
   const setPosition = (x: number, y: number) => {
-    if (x + 10 <= boundary.left) {
-      position.x = boundary.left + 10;
-    } else if (x - 10 >= boundary.left + boundary.width) {
-      position.x = boundary.left + boundary.width - 10;
-    } else {
-      position.x = x;
-    }
+    setTimeout(() => {
+      const { width, height } = document.getElementsByClassName(contextMenuDom)[0].getBoundingClientRect();
+      if (x >= boundary.right - 160) {
+        position.value.x = boundary.right - width;
+      } else {
+        position.value.x = x;
+      }
 
-    if (y + 10 <= boundary.top) {
-      position.y = boundary.top + 10;
-    } else if (y - 10 >= boundary.top + boundary.height) {
-      position.y = boundary.top + boundary.height - 10;
-    } else {
-      position.y = y;
-    }
+      if (y >= boundary.bottom - 200) {
+        position.value.y = boundary.bottom - height;
+      } else {
+        position.value.y = y;
+      }
+    })
   }
 
   document.addEventListener("click", () => {
