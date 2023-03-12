@@ -36,17 +36,20 @@ export function useToggleContextMenu(wrapperDom: string, contextMenuDom: string,
   const setPosition = (x: number, y: number) => {
     setTimeout(() => {
       const { width, height } = document.getElementsByClassName(contextMenuDom)[0].getBoundingClientRect();
-      if (x >= boundary.right - 160) {
+      if (x >= boundary.right - width) {
         position.value.x = boundary.right - width;
       } else {
         position.value.x = x;
       }
 
-      if (y >= boundary.bottom - 200) {
+      if (y >= boundary.bottom - height) {
         position.value.y = boundary.bottom - height;
       } else {
         position.value.y = y;
       }
+      document.oncontextmenu = () => {
+        visible.value = false;
+      };
     })
   }
 
