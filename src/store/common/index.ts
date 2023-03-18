@@ -4,7 +4,7 @@ import type { CommonStoreState, MenuRow, TabPageRow } from "@/types";
 
 export const useCommonStore = defineStore("common", {
   state: (): CommonStoreState => ({
-    transitionName: getItemByLocalStore("transitionName") || "slide-in-left",
+    transitionName: getItemByLocalStore("transitionName") || "left-to-right",
     isCollapse: getItemByLocalStore("isCollapse") || false,
     breadcrumbList: getItemByLocalStore("breadcrumbList") || [],
     menuTree: getItemByLocalStore("menuTree") || [],
