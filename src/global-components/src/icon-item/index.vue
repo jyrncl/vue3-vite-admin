@@ -1,10 +1,12 @@
 <script setup lang="ts">
-const props = withDefaults(defineProps<{
-  icon: string;
-  color?: string;
-  size?: string | number;
-}>(), {})
-
+const props = withDefaults(
+  defineProps<{
+    icon: string;
+    color?: string;
+    size?: string | number;
+  }>(),
+  {}
+);
 </script>
 
 <template>

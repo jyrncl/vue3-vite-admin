@@ -28,11 +28,11 @@ const submitForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   formEl.validate(valid => {
     if (valid) {
-      userLogin(loginFormProps.value).then((menuList) => {
+      userLogin(loginFormProps.value).then(menuList => {
         setMenuTree(menuList);
         setIsRefresh(false);
         router.push(proxy?.$indexPage || "");
-      })
+      });
     } else {
       return false;
     }
@@ -43,7 +43,6 @@ const resetForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   formEl.resetFields();
 };
-
 </script>
 
 <template>

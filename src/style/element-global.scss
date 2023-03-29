@@ -1,6 +1,7 @@
 .user-info-list-popper {
   padding: 0 !important;
-  .list-info, .user-exit {
+  .list-info,
+  .user-exit {
     text-align: center;
     @include flex-center;
     column-gap: 15px;

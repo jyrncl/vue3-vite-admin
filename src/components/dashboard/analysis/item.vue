@@ -8,15 +8,15 @@ const ItemStyleEnum = ["margin", "width"] as const;
 type ItemStyle = {
   "margin-left": string;
   "margin-right": string;
-  width: string
-}
+  width: string;
+};
 const itemStyle = {
   "margin-left": "margin-right: 16px",
   "margin-right": "margin-left: 16px",
   width: "width: 30%"
 };
 const getItemStyle = (index: number, tag: "left" | "right"): string => {
-  const key: keyof ItemStyle = index % 2 === 1 ? ItemStyleEnum[1] : `${ItemStyleEnum[0]}-${tag}`
+  const key: keyof ItemStyle = index % 2 === 1 ? ItemStyleEnum[1] : `${ItemStyleEnum[0]}-${tag}`;
   return itemStyle[key];
 };
 </script>

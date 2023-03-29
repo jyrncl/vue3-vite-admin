@@ -22,13 +22,12 @@ use([
   TitleComponent
 ]);
 defineOptions({
-  components: { VChart },
+  components: { VChart }
 });
 
 const { option } = defineProps<{
   option: object;
-}>()
-
+}>();
 </script>
 
 <template>

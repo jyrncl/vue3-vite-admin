@@ -10,10 +10,10 @@ const route = useRoute();
 <template>
   <router-view v-slot="{ Component }" v-if="route.meta['keepAlive']">
     <keep-alive>
-      <component :is="Component"/>
+      <component :is="Component" />
     </keep-alive>
   </router-view>
-  <router-view v-else/>
+  <router-view v-else />
 </template>
 
 <style lang="scss" scoped></style>

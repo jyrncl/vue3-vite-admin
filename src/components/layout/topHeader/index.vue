@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { MenuRow } from "@/types";
 import { ref } from "vue";
-import { useRouter } from "vue-router"
+import { useRouter } from "vue-router";
 import { useCommonStore, useUserStore } from "@/store";
 
 const commonStore = useCommonStore();
@@ -17,9 +17,9 @@ const userInfoRef = ref();
 const handleExit = () => {
   userStore.userExit().then(() => {
     userStore.$reset();
-    router.push({ name: "login" })
-  })
-}
+    router.push({ name: "login" });
+  });
+};
 </script>
 
 <template>
@@ -35,7 +35,7 @@ const handleExit = () => {
             :to="{ path: item.path }"
             v-for="item in commonStore.breadcrumbList"
             :key="item.id"
-          >{{ item.name }}</el-breadcrumb-item
+            >{{ item.name }}</el-breadcrumb-item
           >
         </el-breadcrumb>
       </div>

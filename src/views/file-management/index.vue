@@ -3,30 +3,29 @@ import FileBreadcrumb from "@/components/file-management/fileBreadcrumb/index.vu
 import FileSelect from "@/components/file-management/fileSelect/index.vue";
 import FileGridBox from "@/components/file-management/fileGridBox/index.vue";
 import type { FileRouterItem, FileItem } from "@/types";
+import { getUserFileList } from "@/api/file-management";
 import { useFileLayout } from "@/hooks/file-management";
-import { reactive } from "vue";
+import { reactive, onMounted, ref } from "vue";
 
 const { fileLayout, changeFileLayout } = useFileLayout();
 
+const folderId = ref(-1);
+const fileList = ref<Array<FileItem>>([]);
+// 获取文件列表页
+onMounted(() => {
+  getUserFileList({ folderId: folderId.value }).then(({ data }) => {
+    fileList.value = data.data || [];
+  });
+});
 
-const list = [
-  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-  1, 1, 1, 1, 1, 1
-];
-const fileList = reactive<Array<FileItem>>(list.map((item, index) => {
-  return {
-    id: index + 1,
-    parent_id: "-1",
-    file_name: "文件夹一",
-    file_size: "未知",
-    file_path: "",
-    file_type: "folder",
-    original_name: "",
-    create_time: "2020/11/15 21:29",
-    update_time: "2020/11/15 21:29"
-  }
-}))
 const fileRouterList = reactive<Array<FileRouterItem>>([]);
+
+const handleDownload = () => {
+  const a = document.createElement("a");
+  a.href = "/api/file/downloadUserFile?id=1";
+  a.click();
+  a.remove();
+};
 </script>
 
 <template>

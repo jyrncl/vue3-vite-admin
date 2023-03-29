@@ -75,3 +75,13 @@ export function dealResponseNull<T = any>(data: T | null, defaultValue: T): T {
   return data ? data : defaultValue;
 }
 
+/**
+ * 通过a标签下载文件
+ * @param { string } url 文件下载路径
+ */
+export function downloadFileByAElement(url: string) {
+  const a = document.createElement("a");
+  a.href = url;
+  a.click();
+  a.remove();
+}

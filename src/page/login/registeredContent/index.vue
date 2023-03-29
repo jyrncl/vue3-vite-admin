@@ -24,7 +24,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
     if (valid) {
       registeredUser(registeredFormProps.value).then(({ data }) => {
         if (data.code === 200) {
-          ElMessage.success(data.data)
+          ElMessage.success(data.data);
           emits("changeTag", "login");
         } else {
           ElMessage.error(data.data);

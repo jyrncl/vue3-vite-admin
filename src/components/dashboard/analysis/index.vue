@@ -28,12 +28,15 @@ onMounted(() => {
       }, 1000);
     });
 });
-
 </script>
 
 <template>
   <div class="analysis-row" v-for="row in analysisComponentsList" :key="row.id">
-    <div :class="['analysis-col', { 'analysis-col-single': row.col.length === 1 }]" v-for="(col, index) in row.col" :key="index">
+    <div
+      :class="['analysis-col', { 'analysis-col-single': row.col.length === 1 }]"
+      v-for="(col, index) in row.col"
+      :key="index"
+    >
       <analysis-item :title="col.title" :loading="loading">
         <template v-slot:header>
           <component

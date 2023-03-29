@@ -15,7 +15,7 @@ const { setTabPageList } = useCommonStore();
     <template v-if="isHaveChildren(menu)">
       <el-sub-menu :index="menu.path">
         <template #title
-        ><IconItem :icon="menu.icon" /> <span>{{ menu.name }}</span></template
+          ><IconItem :icon="menu.icon" /> <span>{{ menu.name }}</span></template
         >
         <menu-item :menuList="menu.children"></menu-item>
       </el-sub-menu>

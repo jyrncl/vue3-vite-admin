@@ -8,5 +8,4 @@ defineOptions({
   <div class="404-wrapper">页面找不到了</div>
 </template>
 
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>

@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import { useCommonStore } from "@/store";
 const commonStore = useCommonStore();
-
 </script>
 
 <template>
   <div class="mainContent">
     <transition :name="`${$prefix}-${commonStore.transitionName}`" mode="out-in">
-      <keep-alive-wrapper/>
+      <keep-alive-wrapper />
     </transition>
   </div>
 </template>

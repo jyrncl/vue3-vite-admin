@@ -1,67 +1,111 @@
 <script setup lang="ts">
-import type { ContextMenu } from "@/types"
-import { reactive } from "vue"
+import type { ContextMenu, FileItem } from "@/types";
+import { downloadFileByAElement } from "@/utils/common";
+import { reactive } from "vue";
 
-
-const props = withDefaults(defineProps<{
-  position: {x: number, y: number};
-  contextMenuType: string;
-}>(), {
-  position: () => ({ x: 0, y: 0 }),
-  contextMenuType: "content"
-})
+const props = withDefaults(
+  defineProps<{
+    position: { x: number; y: number };
+    contextMenuType: { type: string; data: FileItem | undefined };
+  }>(),
+  {
+    position: () => ({ x: 0, y: 0 }),
+    contextMenuType: () => ({ type: "content", data: undefined })
+  }
+);
 const addFolder = () => {
-  console.log("新建文件夹")
-}
+  console.log("新建文件夹");
+};
 
-const defaultMenuList = reactive<Array<ContextMenu>>([{
-  name: "新建文件夹",
-  icon: "FolderAdd",
-  callback: addFolder
-}, {
-  name: "上传文件",
-  icon: "DocumentAdd",
-  callback: () => {
-    console.log("上传文件")
+const defaultMenuList = reactive<Array<ContextMenu>>([
+  {
+    name: "新建文件夹",
+    icon: "FolderAdd",
+    callback: addFolder
+  },
+  {
+    name: "上传文件",
+    icon: "DocumentAdd",
+    callback: () => {
+      console.log("上传文件");
+    }
+  },
+  {
+    name: "上传文件夹",
+    icon: "UploadFilled",
+    callback: () => {
+      console.log("上传文件夹");
+    }
+  },
+  {
+    name: "刷新页面",
+    icon: "Refresh",
+    callback: () => {
+      console.log("刷新页面");
+    }
   }
-}, {
-  name: "上传文件夹",
-  icon: "UploadFilled",
-  callback: () => {
-    console.log("上传文件夹")
-  }
-}, {
-  name: "刷新页面",
-  icon: "Refresh",
-  callback: () => {
-    console.log("刷新页面")
-  }
-}])
+]);
 
-const folderMenuList = reactive<Array<ContextMenu>>([{
-  name: "重命名",
-  icon: "EditPen",
-  callback: () => {
-    console.log("重命名")
+const folderMenuList = reactive<Array<ContextMenu>>([
+  {
+    name: "重命名",
+    icon: "EditPen",
+    callback: () => {
+      console.log("重命名");
+    }
+  },
+  {
+    name: "详细信息",
+    icon: "MoreFilled",
+    callback: () => {
+      console.log("查看详细信息");
+    }
+  },
+  {
+    name: "删除文件夹",
+    icon: "DeleteFilled",
+    callback: () => {
+      console.log("删除文件夹");
+    }
   }
-}, {
-  name: "详细信息",
-  icon: "MoreFilled",
-  callback: () => {
-    console.log("查看详细信息")
+]);
+
+const fileMenuList = reactive<Array<ContextMenu>>([
+  {
+    name: "下载文件",
+    icon: "Download",
+    callback: () => {
+      downloadFileByAElement(`/api/file/downloadUserFile?id=${props.contextMenuType.data?.id}`);
+    }
+  },
+  {
+    name: "重命名",
+    icon: "EditPen",
+    callback: () => {
+      console.log("重命名");
+    }
+  },
+  {
+    name: "详细信息",
+    icon: "MoreFilled",
+    callback: () => {
+      console.log("查看详细信息");
+    }
+  },
+  {
+    name: "删除文件",
+    icon: "DeleteFilled",
+    callback: () => {
+      console.log("删除文件夹");
+    }
   }
-}, {
-  name: "删除文件夹",
-  icon: "DeleteFilled",
-  callback: () => {
-    console.log("删除文件夹")
-  }
-}])
+]);
 
 const finallyMenuList = {
   content: defaultMenuList,
   folder: folderMenuList,
-}
+  file: fileMenuList
+};
 
 defineOptions({
   name: "file-context-menu-wrapper"
@@ -69,8 +113,16 @@ defineOptions({
 </script>
 
 <template>
-  <div class="file-context-menu-wrapper" :style="{ top: `${position.y}px`, left: `${position.x}px` }">
-    <div class="file-context-menu-item" v-for="item in finallyMenuList[contextMenuType]" :key="item.icon" @click="item.callback">
+  <div
+    class="file-context-menu-wrapper"
+    :style="{ top: `${position.y}px`, left: `${position.x}px` }"
+  >
+    <div
+      class="file-context-menu-item"
+      v-for="item in finallyMenuList[contextMenuType.type]"
+      :key="item.icon"
+      @click="item.callback"
+    >
       <icon-item :icon="item.icon" size="18px" color="#409EFF" />
       <span>{{ item.name }}</span>
     </div>

@@ -10,6 +10,7 @@ const instance: AxiosInstance = Axios.create({
 instance.interceptors.request.use(
   request => {
     request.headers = {
+      ...request.headers,
       Authorization: `Bearer ${useUserStore(pinia).token}`
     };
     return request;

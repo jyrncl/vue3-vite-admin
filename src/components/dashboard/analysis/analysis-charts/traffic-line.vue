@@ -8,7 +8,10 @@ import { dealResponseNull } from "@/utils/common";
 const eChartOption = ref({});
 onMounted(() => {
   getTrafficLineList().then(({ data }) => {
-    eChartOption.value = useTrafficLineOptions(dealResponseNull(data.data, []), { label: "time", value: "value" });
+    eChartOption.value = useTrafficLineOptions(dealResponseNull(data.data, []), {
+      label: "time",
+      value: "value"
+    });
   });
 });
 </script>

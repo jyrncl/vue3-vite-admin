@@ -20,7 +20,6 @@ const curTab = ref("login");
 const changeCurTab = (tab: string): void => {
   curTab.value = tab;
 };
-
 </script>
 
 <template>

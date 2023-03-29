@@ -5,26 +5,28 @@ defineOptions({
   name: "file-select-wrapper"
 });
 
-const props = withDefaults(defineProps<{
-  all?: number;
-  select?: number;
-}>(), {
-  all: 0,
-  select: 0
-})
+const props = withDefaults(
+  defineProps<{
+    all?: number;
+    select?: number;
+  }>(),
+  {
+    all: 0,
+    select: 0
+  }
+);
 
 const fileCheckAll = ref(false);
 const isIndeterminate = ref(false);
 
 const emit = defineEmits<{
-  (e: "selectAll", checked: boolean): void
-}>()
+  (e: "selectAll", checked: boolean): void;
+}>();
 
 const handleCheckAllFile = (checked: boolean) => {
   isIndeterminate.value = false;
-  emit('selectAll', checked);
-}
-
+  emit("selectAll", checked);
+};
 </script>
 
 <template>
@@ -33,10 +35,9 @@ const handleCheckAllFile = (checked: boolean) => {
       v-model="fileCheckAll"
       :indeterminate="isIndeterminate"
       @change="handleCheckAllFile"
-    >{{ props.select ? `已选${props.select}项` : `共${props.all}项` }}</el-checkbox
+      >{{ props.select ? `已选${props.select}项` : `共${props.all}项` }}</el-checkbox
     >
   </div>
 </template>
 
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>
