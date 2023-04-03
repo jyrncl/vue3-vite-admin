@@ -7,6 +7,8 @@ declare module "*.vue" {
   export default component;
 }
 
+declare module "@smallwei/avue";
+
 // declare module '@vue/runtime-core' {
 //   export interface ComponentCustomProperties {
 //     $getImageUrlByModules: (moduleName: string, fileName: string) => string

@@ -3,6 +3,7 @@ import VChart from "vue-echarts";
 import { use } from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
 import { BarChart, LineChart, PieChart, RadarChart } from "echarts/charts";
+import type { ECBasicOption } from "echarts/types/dist/shared";
 import {
   GridComponent,
   TooltipComponent,
@@ -26,7 +27,7 @@ defineOptions({
 });
 
 const { option } = defineProps<{
-  option: object;
+  option: ECBasicOption;
 }>();
 </script>
 

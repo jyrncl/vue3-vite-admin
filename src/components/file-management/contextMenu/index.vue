@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import type { ContextMenu, FileItem } from "@/types";
+import type { ContextMenu, FolderDetailItem } from "@/types";
+import RenameAdd from "@/components/file-management/dialog/rename-add.vue";
 import { downloadFileByAElement } from "@/utils/common";
-import { reactive } from "vue";
+import { ref, reactive } from "vue";
 
 const props = withDefaults(
   defineProps<{
     position: { x: number; y: number };
-    contextMenuType: { type: string; data: FileItem | undefined };
+    contextMenuType: { type: string; data: FolderDetailItem | undefined };
   }>(),
   {
     position: () => ({ x: 0, y: 0 }),
@@ -51,7 +52,7 @@ const folderMenuList = reactive<Array<ContextMenu>>([
     name: "重命名",
     icon: "EditPen",
     callback: () => {
-      console.log("重命名");
+      RenameAddDialog.value?.handleOpen("update", props.contextMenuType.data);
     }
   },
   {
@@ -107,25 +108,25 @@ const finallyMenuList = {
   file: fileMenuList
 };
 
+const RenameAddDialog = ref<InstanceType<typeof RenameAdd>>(null);
+
 defineOptions({
   name: "file-context-menu-wrapper"
 });
 </script>
 
 <template>
-  <div
-    class="file-context-menu-wrapper"
-    :style="{ top: `${position.y}px`, left: `${position.x}px` }"
-  >
+  <div class="file-context-menu-wrapper" :style="{ top: `${position.y}px`, left: `${position.x}px` }">
     <div
       class="file-context-menu-item"
-      v-for="item in finallyMenuList[contextMenuType.type]"
+      v-for="item in finallyMenuList[contextMenuType.type as keyof typeof finallyMenuList]"
       :key="item.icon"
       @click="item.callback"
     >
       <icon-item :icon="item.icon" size="18px" color="#409EFF" />
       <span>{{ item.name }}</span>
     </div>
+    <rename-add ref="RenameAddDialog" />
   </div>
 </template>
 

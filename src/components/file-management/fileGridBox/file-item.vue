@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { FileItem } from "@/types";
+import type { FolderDetailItem } from "@/types";
 import dayjs from "dayjs";
 import { ref } from "vue";
 defineOptions({
@@ -8,7 +8,7 @@ defineOptions({
 
 const props = withDefaults(
   defineProps<{
-    fileItem: FileItem;
+    fileItem: FolderDetailItem;
   }>(),
   {}
 );
@@ -16,33 +16,24 @@ const props = withDefaults(
 const checked = ref(false);
 
 const emit = defineEmits<{
-  (e: "changeContextMenuType", type: string, data: FileItem): void;
+  (e: "changeContextMenuType", type: string, data: FolderDetailItem): void;
 }>();
 
 const handleOncontextmenu = () => {
-  emit("changeContextMenuType", props.fileItem.is_folder ? "folder" : "file", props.fileItem);
+  emit("changeContextMenuType", props.fileItem.isFolder ? "folder" : "file", props.fileItem);
 };
 </script>
 
 <template>
-  <div
-    class="file-item-wrapper"
-    @contextmenu="handleOncontextmenu"
-    :title="props.fileItem.original_name"
-  >
+  <div class="file-item-wrapper" @contextmenu="handleOncontextmenu" :title="props.fileItem.name">
     <div class="file-item-item-main">
       <div class="file-image">
-        <img
-          :src="
-            $getImageUrl(`/file-management/${props.fileItem.is_folder ? 'folder' : 'file'}.png`)
-          "
-          alt=""
-        />
+        <img :src="$getImageUrl(`/file-management/${props.fileItem.isFolder ? 'folder' : 'file'}.png`)" alt="" />
       </div>
       <div class="file-info">
-        <div class="info-name">{{ props.fileItem.original_name }}</div>
+        <div class="info-name">{{ props.fileItem.name }}</div>
         <div class="info-time">
-          {{ dayjs(props.fileItem.create_time).format("YYYY-MM-DD HH:MM") }}
+          {{ dayjs(props.fileItem.createTime).format("YYYY-MM-DD HH:MM") }}
         </div>
       </div>
     </div>
@@ -80,6 +71,7 @@ const handleOncontextmenu = () => {
       img {
         width: 100%;
         height: 100%;
+        object-fit: contain;
       }
     }
     .file-info {

@@ -2,18 +2,18 @@
 import FileBreadcrumb from "@/components/file-management/fileBreadcrumb/index.vue";
 import FileSelect from "@/components/file-management/fileSelect/index.vue";
 import FileGridBox from "@/components/file-management/fileGridBox/index.vue";
-import type { FileRouterItem, FileItem } from "@/types";
-import { getUserFileList } from "@/api/file-management";
+import type { FileRouterItem, FolderDetailList } from "@/types";
+import { getCurrentFolderInfo } from "@/api/file-management";
 import { useFileLayout } from "@/hooks/file-management";
 import { reactive, onMounted, ref } from "vue";
 
 const { fileLayout, changeFileLayout } = useFileLayout();
 
 const folderId = ref(-1);
-const fileList = ref<Array<FileItem>>([]);
+const fileList = ref<FolderDetailList>([]);
 // 获取文件列表页
 onMounted(() => {
-  getUserFileList({ folderId: folderId.value }).then(({ data }) => {
+  getCurrentFolderInfo({ folderId: folderId.value }).then(({ data }) => {
     fileList.value = data.data || [];
   });
 });
