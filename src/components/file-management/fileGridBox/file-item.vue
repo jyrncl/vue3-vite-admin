@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import type { FolderDetailItem } from "@/types";
 import dayjs from "dayjs";
-import { ref } from "vue";
+import { inject, ref } from "vue";
+import { FILE_MANAGEMENT_PROVIDER_KEY } from "@/constant";
+import { FileManagementProviderKey } from "@/types";
 defineOptions({
   name: "file-item-wrapper"
 });
+
+const { setCurFolderId, addFileRouter } = inject(FILE_MANAGEMENT_PROVIDER_KEY) as FileManagementProviderKey;
 
 const props = withDefaults(
   defineProps<{
@@ -17,15 +21,25 @@ const checked = ref(false);
 
 const emit = defineEmits<{
   (e: "changeContextMenuType", type: string, data: FolderDetailItem): void;
+  (e: "getCurListById", id: string | number): void;
 }>();
 
 const handleOncontextmenu = () => {
   emit("changeContextMenuType", props.fileItem.isFolder ? "folder" : "file", props.fileItem);
 };
+
+const handleGetCurList = () => {
+  if (props.fileItem.isFolder) {
+    setCurFolderId(props.fileItem.id);
+    addFileRouter({ name: props.fileItem.name, id: props.fileItem.id, parentId: props.fileItem.parentId });
+  } else {
+    console.log("这个是文件");
+  }
+};
 </script>
 
 <template>
-  <div class="file-item-wrapper" @contextmenu="handleOncontextmenu" :title="props.fileItem.name">
+  <div class="file-item-wrapper" @contextmenu="handleOncontextmenu" :title="props.fileItem.name" @click="handleGetCurList">
     <div class="file-item-item-main">
       <div class="file-image">
         <img :src="$getImageUrl(`/file-management/${props.fileItem.isFolder ? 'folder' : 'file'}.png`)" alt="" />

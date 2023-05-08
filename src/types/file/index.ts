@@ -3,12 +3,8 @@ import { Ref } from "vue";
 
 export type FileRouterItem = {
   id: number;
-  parentId: string;
-  path: string;
+  parentId?: string | number;
   name: string;
-  type: string;
-  createTime: string;
-  updateTime: string;
 };
 
 // 文件
@@ -69,4 +65,6 @@ export interface FileManagementProviderKey {
   curFolderId: Ref<number>;
   setCurFolderId: (id: number) => void;
   refreshPage: () => void;
+  addFileRouter: (fileRouterItem: FileRouterItem) => void;
+  spliceFileRouter: (fileRouterItem: FileRouterItem) => void;
 }

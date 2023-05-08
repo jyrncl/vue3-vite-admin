@@ -13,6 +13,7 @@ const { fileLayout, changeFileLayout } = useFileLayout();
 const curFolderId = ref(-1);
 const setCurFolderId = (id: number) => {
   curFolderId.value = id;
+  getCurrentFolderList();
 };
 
 const fileList = ref<FolderDetailList>([]);
@@ -26,12 +27,31 @@ onMounted(() => {
   getCurrentFolderList();
 });
 
-const fileRouterList = reactive<Array<FileRouterItem>>([]);
+const fileRouterList = reactive<Array<FileRouterItem>>([
+  {
+    id: -1,
+    name: "全部文件"
+  }
+]);
+
+const addFileRouter = (item: FileRouterItem) => {
+  fileRouterList.push(item);
+};
+
+const spliceFileRouter = (item: FileRouterItem) => {
+  const index = fileRouterList.findIndex(i => i.id === item.id);
+  if (index !== -1) {
+    fileRouterList.splice(index + 1, fileRouterList.length - 1);
+    setCurFolderId(item.id);
+  }
+};
 
 provide(FILE_MANAGEMENT_PROVIDER_KEY, {
   curFolderId,
   setCurFolderId,
-  refreshPage: getCurrentFolderList
+  refreshPage: getCurrentFolderList,
+  addFileRouter: addFileRouter,
+  spliceFileRouter: spliceFileRouter
 });
 
 const handleDownload = () => {
