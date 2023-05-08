@@ -1,8 +1,12 @@
 <script setup lang="ts">
-import type { ContextMenu, FolderDetailItem } from "@/types";
+import type { ContextMenu, FolderDetailItem, FileManagementProviderKey } from "@/types";
 import RenameAdd from "@/components/file-management/dialog/rename-add.vue";
+import { FILE_MANAGEMENT_PROVIDER_KEY } from "@/constant";
+import { uploadFile, deleteFile } from "@/api/file-management";
 import { downloadFileByAElement } from "@/utils/common";
-import { ref, reactive } from "vue";
+import { ref, reactive, inject } from "vue";
+import { useUserStore } from "@/store";
+import { ElButton, ElMessage, ElMessageBox, type UploadRequestOptions } from "element-plus";
 
 const props = withDefaults(
   defineProps<{
@@ -14,21 +18,22 @@ const props = withDefaults(
     contextMenuType: () => ({ type: "content", data: undefined })
   }
 );
-const addFolder = () => {
-  console.log("新建文件夹");
-};
+
+const { curFolderId, refreshPage } = inject(FILE_MANAGEMENT_PROVIDER_KEY) as FileManagementProviderKey;
 
 const defaultMenuList = reactive<Array<ContextMenu>>([
   {
     name: "新建文件夹",
     icon: "FolderAdd",
-    callback: addFolder
+    callback: () => {
+      RenameAddDialog.value?.handleOpen("create", { parentId: curFolderId.value });
+    }
   },
   {
     name: "上传文件",
     icon: "DocumentAdd",
     callback: () => {
-      console.log("上传文件");
+      Upload.value?.ref.click();
     }
   },
   {
@@ -42,7 +47,7 @@ const defaultMenuList = reactive<Array<ContextMenu>>([
     name: "刷新页面",
     icon: "Refresh",
     callback: () => {
-      console.log("刷新页面");
+      refreshPage();
     }
   }
 ]);
@@ -83,7 +88,7 @@ const fileMenuList = reactive<Array<ContextMenu>>([
     name: "重命名",
     icon: "EditPen",
     callback: () => {
-      console.log("重命名");
+      RenameAddDialog.value?.handleOpen("update", props.contextMenuType.data);
     }
   },
   {
@@ -97,7 +102,7 @@ const fileMenuList = reactive<Array<ContextMenu>>([
     name: "删除文件",
     icon: "DeleteFilled",
     callback: () => {
-      console.log("删除文件夹");
+      handleDeleteFile();
     }
   }
 ]);
@@ -109,6 +114,40 @@ const finallyMenuList = {
 };
 
 const RenameAddDialog = ref<InstanceType<typeof RenameAdd>>(null);
+
+const { token } = useUserStore();
+const Upload = ref<InstanceType<typeof ElButton> | null>(null);
+
+const handleUpload = (data: UploadRequestOptions) => {
+  const formData = new FormData();
+  formData.append("file", data.file);
+  formData.append("parentId", curFolderId.value.toString());
+  uploadFile(formData).then(({ data }) => {
+    if (data.code === 200) {
+      ElMessage.success("上传成功");
+      refreshPage();
+    }
+  });
+};
+
+const handleDeleteFile = () => {
+  ElMessageBox.confirm(`是否删除${props.contextMenuType.data?.name}?`, "提示", {
+    confirmButtonText: "确定",
+    cancelButtonText: "取消",
+    type: "warning"
+  })
+    .then(() => {
+      deleteFile({ id: props.contextMenuType.data?.id as number }).then(({ data }) => {
+        if (data.code === 200) {
+          ElMessage.success("删除成功");
+          refreshPage();
+        }
+      });
+    })
+    .catch(() => {
+      ElMessage.success("已取消");
+    });
+};
 
 defineOptions({
   name: "file-context-menu-wrapper"
@@ -127,6 +166,11 @@ defineOptions({
       <span>{{ item.name }}</span>
     </div>
     <rename-add ref="RenameAddDialog" />
+    <el-upload v-show="false" action="" :show-file-list="false" :auto-upload="true" :http-request="handleUpload">
+      <template #trigger>
+        <el-button ref="Upload" type="primary">select file</el-button>
+      </template>
+    </el-upload>
   </div>
 </template>
 
@@ -147,10 +191,10 @@ defineOptions({
     column-gap: 8px;
     cursor: pointer;
     padding: 8px;
-    border-bottom: 1px #eee solid;
+    border-top: 1px #eee solid;
     border-radius: 8px;
     overflow: hidden;
-    &:last-child {
+    &:first-child {
       border: none;
     }
     &:hover {

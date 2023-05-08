@@ -16,11 +16,9 @@ const props = withDefaults(
 
 <template>
   <div class="file-breadcrumb-wrapper">
-    <el-breadcrumb :separator-icon="ArrowRight">
+    <el-breadcrumb :separator-icon="ArrowRight as Component">
       <el-breadcrumb-item>文件</el-breadcrumb-item>
-      <el-breadcrumb-item v-for="item in props.fileRouterList" :key="item.id"
-        >{{ item.name }}
-      </el-breadcrumb-item>
+      <el-breadcrumb-item v-for="item in props.fileRouterList" :key="item.id">{{ item.name }} </el-breadcrumb-item>
     </el-breadcrumb>
   </div>
 </template>

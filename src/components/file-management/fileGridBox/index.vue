@@ -56,5 +56,6 @@ const handleOncontextmenu = (type: string, data?: FolderDetailItem) => {
   flex-wrap: wrap;
   column-gap: 34px;
   row-gap: 15px;
+  align-content: flex-start;
 }
 </style>

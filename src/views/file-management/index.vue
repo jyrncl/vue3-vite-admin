@@ -5,20 +5,34 @@ import FileGridBox from "@/components/file-management/fileGridBox/index.vue";
 import type { FileRouterItem, FolderDetailList } from "@/types";
 import { getCurrentFolderInfo } from "@/api/file-management";
 import { useFileLayout } from "@/hooks/file-management";
-import { reactive, onMounted, ref } from "vue";
+import { FILE_MANAGEMENT_PROVIDER_KEY } from "@/constant";
+import { reactive, onMounted, ref, provide } from "vue";
 
 const { fileLayout, changeFileLayout } = useFileLayout();
 
-const folderId = ref(-1);
+const curFolderId = ref(-1);
+const setCurFolderId = (id: number) => {
+  curFolderId.value = id;
+};
+
 const fileList = ref<FolderDetailList>([]);
 // 获取文件列表页
-onMounted(() => {
-  getCurrentFolderInfo({ folderId: folderId.value }).then(({ data }) => {
+const getCurrentFolderList = () => {
+  getCurrentFolderInfo({ folderId: curFolderId.value }).then(({ data }) => {
     fileList.value = data.data || [];
   });
+};
+onMounted(() => {
+  getCurrentFolderList();
 });
 
 const fileRouterList = reactive<Array<FileRouterItem>>([]);
+
+provide(FILE_MANAGEMENT_PROVIDER_KEY, {
+  curFolderId,
+  setCurFolderId,
+  refreshPage: getCurrentFolderList
+});
 
 const handleDownload = () => {
   const a = document.createElement("a");

@@ -55,7 +55,7 @@ const handleOncontextmenu = () => {
   padding: 8px;
   border-radius: 8px;
   width: 130px;
-  height: 200px;
+  height: 180px;
   overflow: hidden;
   &:hover {
     background: rgba(132, 133, 141, 0.08);

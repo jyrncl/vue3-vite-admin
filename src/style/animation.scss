@@ -82,11 +82,10 @@
 // 高度自零变化
 .#{$prefix}-height-zero-enter-active,
 .#{$prefix}-height-zero-leave-active {
-  transition: transform 0.3s;
+  transition: opacity 0.3s;
 }
 
 .#{$prefix}-height-zero-enter-from,
 .#{$prefix}-height-zero-leave-to {
-  transform: scale(0);
-  transform-origin: top left;
+  opacity: 0;
 }

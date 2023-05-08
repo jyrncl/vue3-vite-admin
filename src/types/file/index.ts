@@ -1,4 +1,6 @@
 // 文件面包屑
+import { Ref } from "vue";
+
 export type FileRouterItem = {
   id: number;
   parentId: string;
@@ -44,12 +46,27 @@ export type ContextMenu = {
 export type FolderDetailList = Array<FolderDetailItem>;
 
 // 重命名或者新建文件夹表单类型
-export type RenameForm =
-  | {
-      name: string;
-      id: number;
-      parentId: number;
-    }
-  | {};
+export type RenameForm = {} | CreateFolder | RenameFolder;
 
 export type FormStatus = "create" | "detail" | "update";
+
+// 新增文件夹
+export type CreateFolder = {
+  name: string;
+  parentId: number;
+};
+
+// 重命名文件夹
+export type RenameFolder = {
+  name: string;
+  id: number;
+  isFolder: number;
+  parentId: number;
+};
+
+// 文件管理列表provider key类型
+export interface FileManagementProviderKey {
+  curFolderId: Ref<number>;
+  setCurFolderId: (id: number) => void;
+  refreshPage: () => void;
+}

@@ -3,9 +3,11 @@ const props = withDefaults(
   defineProps<{
     icon: string | undefined;
     color?: string;
-    size: string | number;
+    size?: string | number;
   }>(),
-  {}
+  {
+    size: 12
+  }
 );
 </script>
 
