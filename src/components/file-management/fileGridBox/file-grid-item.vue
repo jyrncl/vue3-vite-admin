@@ -21,7 +21,6 @@ const checked = ref(false);
 
 const emit = defineEmits<{
   (e: "changeContextMenuType", type: string, data: FolderDetailItem): void;
-  (e: "getCurListById", id: string | number): void;
 }>();
 
 const handleOncontextmenu = () => {

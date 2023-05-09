@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import type { FolderDetailItem, FolderDetailList } from "@/types";
 import FileContextMenu from "@/components/file-management/contextMenu/index.vue";
-import FileItemWrapper from "./file-item.vue";
+import FileGridItemWrapper from "./file-grid-item.vue";
+import FileListWrapper from "./file-list-wrapper.vue";
 import { ref } from "vue";
 import { useToggleContextMenu } from "@/hooks/file-management";
 
@@ -12,6 +13,7 @@ defineOptions({
 const props = withDefaults(
   defineProps<{
     fileList: FolderDetailList;
+    fileLayout: string;
   }>(),
   {
     fileList: () => []
@@ -38,10 +40,25 @@ const handleOncontextmenu = (type: string, data?: FolderDetailItem) => {
 
 <template>
   <div class="file-grid-box-wrapper" @contextmenu.self="handleOncontextmenu('content')">
-    <FileItemWrapper :file-item="file" v-for="file in props.fileList" :key="file.id" @change-context-menu-type="handleOncontextmenu" />
+    <template v-if="props.fileList.length">
+      <template v-if="props.fileLayout === 'Grid'">
+        <file-grid-item-wrapper
+          :file-item="file"
+          v-for="file in props.fileList"
+          :key="file.id"
+          @change-context-menu-type="handleOncontextmenu"
+        />
+      </template>
+      <template v-else>
+        <file-list-wrapper :file-list="props.fileList" @change-context-menu-type="handleOncontextmenu" />
+      </template>
+    </template>
+    <template v-else>
+      <el-empty style="width: 100%; margin-top: 30px" description="没有数据，点击右键上传吧" />
+    </template>
     <Teleport to="body">
       <transition :name="`${$prefix}-height-zero`">
-        <FileContextMenu v-show="contextMenuVisible" :position="position" :context-menu-type="contextMenuType" />
+        <file-context-menu v-show="contextMenuVisible" :position="position" :context-menu-type="contextMenuType" />
       </transition>
     </Teleport>
   </div>

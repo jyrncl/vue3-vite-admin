@@ -10,11 +10,7 @@ export function isHaveChildren(data: { children: Array<any>; [prop: string]: any
 /**
  * 返回指定path的节点
  */
-export function getThisData(
-  tree: Array<MenuRow>,
-  path: string,
-  result: Array<MenuRow | undefined>
-): void {
+export function getThisData(tree: Array<MenuRow>, path: string, result: Array<MenuRow | undefined>): void {
   for (const menuRow of tree) {
     if (menuRow.path === path) {
       result.push(menuRow);
@@ -28,10 +24,7 @@ export function getThisData(
 /**
  * 返回树中与之相关的节点组成的字符串数组
  */
-export function getPathList(
-  pathList: Array<string>,
-  menuTree: Array<MenuRow>
-): Promise<Array<MenuRow | undefined>> {
+export function getPathList(pathList: Array<string>, menuTree: Array<MenuRow>): Promise<Array<MenuRow | undefined>> {
   return new Promise(resolve => {
     const result: Array<MenuRow | undefined> = [];
     pathList.forEach(path => {
@@ -84,4 +77,12 @@ export function downloadFileByAElement(url: string) {
   a.href = url;
   a.click();
   a.remove();
+}
+
+export function convertSizeUnit(bytes: number) {
+  if (!bytes) return "";
+  const size = 1024;
+  const units = ["B", "KB", "MB", "GB", "TB", "PB"];
+  const index = Math.floor(Math.log(bytes) / Math.log(size));
+  return (bytes / Math.pow(size, index)).toFixed(2) + " " + units[index];
 }

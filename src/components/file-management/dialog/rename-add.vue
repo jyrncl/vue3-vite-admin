@@ -7,7 +7,7 @@ import type { RenameForm, FormStatus, CreateFolder, RenameFolder, FileManagement
 import { FILE_MANAGEMENT_PROVIDER_KEY } from "@/constant";
 import { ElMessage } from "element-plus";
 import { createFolder, updateFolder, updateFile } from "@/api/file-management";
-import { ref, nextTick, inject } from "vue";
+import { ref, inject } from "vue";
 
 const { refreshPage } = inject(FILE_MANAGEMENT_PROVIDER_KEY) as FileManagementProviderKey;
 
@@ -79,7 +79,6 @@ defineExpose({ handleOpen, handleClose });
 </script>
 
 <template>
-  <div class="add-folder-wrapper"></div>
   <el-dialog
     v-model="dialogVisible"
     style="border-radius: 8px"

@@ -19,9 +19,14 @@ const setCurFolderId = (id: number) => {
 const fileList = ref<FolderDetailList>([]);
 // 获取文件列表页
 const getCurrentFolderList = () => {
-  getCurrentFolderInfo({ folderId: curFolderId.value }).then(({ data }) => {
-    fileList.value = data.data || [];
-  });
+  setLoading(true);
+  getCurrentFolderInfo({ folderId: curFolderId.value })
+    .then(({ data }) => {
+      fileList.value = data.data || [];
+    })
+    .finally(() => {
+      setLoading(false);
+    });
 };
 onMounted(() => {
   getCurrentFolderList();
@@ -46,12 +51,19 @@ const spliceFileRouter = (item: FileRouterItem) => {
   }
 };
 
+const loading = ref(false);
+const setLoading = (val: boolean) => {
+  loading.value = val;
+};
+
 provide(FILE_MANAGEMENT_PROVIDER_KEY, {
   curFolderId,
+  fileLayout,
   setCurFolderId,
   refreshPage: getCurrentFolderList,
-  addFileRouter: addFileRouter,
-  spliceFileRouter: spliceFileRouter
+  addFileRouter,
+  spliceFileRouter,
+  setLoading
 });
 
 const handleDownload = () => {
@@ -90,8 +102,8 @@ const handleDownload = () => {
           </div>
         </div>
       </div>
-      <div class="file-management-content">
-        <FileGridBox :file-list="fileList" />
+      <div class="file-management-content" v-loading="loading">
+        <FileGridBox :file-list="fileList" :file-layout="fileLayout" />
       </div>
     </div>
   </div>

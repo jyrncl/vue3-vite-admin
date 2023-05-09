@@ -63,8 +63,10 @@ export type RenameFolder = {
 // 文件管理列表provider key类型
 export interface FileManagementProviderKey {
   curFolderId: Ref<number>;
+  fileLayout: Ref<string>;
   setCurFolderId: (id: number) => void;
   refreshPage: () => void;
   addFileRouter: (fileRouterItem: FileRouterItem) => void;
   spliceFileRouter: (fileRouterItem: FileRouterItem) => void;
+  setLoading: (loading: boolean) => void;
 }
