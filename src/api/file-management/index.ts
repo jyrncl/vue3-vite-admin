@@ -67,3 +67,21 @@ export function updateFile(data: { id: number; name: string }): ResponseResultTy
     data
   });
 }
+
+// 获取文件夹详情
+export function getFileDetail(params: { id: number }): ResponseResultType {
+  return request({
+    url: "/api/file/getUserFileDetail",
+    method: "get",
+    params
+  });
+}
+
+// 获取文件详情
+export function getFolderInfo(params: { id: number }) {
+  return request({
+    url: "/api/file/getUserFolderInfo",
+    method: "get",
+    params
+  });
+}

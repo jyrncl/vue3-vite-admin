@@ -60,6 +60,16 @@ export type RenameFolder = {
   parentId: number;
 };
 
+// 文件详情
+export type FileDetail = {
+  name: string;
+  id: number;
+  isFolder: number;
+  createTime: string;
+  updateTime: string;
+  size?: string;
+};
+
 // 文件管理列表provider key类型
 export interface FileManagementProviderKey {
   curFolderId: Ref<number>;

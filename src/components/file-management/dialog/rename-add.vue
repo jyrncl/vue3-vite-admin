@@ -89,7 +89,7 @@ defineExpose({ handleOpen, handleClose });
     append-to-body
   >
     <div class="rename-add-content">
-      <img :src="$getImageUrl('/file-management/folder.png')" alt="" />
+      <img :src="$getImageUrl(`/file-management/${formData.isFolder ? 'folder' : 'file'}.png`)" alt="" />
       <el-input ref="InputRef" v-model="formData.name" size="large" />
     </div>
     <div class="rename-add-footer">

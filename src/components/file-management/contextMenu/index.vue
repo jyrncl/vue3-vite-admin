@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { ContextMenu, FolderDetailItem, FileManagementProviderKey } from "@/types";
 import RenameAdd from "@/components/file-management/dialog/rename-add.vue";
+import FileDetail from "@/components/file-management/dialog/file-detail.vue";
 import { FILE_MANAGEMENT_PROVIDER_KEY } from "@/constant";
 import { uploadFile, deleteFile } from "@/api/file-management";
 import { downloadFileByAElement } from "@/utils/common";
@@ -64,7 +65,7 @@ const folderMenuList = reactive<Array<ContextMenu>>([
     name: "详细信息",
     icon: "MoreFilled",
     callback: () => {
-      console.log("查看详细信息");
+      FileDetailDialog.value?.handleOpen(props.contextMenuType.data);
     }
   },
   {
@@ -95,7 +96,7 @@ const fileMenuList = reactive<Array<ContextMenu>>([
     name: "详细信息",
     icon: "MoreFilled",
     callback: () => {
-      console.log("查看详细信息");
+      FileDetailDialog.value?.handleOpen(props.contextMenuType.data);
     }
   },
   {
@@ -114,6 +115,7 @@ const finallyMenuList = {
 };
 
 const RenameAddDialog = ref<InstanceType<typeof RenameAdd>>(null);
+const FileDetailDialog = ref<InstanceType<typeof FileDetail>>(null);
 
 const { token } = useUserStore();
 const Upload = ref<InstanceType<typeof ElButton> | null>(null);
@@ -166,6 +168,7 @@ defineOptions({
       <span>{{ item.name }}</span>
     </div>
     <rename-add ref="RenameAddDialog" />
+    <file-detail ref="FileDetailDialog" />
     <el-upload v-show="false" action="" :show-file-list="false" :auto-upload="true" :http-request="handleUpload">
       <template #trigger>
         <el-button ref="Upload" type="primary">select file</el-button>
