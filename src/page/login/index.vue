@@ -26,12 +26,7 @@ const changeCurTab = (tab: string): void => {
   <div class="login">
     <div class="login-wrapper">
       <div class="login-header">
-        <div
-          class="login-tab-wrapper"
-          v-for="(item, index) in tabList"
-          :key="`${item.id}_${index}`"
-          @click="changeCurTab(item.id)"
-        >
+        <div class="login-tab-wrapper" v-for="(item, index) in tabList" :key="`${item.id}_${index}`" @click="changeCurTab(item.id)">
           <div class="login-tab">{{ item.label }}</div>
         </div>
         <div
@@ -53,9 +48,7 @@ const changeCurTab = (tab: string): void => {
         <RegisteredContent
           @changeTag="changeCurTab"
           :style="{
-            transform: `rotate3d(0, -1, 0, ${curTab === 'registered' ? 0 : 90}deg) scale(${
-              curTab === 'registered' ? 1 : 0.5
-            })`
+            transform: `rotate3d(0, -1, 0, ${curTab === 'registered' ? 0 : 90}deg) scale(${curTab === 'registered' ? 1 : 0.5})`
           }"
         />
       </div>

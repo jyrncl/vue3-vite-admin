@@ -90,7 +90,7 @@ defineExpose({ handleOpen, handleClose });
   >
     <div class="rename-add-content">
       <img :src="$getImageUrl(`/file-management/${formData.isFolder ? 'folder' : 'file'}.png`)" alt="" />
-      <el-input ref="InputRef" v-model="formData.name" size="large" />
+      <el-input ref="InputRef" v-model="formData.name" size="large" autofocus />
     </div>
     <div class="rename-add-footer">
       <el-button :disabled="!Boolean(formData.name)" type="primary" @click="handleSubmit">确定</el-button>

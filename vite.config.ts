@@ -15,13 +15,18 @@ export default ({ mode }) => {
         "/api": {
           target: env.VITE_BASE_URL,
           changeOrigin: true,
-          rewrite: path => path.replace(/^\/api/, "")
+          rewrite: path => path.replace(/^\/api/, "/api")
         },
         "/jyrncl": {
           target: env.VITE_MOCK_BASE_URL,
           changeOrigin: true,
           rewrite: path => path.replace(/^\/jyrncl/, "/jyrncl")
         }
+        // "/internal": {
+        //   target: env.VITE_INTERNAL_BASE_URL,
+        //   changeOrigin: true,
+        //   rewrite: path => path.replace(/^\/internal/, "")
+        // }
       }
     },
     css: {

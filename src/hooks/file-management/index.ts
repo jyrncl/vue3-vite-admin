@@ -16,9 +16,10 @@ export const useFileLayout = () => {
 export function useToggleContextMenu(
   wrapperDom: string,
   contextMenuDom: string,
+  isAddClick: Ref<boolean>,
   visibleCb: () => void,
   noneCb: () => void
-): [visible: Ref<boolean>, oncontextmenu: () => void, position: Ref<{ x: number; y: number }>] {
+): [visible: Ref<boolean>, oncontextmenu: () => void, position: Ref<{ x: number; y: number }>, setVisible: () => void] {
   const visible = ref(false);
   const position = ref({ x: 0, y: 0 });
   const setVisible = () => {
@@ -57,10 +58,10 @@ export function useToggleContextMenu(
 
   document.addEventListener("click", () => {
     if (!visible.value) return;
-    visible.value = false;
+    !isAddClick.value && (visible.value = false);
     document.oncontextmenu = null;
     noneCb();
   });
 
-  return [visible, oncontextmenu, position];
+  return [visible, oncontextmenu, position, setVisible];
 }

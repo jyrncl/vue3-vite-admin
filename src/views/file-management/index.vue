@@ -66,11 +66,9 @@ provide(FILE_MANAGEMENT_PROVIDER_KEY, {
   setLoading
 });
 
-const handleDownload = () => {
-  const a = document.createElement("a");
-  a.href = "/api/file/downloadUserFile?id=1";
-  a.click();
-  a.remove();
+const FileGridBoxRef = ref<InstanceType<typeof FileGridBox>>(null);
+const handleOpenContextMenu = () => {
+  FileGridBoxRef.value?.handleClickAdd();
 };
 </script>
 
@@ -83,7 +81,7 @@ const handleDownload = () => {
           <div class="header-search">
             <icon-item icon="Search" size="18px" />
           </div>
-          <div class="header-add">
+          <div class="header-add file-click-add" @click="handleOpenContextMenu">
             <icon-item icon="Plus" color="#fff" size="18px" />
           </div>
         </div>
@@ -103,7 +101,7 @@ const handleDownload = () => {
         </div>
       </div>
       <div class="file-management-content" v-loading="loading">
-        <FileGridBox :file-list="fileList" :file-layout="fileLayout" />
+        <FileGridBox ref="FileGridBoxRef" :file-list="fileList" :file-layout="fileLayout" />
       </div>
     </div>
   </div>

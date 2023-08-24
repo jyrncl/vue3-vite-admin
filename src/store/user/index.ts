@@ -16,9 +16,10 @@ export const useUserStore = defineStore("user", {
         const {
           data: { data: result }
         } = await userLogin(data);
-        if (result.userInfo) {
-          this.setToken(result.userInfo.authorization);
+        if (result) {
+          this.setToken(result.token);
           const menuList = await this.getMenuList();
+          ElMessage.success(result.msg);
           resolve(menuList);
         } else {
           ElMessage.error(result.msg);
@@ -27,7 +28,7 @@ export const useUserStore = defineStore("user", {
     },
     async userExit() {
       await userExit();
-      await clearLocalStore();
+      clearLocalStore();
     },
     async getMenuList(): Promise<Array<MenuRow>> {
       const {

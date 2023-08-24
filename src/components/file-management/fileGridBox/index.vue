@@ -3,7 +3,7 @@ import type { FolderDetailItem, FolderDetailList } from "@/types";
 import FileContextMenu from "@/components/file-management/contextMenu/index.vue";
 import FileGridItemWrapper from "./file-grid-item.vue";
 import FileListWrapper from "./file-list-wrapper.vue";
-import { ref } from "vue";
+import { ref, nextTick } from "vue";
 import { useToggleContextMenu } from "@/hooks/file-management";
 
 defineOptions({
@@ -25,17 +25,39 @@ const contextMenuType = ref<{ type: string; data: FolderDetailItem | undefined }
   data: undefined
 });
 
-const [contextMenuVisible, oncontextmenu, position] = useToggleContextMenu(
+const isAddClick = ref(false);
+
+const [contextMenuVisible, oncontextmenu, position, setVisible] = useToggleContextMenu(
   "file-management-content",
   "file-context-menu-wrapper",
+  isAddClick,
   () => {},
   () => {}
 );
 
 const handleOncontextmenu = (type: string, data?: FolderDetailItem) => {
+  isAddClick.value = false;
   contextMenuType.value = { type, data };
   oncontextmenu();
 };
+
+const handleClickAdd = () => {
+  isAddClick.value = true;
+  contextMenuType.value = { type: "content", data: undefined };
+  setVisible();
+  const { height, top, left } = document.getElementsByClassName("file-click-add")[0].getBoundingClientRect();
+  position.value = {
+    x: left - 150,
+    y: top + height + 8
+  };
+  nextTick(() => {
+    setTimeout(() => {
+      isAddClick.value = false;
+    }, 350);
+  });
+};
+
+defineExpose({ handleClickAdd });
 </script>
 
 <template>
