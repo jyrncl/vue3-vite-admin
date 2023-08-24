@@ -1,7 +1,7 @@
 import request from "@/utils/request";
 import type { LoginUser, RegisteredUser, ResponseResultType, MenuRow } from "@/types";
 
-export function userLogin(data: LoginUser): ResponseResultType {
+export function userLogin(data: LoginUser): ResponseResultType<string> {
   return request({
     url: "/api/user/login",
     method: "post",

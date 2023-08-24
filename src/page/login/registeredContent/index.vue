@@ -5,8 +5,7 @@ import type { FormInstance } from "element-plus";
 import { ElMessage } from "element-plus";
 import { reactive } from "vue";
 
-const { registeredFormProps, registeredFormRef, validatePass, validateCheckPass } =
-  useRegisteredValidate();
+const { registeredFormProps, registeredFormRef, validatePass, validateCheckPass } = useRegisteredValidate();
 
 const rules = reactive({
   username: [{ required: true, message: "请输入用户名", trigger: "blur" }],
@@ -24,10 +23,10 @@ const submitForm = (formEl: FormInstance | undefined) => {
     if (valid) {
       registeredUser(registeredFormProps.value).then(({ data }) => {
         if (data.code === 200) {
-          ElMessage.success(data.data);
+          ElMessage.success(data.msg);
           emits("changeTag", "login");
         } else {
-          ElMessage.error(data.data);
+          ElMessage.error(data.msg);
         }
       });
     } else {
@@ -48,14 +47,7 @@ const resetForm = (formEl: FormInstance | undefined) => {
       <img :src="$getImageUrl('/loginPage/1.png')" alt="" />
     </div>
     <div class="registeredContent-form">
-      <el-form
-        ref="registeredFormRef"
-        :model="registeredFormProps"
-        status-icon
-        :rules="rules"
-        label-width="80px"
-        class="login-Form"
-      >
+      <el-form ref="registeredFormRef" :model="registeredFormProps" status-icon :rules="rules" label-width="80px" class="login-Form">
         <el-form-item label="账号" prop="username" class="login-input">
           <el-input v-model.number="registeredFormProps.username" />
         </el-form-item>

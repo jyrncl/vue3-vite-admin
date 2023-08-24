@@ -11,18 +11,16 @@ export const useUserStore = defineStore("user", {
     token: getItemByLocalStore("token") || ""
   }),
   actions: {
-    userLogin(data: LoginUser): Promise<Array<MenuRow>> {
+    userLogin(loginUser: LoginUser): Promise<Array<MenuRow>> {
       return new Promise(async resolve => {
-        const {
-          data: { data: result }
-        } = await userLogin(data);
-        if (result) {
-          this.setToken(result.token);
+        const { data } = await userLogin(loginUser);
+        if (data.data) {
+          this.setToken(data.data);
           const menuList = await this.getMenuList();
-          ElMessage.success(result.msg);
+          ElMessage.success(data.msg);
           resolve(menuList);
         } else {
-          ElMessage.error(result.msg);
+          ElMessage.error(data.msg);
         }
       });
     },

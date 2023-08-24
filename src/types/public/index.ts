@@ -8,4 +8,4 @@ export interface LocalStoreItem {
 
 export type UseEChartsOption = (data: Array<any>, props: { label: string; value: string }) => {};
 
-export type ResponseResultType<T = any> = AxiosPromise<{ code: number; data: T | null }>;
+export type ResponseResultType<T = any> = AxiosPromise<{ code: number; data: T | null; msg: string }>;
