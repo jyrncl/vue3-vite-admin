@@ -1,16 +1,16 @@
 import { defineConfig, loadEnv, splitVendorChunkPlugin } from "vite";
 import vue from "@vitejs/plugin-vue";
-import defineOptions from "unplugin-vue-define-options/vite";
 import * as path from "path";
 
 // https://vitejs.dev/config/
 export default ({ mode }) => {
   const env = loadEnv(mode, process.cwd());
   return defineConfig({
-    plugins: [vue(), defineOptions(), splitVendorChunkPlugin()],
+    plugins: [vue(), splitVendorChunkPlugin()],
     server: {
       port: 3756,
       host: true,
+      open: true,
       proxy: {
         "/api": {
           target: env.VITE_BASE_URL,

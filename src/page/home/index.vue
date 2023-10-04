@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
-import { getUserInfo } from "@/api/user";
+// import { getUserInfo } from "@/api/user";
 import LeftAside from "@/components/layout/leftAside/index.vue";
 import TopHeader from "@/components/layout/topHeader/index.vue";
 import TopTabPage from "@/components/layout/topTabPage/index.vue";
@@ -11,9 +11,9 @@ defineOptions({
 });
 
 onMounted(() => {
-  getUserInfo().then(({ data }) => {
-    console.log(data.data, "detail");
-  });
+  // getUserInfo().then(({ data }) => {
+  //   console.log(data.data, "detail");
+  // });
 });
 </script>
 

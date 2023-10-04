@@ -6,7 +6,7 @@ const props = withDefaults(
     size?: string | number;
   }>(),
   {
-    size: 12
+    size: 18
   }
 );
 </script>

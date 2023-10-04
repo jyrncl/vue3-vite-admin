@@ -37,7 +37,7 @@
 
 .#{$prefix}-left-to-right-enter-from,
 .#{$prefix}-left-to-right-leave-to {
-  transform: translateX(-50%);
+  transform: translateX(-40%);
 }
 
 /**
@@ -88,4 +88,15 @@
 .#{$prefix}-height-zero-enter-from,
 .#{$prefix}-height-zero-leave-to {
   opacity: 0;
+}
+
+/** 宽度自零变化 */
+.#{$prefix}-width-zero-enter-active,
+.#{$prefix}-width-zero-leave-active {
+  transition: width 0.3s;
+}
+
+.#{$prefix}-width-zero-enter-from,
+.#{$prefix}-width-zero-leave-to {
+  width: 0px;
 }

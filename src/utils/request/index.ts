@@ -1,7 +1,7 @@
 import Axios from "axios";
 import { ElMessage } from "element-plus";
 import { pinia, useUserStore } from "@/store";
-import type { AxiosInstance } from "axios";
+import type { AxiosInstance, AxiosRequestHeaders } from "axios";
 
 const instance: AxiosInstance = Axios.create({
   timeout: 30000
@@ -12,7 +12,7 @@ instance.interceptors.request.use(
     request.headers = {
       Authorization: `Bearer ${useUserStore(pinia).token}`,
       ...request.headers
-    };
+    } as AxiosRequestHeaders;
     return request;
   },
   error => {

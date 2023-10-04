@@ -114,8 +114,8 @@ const finallyMenuList = {
   file: fileMenuList
 };
 
-const RenameAddDialog = ref<InstanceType<typeof RenameAdd>>(null);
-const FileDetailDialog = ref<InstanceType<typeof FileDetail>>(null);
+const RenameAddDialog = ref<InstanceType<typeof RenameAdd> | null>(null);
+const FileDetailDialog = ref<InstanceType<typeof FileDetail> | null>(null);
 
 const { token } = useUserStore();
 const Upload = ref<InstanceType<typeof ElButton> | null>(null);
@@ -186,7 +186,9 @@ defineOptions({
   border-radius: 8px;
   padding: 10px;
   background: #fff;
-  box-shadow: 0 0 1px 1px rgb(28 28 32 / 5%), 0 8px 24px rgb(28 28 32 / 12%);
+  box-shadow:
+    0 0 1px 1px rgb(28 28 32 / 5%),
+    0 8px 24px rgb(28 28 32 / 12%);
   z-index: 99999;
   .file-context-menu-item {
     display: flex;

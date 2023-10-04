@@ -7,7 +7,7 @@
     "strict": true,
     "jsx": "preserve",
     "sourceMap": true,
-    "types": ["element-plus/global", "unplugin-vue-define-options", "vite/client"],
+    "types": ["element-plus/global", "vite/client"],
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "noEmit": true,
