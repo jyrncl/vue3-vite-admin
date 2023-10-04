@@ -69,12 +69,13 @@ const handleSave = (content: string) => {
     <div class="null-content" v-show="!props.chapter.content && mode === 'preview'">
       <el-empty :image-size="200" description="暂无内容" />
     </div>
+    <el-backtop target=".knowledge-base-content" :right="50" :bottom="50" />
   </div>
 </template>
 
 <style scoped lang="scss">
 .knowledge-base-content {
-  wdith: 100%;
+  width: 100%;
   height: 100%;
   overflow: auto;
   .null-content {
