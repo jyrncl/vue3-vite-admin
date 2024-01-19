@@ -1,9 +1,6 @@
 <script setup lang="ts">
+defineOptions({ name: "keep-alive-wrapper" });
 import { useRoute } from "vue-router";
-
-defineOptions({
-  name: "keep-alive-wrapper"
-});
 const route = useRoute();
 </script>
 

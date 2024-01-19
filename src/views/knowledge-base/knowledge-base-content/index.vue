@@ -39,8 +39,8 @@ const handleSave = (content: string) => {
     type: "warning"
   }).then(() => {
     setLoading("chapter", true);
-    const { title, sort = 1, parent_id, id, type } = props.chapter;
-    update({ title, sort, parent_id, id, type, content })
+    const { title, parent_id, id, type } = props.chapter;
+    update({ title, parent_id, id, type, content })
       .then(() => {
         emits("refreshTree");
         ElMessage.success("保存成功");

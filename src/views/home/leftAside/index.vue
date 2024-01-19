@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Menu from "@/components/layout/menu/index.vue";
+import Menu from "@/views/home/menu/index.vue";
 import { useCommonStore } from "@/store";
 
 const commonStore = useCommonStore();

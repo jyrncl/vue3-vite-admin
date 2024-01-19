@@ -8,7 +8,7 @@ export const viewsRouterList: Array<RouteRecordRaw> = [
   {
     path: "/login",
     name: "login",
-    component: () => import("@/page/login/index.vue"),
+    component: () => import("@/views/login/index.vue"),
     meta: {
       authorization: false,
       keepAlive: false
@@ -21,7 +21,7 @@ export const viewsRouterList: Array<RouteRecordRaw> = [
       authorization: false,
       keepAlive: false
     },
-    component: () => import("@/page/other/404.vue")
+    component: () => import("@/views/other/404.vue")
   },
   {
     path: "/:catchAll(.*)",

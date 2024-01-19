@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { useConversionRateOptions } from "@/components/echartsComponents/hooks/radar";
-import EChartsComponents from "@/components/echartsComponents/index.vue";
+import EChartsComponents from "@/components/global/common-chart/index.vue";
 
 const eChartOption = ref({});
 onMounted(() => {

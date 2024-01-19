@@ -1,4 +1,5 @@
 <script setup lang="ts">
+defineOptions({ name: "icon-item" });
 const props = withDefaults(
   defineProps<{
     icon: string | undefined;

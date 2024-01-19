@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import FileBreadcrumb from "@/components/file-management/fileBreadcrumb/index.vue";
-import FileSelect from "@/components/file-management/fileSelect/index.vue";
-import FileGridBox from "@/components/file-management/fileGridBox/index.vue";
+import FileBreadcrumb from "@/views/file-management/fileBreadcrumb/index.vue";
+import FileSelect from "@/views/file-management/fileSelect/index.vue";
+import FileGridBox from "@/views/file-management/fileGridBox/index.vue";
 import type { FileRouterItem, FolderDetailList } from "@/types";
 import { getCurrentFolderInfo } from "@/api/file-management";
 import { useFileLayout } from "@/hooks/file-management";

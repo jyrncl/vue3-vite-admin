@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import KnowledgeBaseTree from "@/components/knowledge-base/knowledge-base-tree/index.vue";
-import KnowledgeBaseContent from "@/components/knowledge-base/knowledge-base-content/index.vue";
+import KnowledgeBaseTree from "@/views/knowledge-base/knowledge-base-tree/index.vue";
+import KnowledgeBaseContent from "@/views/knowledge-base/knowledge-base-content/index.vue";
 import { ref, provide } from "vue";
 import { KNOWLEDGE_BASE_PROVIDER_KEY } from "@/constant";
 import { Chapter } from "@/types";

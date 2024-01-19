@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { FolderDetailItem, FolderDetailList } from "@/types";
-import FileContextMenu from "@/components/file-management/contextMenu/index.vue";
+import FileContextMenu from "@/views/file-management/contextMenu/index.vue";
 import FileGridItemWrapper from "./file-grid-item.vue";
 import FileListWrapper from "./file-list-wrapper.vue";
 import { ref, nextTick } from "vue";

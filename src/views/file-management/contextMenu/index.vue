@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { ContextMenu, FolderDetailItem, FileManagementProviderKey } from "@/types";
-import RenameAdd from "@/components/file-management/dialog/rename-add.vue";
-import FileDetail from "@/components/file-management/dialog/file-detail.vue";
+import RenameAdd from "@/views/file-management/dialog/rename-add.vue";
+import FileDetail from "@/views/file-management/dialog/file-detail.vue";
 import { FILE_MANAGEMENT_PROVIDER_KEY } from "@/constant";
 import { uploadFile, deleteFile } from "@/api/file-management";
 import { downloadFileByAElement } from "@/utils/common";

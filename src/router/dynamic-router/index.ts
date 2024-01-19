@@ -3,8 +3,8 @@ import type { MenuRow } from "@/types";
 import { isHaveChildren } from "@/utils/common";
 import { pinia, useCommonStore, useUserStore } from "@/store";
 import config from "@/config";
-import Layout from "@/page/home/index.vue";
-import NotFoundPage from "@/page/other/404.vue";
+import Layout from "@/views/home/index.vue";
+import NotFoundPage from "@/views/other/404.vue";
 const defaultRouteWrapper: RouteRecordRaw = {
   name: "home",
   path: "/home",
@@ -42,9 +42,7 @@ export default class DynamicRouter {
     return {
       name: menu.name,
       path: menu.path,
-      component: hasChild
-        ? () => import("@/page/default/index.vue")
-        : this.dynamicImportComponents(`/src/views${menu.path}/index.vue`),
+      component: hasChild ? () => import("@/views/default/index.vue") : this.dynamicImportComponents(`/src/views${menu.path}/index.vue`),
       meta: {
         authorization: true,
         keepAlive: true

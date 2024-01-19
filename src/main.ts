@@ -6,7 +6,7 @@ import "@smallwei/avue/lib/index.css";
 import "element-plus/dist/index.css";
 import "element-plus/theme-chalk/display.css";
 import "@/style/default.scss";
-import globalComponents from "@/global-components/index";
+import globalComponentsInstall from "@/components/index";
 import config from "@/config";
 import { pinia } from "@/store";
 import { Router, dynamicRouter } from "@/router";
@@ -24,7 +24,9 @@ dynamicRouter.refreshRouter().then(() => {
   app.use(Router);
   app.use(ElementPlus);
   app.use(Avue);
-  app.use(globalComponents);
+  app.use(globalComponentsInstall);
 
   app.mount("#app");
 });
+
+// "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
