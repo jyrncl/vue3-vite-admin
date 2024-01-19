@@ -1,8 +1,6 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import ElementPlus from "element-plus";
-import Avue from "@smallwei/avue";
-import "@smallwei/avue/lib/index.css";
 import "element-plus/dist/index.css";
 import "element-plus/theme-chalk/display.css";
 import "@/style/default.scss";
@@ -23,10 +21,6 @@ dynamicRouter.refreshRouter().then(() => {
   app.use(pinia);
   app.use(Router);
   app.use(ElementPlus);
-  app.use(Avue);
   app.use(globalComponentsInstall);
-
   app.mount("#app");
 });
-
-// "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],

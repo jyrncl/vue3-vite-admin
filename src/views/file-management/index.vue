@@ -66,7 +66,7 @@ provide(FILE_MANAGEMENT_PROVIDER_KEY, {
   setLoading
 });
 
-const FileGridBoxRef = ref<InstanceType<typeof FileGridBox>>(null);
+const FileGridBoxRef = ref<InstanceType<typeof FileGridBox> | null>(null);
 const handleOpenContextMenu = () => {
   FileGridBoxRef.value?.handleClickAdd();
 };
